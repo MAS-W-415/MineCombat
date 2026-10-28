@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.env
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Experiment artifacts
+output/
+ray_results/
+wandb/
+experiments/**/videos/
+experiments/**/checkpoints/
+experiments/**/*.mp4
+experiments/**/*.pt
+experiments/**/*.pth
+experiments/**/*.ckpt
+experiments/**/*.weights
+experiments/**/*.model
+
+# MineStudio / Minecraft
+engine/
+*.jar
+logs/
+recordings/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

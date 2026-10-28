@@ -1,0 +1,8 @@
+env_config: configs/env/zombie_stage1.yaml
+policy: random
+episodes: 50
+seed_start: 0
+deterministic: true
+max_steps: 600
+record_video: false
+output_dir: experiments
