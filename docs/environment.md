@@ -153,6 +153,19 @@ Record the following numbers in the M0 issue:
 - reset time,
 - any rendering warnings.
 
+## GitHub project board
+
+The repository backlog is tracked in GitHub Projects v2. Creating the board
+requires the `project` and `read:project` scopes:
+
+```bash
+gh auth refresh -s project,read:project
+bash scripts/create_project_board.sh
+```
+
+The script creates the `MineCombat Roadmap` project if needed, adds `Stage`,
+`Area`, and `Priority` fields, and adds all open issues.
+
 ## Troubleshooting
 
 ### `java.lang.UnsupportedClassVersionError`
