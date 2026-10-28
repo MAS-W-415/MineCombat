@@ -55,7 +55,8 @@ fi
 
 while IFS= read -r url; do
   [[ -z "$url" ]] && continue
-  gh project item-add "$NUMBER" --owner "$OWNER" --url "$url" >/dev/null
+  # Ignore duplicates when the script is rerun.
+  gh project item-add "$NUMBER" --owner "$OWNER" --url "$url" >/dev/null 2>&1 || true
 done < <(gh issue list --repo "$REPO" --state open --limit 100 --json url --jq '.[].url')
 
 echo "Project board ready: https://github.com/users/$OWNER/projects/$NUMBER"
