@@ -10,17 +10,17 @@ import yaml
 
 from .callbacks import (
     ArenaResetCallback,
+    CombatEpisodeCallback,
     CombatRewardCallback,
     CombatRewardConfig,
-    DeathTerminationCallback,
-    KillTerminationCallback,
     RandomZombieSpawnCallback,
     ZombieSpawnConfig,
 )
 
 
 def load_config(path: str | Path) -> dict[str, Any]:
-    """Load arena configuration from a YAML file."""
+    """Load environment configuration from YAML."""
+
     with Path(path).expanduser().open(
         "r",
         encoding="utf-8",
@@ -32,7 +32,7 @@ def make_zombie_env(
     config: str | Path | Mapping[str, Any] | None = None,
     **overrides: Any,
 ):
-    """Create a MineStudio environment for stage-1 zombie combat."""
+    """Create the MineStudio zombie combat environment."""
 
     # 1. Resolve configuration.
     if config is None:
@@ -54,14 +54,11 @@ def make_zombie_env(
     zombie = dict(cfg.get("zombie", {}))
     reward = dict(cfg.get("reward", {}))
 
-    # 3. Import MineStudio only when creating the real environment.
+    # Lazy imports keep local unit tests lightweight.
     from minestudio.simulator import MinecraftSim
-    from minestudio.simulator.callbacks import (
-        CommandsCallback,
-        JudgeResetCallback,
-    )
+    from minestudio.simulator.callbacks import CommandsCallback
 
-    # 4. Create and register callbacks.
+    # 3. Construct callbacks.
     callbacks = [
         ArenaResetCallback(
             biome=world.get(
@@ -93,19 +90,16 @@ def make_zombie_env(
             CombatRewardConfig(**reward)
         ),
 
-        DeathTerminationCallback(),
-
-        KillTerminationCallback(
+        CombatEpisodeCallback(
             target_mob=zombie.get("mob", "zombie"),
             required_kills=int(zombie.get("count", 1)),
-        ),
-
-        JudgeResetCallback(
-            int(cfg.get("max_episode_steps", 600))
+            max_episode_steps=int(
+                cfg.get("max_episode_steps", 600)
+            ),
         ),
     ]
 
-    # 5. Construct and return the simulator.
+    # 4. Create the simulator.
     return MinecraftSim(
         obs_size=tuple(
             cfg.get("obs_size", (128, 128))

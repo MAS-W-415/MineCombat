@@ -1,4 +1,4 @@
-"""Tests for zombie arena callback wiring."""
+"""Tests for zombie environment callback wiring."""
 
 from __future__ import annotations
 
@@ -7,9 +7,8 @@ from types import ModuleType
 
 from minecombat.envs.callbacks import (
     ArenaResetCallback,
+    CombatEpisodeCallback,
     CombatRewardCallback,
-    DeathTerminationCallback,
-    KillTerminationCallback,
     RandomZombieSpawnCallback,
 )
 from minecombat.envs.zombie_arena import make_zombie_env
@@ -25,13 +24,8 @@ class FakeCommandsCallback:
         self.commands = commands
 
 
-class FakeJudgeResetCallback:
-    def __init__(self, time_limit):
-        self.time_limit = time_limit
-
-
 def install_fake_minestudio(monkeypatch):
-    """Replace MineStudio imports during this test."""
+    """Install lightweight substitutes for MineStudio imports."""
 
     minestudio = ModuleType("minestudio")
     simulator = ModuleType("minestudio.simulator")
@@ -42,14 +36,19 @@ def install_fake_minestudio(monkeypatch):
 
     simulator.MinecraftSim = FakeMinecraftSim
     callbacks.CommandsCallback = FakeCommandsCallback
-    callbacks.JudgeResetCallback = FakeJudgeResetCallback
 
     monkeypatch.setitem(
-        sys.modules, "minestudio", minestudio
+        sys.modules,
+        "minestudio",
+        minestudio,
     )
+
     monkeypatch.setitem(
-        sys.modules, "minestudio.simulator", simulator
+        sys.modules,
+        "minestudio.simulator",
+        simulator,
     )
+
     monkeypatch.setitem(
         sys.modules,
         "minestudio.simulator.callbacks",
@@ -71,20 +70,18 @@ def test_factory_registers_callbacks_in_order(monkeypatch):
         FakeCommandsCallback,
         RandomZombieSpawnCallback,
         CombatRewardCallback,
-        DeathTerminationCallback,
-        KillTerminationCallback,
-        FakeJudgeResetCallback,
+        CombatEpisodeCallback,
     ]
 
-    kill_callback = registered[5]
+    episode_callback = registered[4]
 
-    assert kill_callback.target_mob == "zombie"
-    assert kill_callback.required_kills == 1
-
+    assert episode_callback.target_mob == "zombie"
+    assert episode_callback.required_kills == 1
+    assert episode_callback.max_episode_steps == 600
     assert env.kwargs["action_type"] == "agent"
 
 
-def test_factory_uses_zombie_count_for_kill_goal(monkeypatch):
+def test_factory_uses_zombie_count_for_success_goal(monkeypatch):
     install_fake_minestudio(monkeypatch)
 
     env = make_zombie_env(
@@ -92,14 +89,16 @@ def test_factory_uses_zombie_count_for_kill_goal(monkeypatch):
             "zombie": {
                 "mob": "zombie",
                 "count": 3,
-            }
+            },
+            "max_episode_steps": 200,
         }
     )
 
     registered = env.kwargs["callbacks"]
 
     spawn_callback = registered[2]
-    kill_callback = registered[5]
+    episode_callback = registered[4]
 
     assert spawn_callback.config.count == 3
-    assert kill_callback.required_kills == 3
+    assert episode_callback.required_kills == 3
+    assert episode_callback.max_episode_steps == 200
