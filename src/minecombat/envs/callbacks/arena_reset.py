@@ -8,6 +8,8 @@ fast-reset idea while only killing non-player entities.
 
 from __future__ import annotations
 
+from ._info import scalar
+
 try:
     from minestudio.simulator.callbacks.callback import MinecraftCallback
 except ImportError:  # pragma: no cover
@@ -73,6 +75,16 @@ class ArenaResetCallback(MinecraftCallback):
         if not getattr(sim, "already_reset", False):
             return reset_flag
 
+        # Dead or unknown player state requires a hard reset.
+        info = getattr(sim, "info", None)
+
+        if not isinstance(info, dict) or "health" not in info:
+            return True
+
+        if scalar(info["health"]) <= 0.0:
+            return True
+
+        # Continue with the existing fast-reset commands.
         x, z = self._random_location(sim)
         commands = [
             "/kill @e[type=!player]",
