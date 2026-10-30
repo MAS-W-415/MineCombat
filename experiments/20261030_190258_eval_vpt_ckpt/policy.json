@@ -1,0 +1,5 @@
+{
+  "policy": "vpt",
+  "model": "CraftJarvis/MineStudio_VPT.foundation_model_1x",
+  "checkpoint": "experiments/ppo_smoke/checkpoints/2026-10-30_18-22-45/20/model.ckpt"
+}
