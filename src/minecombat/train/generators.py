@@ -18,4 +18,7 @@ def policy_generator(repo_id: str):
     from minestudio.models import VPTPolicy
     from minestudio.utils import get_compute_device
 
+    from .patches import patch_scaled_mse_head
+
+    patch_scaled_mse_head()
     return VPTPolicy.from_pretrained(repo_id).to(get_compute_device())
