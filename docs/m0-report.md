@@ -52,15 +52,14 @@ episode completed without a crash.
 8. **Teleport rotation syntax is fragile.** `/tp ... 0 0` can be parsed as
    something other than rotation; use `0.0` for the pitch component.
 
-## Not yet verified
+## Verified in later milestones
 
-- A successful player attack and a zombie kill.
-- `damage_dealt` and `kill_entity` increments in a controlled melee test.
-- PPO training and VRAM usage under the trainer.
-- Reproducibility across many resets (the 3.7–4.1 s reset time is a first
-  measurement).
-
-These are M1/M3 tasks.
+- A successful player attack and zombie kill: M1, after the engine
+  `leftClickCounter` patch.
+- `damage_dealt` and `kill_entity` increments: M1; the `custom.damage_dealt`
+  observation was fixed in M3.
+- PPO training and VRAM usage: M3 smoke, see `docs/m3-ppo-smoke.md`.
+- Reproducibility across 20 resets: M1, see `scripts/validate_resets.py`.
 
 ## Reproduction
 

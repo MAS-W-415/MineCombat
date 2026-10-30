@@ -29,10 +29,11 @@ VPT: `CraftJarvis/MineStudio_VPT.foundation_model_1x`, deterministic sampling
 
 ## Limitation
 
-`damage_dealt` is empty in this MineStudio build, so the damage ratio is 0 and
-the dense damage reward term is currently inactive. The reward uses kill, HP
-loss, time, and death. Dense damage requires a different observation source or
-an upstream fix.
+These 50-seed baselines were run before the `damage_dealt` observation patch,
+so their `damage_ratio` is 0. The win, death, timeout, HP-loss, and step metrics
+are unaffected by the reward. New runs read `custom.damage_dealt` and report a
+nonzero damage ratio. See `minecombat.envs.patches` and
+`tests/test_env_patches.py`.
 
 ## Artifacts
 

@@ -45,7 +45,7 @@ The project studies a curriculum from a single zombie to mixed enemies and, even
 The initial reward is:
 
 ```text
-r_t = 0.1 * Δdamage_dealt
+r_t = 0.01 * Δdamage_dealt   # damage_dealt is in tenths of a HP
     - 0.2 * Δhp_lost
     - 0.001
     + 10 * kill

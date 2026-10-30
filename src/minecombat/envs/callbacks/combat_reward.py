@@ -24,7 +24,8 @@ class CombatRewardConfig:
     target_mob: str = "zombie"
     kill: float = 10.0
     death: float = -5.0
-    damage_dealt: float = 0.1
+    # Minecraft stores damage_dealt in tenths of a HP.
+    damage_dealt: float = 0.01
     damage_taken: float = 0.2
     time: float = 0.001
     clip_min: float = -10.0

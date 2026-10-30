@@ -14,7 +14,7 @@ Stage-1 values:
 
 | Term | Weight | Rationale |
 |---|---:|---|
-| `Δdamage_dealt` | 0.1 | Dense signal for successful hits |
+| `Δdamage_dealt` | 0.01 | 0.1 per HP; the stat is in tenths of a HP |
 | `Δhp_lost` | 0.2 | Stronger penalty for taking damage than for dealing it |
 | time | 0.001 | Small pressure against indefinite camping |
 | `kill` | 10.0 | Terminal objective |
@@ -26,12 +26,17 @@ The reward is clipped to `[-10, 20]` to limit the effect of event spikes.
 
 MineStudio exposes cumulative counters in `info`:
 
-- `info["damage_dealt"]["zombie"]` — total damage dealt to zombies.
+- `info["damage_dealt"]` — total damage dealt, in tenths of a HP. The engine
+  stores this under `info["custom"]["damage_dealt"]`; `minecombat.envs.patches`
+  makes `ObserveFromFullStats` read it. Some builds return
+  `{"zombie": value}` instead of a scalar, so `event_count` handles both.
 - `info["kill_entity"]["zombie"]` — total zombies killed.
 - `info["health"]` — current player health.
 
 The reward uses deltas between consecutive `info` dictionaries. `kill` and
-`death` are terminal events and are counted once per episode.
+`death` are terminal events and are counted once per episode. Because the
+damage stat is cumulative across episodes, the calculator snapshots its value
+at reset and only rewards the delta.
 
 ## Why not only a kill reward?
 

@@ -118,7 +118,9 @@ at 100% CPU and hold GPU memory.
 
 ## Known limitations
 
-- `damage_dealt` is empty, so the dense damage reward term is inactive (#23).
 - The value-target shape warning is fixed (#20).
 - The local machine supports at most two clients because of system RAM, not
   because of the display (#21).
+- Dense damage is active after the `custom.damage_dealt` observation fix (#23).
+  Re-run the 8-environment smoke after pulling that change so the reward
+  matches the training config.
