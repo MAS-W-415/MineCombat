@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from typing import Any
 
 from ._info import event_count, scalar
@@ -34,6 +35,7 @@ class CombatEpisodeCallback(MinecraftCallback):
 
         self.episode_steps = 0
         self.initial_kills = 0.0
+        self.prev_time_since_death: float | None = None
 
     def _add_outcome_info(
         self,
@@ -62,6 +64,7 @@ class CombatEpisodeCallback(MinecraftCallback):
             "kill_entity",
             self.target_mob,
         )
+        self.prev_time_since_death = self._time_since_death(info)
 
         info = self._add_outcome_info(
             info,
@@ -70,6 +73,16 @@ class CombatEpisodeCallback(MinecraftCallback):
         )
 
         return obs, info
+
+    @staticmethod
+    def _time_since_death(info: dict[str, Any]) -> float | None:
+        custom = info.get("custom")
+        if not isinstance(custom, Mapping):
+            return None
+        value = custom.get("time_since_death")
+        if value is None:
+            return None
+        return scalar(value, default=-1.0)
 
     def after_step(
         self,
@@ -100,7 +113,15 @@ class CombatEpisodeCallback(MinecraftCallback):
             default=20.0,
         )
 
-        if hp <= 0.0:
+        current_tsd = self._time_since_death(info)
+        death_by_stat = (
+            current_tsd is not None
+            and self.prev_time_since_death is not None
+            and current_tsd < self.prev_time_since_death
+        )
+        self.prev_time_since_death = current_tsd
+
+        if hp <= 0.0 or death_by_stat:
             # Death takes precedence over simultaneous success.
             outcome = "death"
             terminated = True

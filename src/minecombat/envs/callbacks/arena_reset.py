@@ -34,6 +34,7 @@ class ArenaResetCallback(MinecraftCallback):
         do_mob_spawning: bool = False,
         do_daylight_cycle: bool = False,
         difficulty: str = "normal",
+        natural_regeneration: bool = False,
         build_platform: bool = True,
         platform_radius: int = 8,
         night_vision: bool = True,
@@ -45,6 +46,7 @@ class ArenaResetCallback(MinecraftCallback):
         self.do_mob_spawning = do_mob_spawning
         self.do_daylight_cycle = do_daylight_cycle
         self.difficulty = difficulty
+        self.natural_regeneration = natural_regeneration
         self.build_platform = build_platform
         self.platform_radius = platform_radius
         self.night_vision = night_vision
@@ -54,6 +56,7 @@ class ArenaResetCallback(MinecraftCallback):
             f"/time set {self.time}",
             f"/weather {self.weather}",
             f"/difficulty {self.difficulty}",
+            f"/gamerule naturalRegeneration {str(self.natural_regeneration).lower()}",
             f"/gamerule doMobSpawning {str(self.do_mob_spawning).lower()}",
             f"/gamerule doDaylightCycle {str(self.do_daylight_cycle).lower()}",
         ]

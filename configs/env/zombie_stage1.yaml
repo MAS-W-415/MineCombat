@@ -25,6 +25,7 @@ world:
   time: midnight
   weather: clear
   difficulty: normal
+  natural_regeneration: false
   do_mob_spawning: false
   do_daylight_cycle: false
 
