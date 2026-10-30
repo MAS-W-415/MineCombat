@@ -47,6 +47,7 @@ def main() -> None:
     parser.add_argument("--num-iterations", type=int, default=None)
     parser.add_argument("--batches-per-iteration", type=int, default=None)
     parser.add_argument("--num-envs", type=int, default=None)
+    parser.add_argument("--batch-size", type=int, default=None)
     parser.add_argument("--save-path", default=None)
     parser.add_argument("--name", default=None)
     parser.add_argument(
@@ -84,6 +85,8 @@ def main() -> None:
         cfg.train_config.batches_per_iteration = args.batches_per_iteration
     if args.num_envs is not None:
         cfg.rollout_config.worker_config.num_envs = args.num_envs
+    if args.batch_size is not None:
+        cfg.rollout_config.worker_config.batch_size = args.batch_size
     if args.save_path is not None:
         cfg.train_config.save_path = args.save_path
     if args.name is not None:

@@ -8,6 +8,7 @@ DEFAULT_MODEL = "CraftJarvis/MineStudio_VPT.foundation_model_1x"
 def load_vpt_policy(
     repo_id: str = DEFAULT_MODEL,
     device: str | None = None,
+    checkpoint: str | None = None,
 ):
     """Load a pretrained VPT policy for inference.
 
@@ -19,6 +20,9 @@ def load_vpt_policy(
         PyTorch device, such as "cpu" or "cuda".
         None or "auto" selects CUDA when available,
         otherwise CPU.
+    checkpoint:
+        Optional PPO ``model.ckpt`` to load on top of the
+        pretrained weights.
     """
 
     # Lazy imports: only load heavy dependencies when needed.
@@ -43,6 +47,12 @@ def load_vpt_policy(
 
     # Construct the model and load pretrained parameters.
     policy = VPTPolicy.from_pretrained(repo_id)
+
+    if checkpoint is not None:
+        state = torch.load(checkpoint, map_location="cpu")
+        if isinstance(state, dict) and "model" in state:
+            state = state["model"]
+        policy.load_state_dict(state, strict=True)
 
     # Move model parameters to the selected device.
     policy = policy.to(device)

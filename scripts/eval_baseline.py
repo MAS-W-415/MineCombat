@@ -50,6 +50,12 @@ def main() -> None:
     )
 
     parser.add_argument(
+        "--checkpoint",
+        default=None,
+        help="Optional PPO model.ckpt to evaluate on top of VPT.",
+    )
+
+    parser.add_argument(
         "--device",
         choices=["auto", "cpu", "cuda"],
         default="auto",
@@ -91,19 +97,28 @@ def main() -> None:
 
     args = parser.parse_args()
 
+    if args.checkpoint and args.policy != "vpt":
+        parser.error("--checkpoint requires --policy vpt")
+
     # Load the policy before creating the simulator.
     # A model-loading failure should not leave Minecraft running.
     policy = None
 
     if args.policy == "vpt":
+        checkpoint = (
+            _resolve(args.checkpoint)
+            if args.checkpoint
+            else None
+        )
         print(
             f"Loading VPT model: {args.model}, "
-            f"device={args.device}"
+            f"device={args.device}, checkpoint={checkpoint}"
         )
 
         policy = load_vpt_policy(
             repo_id=args.model,
             device=args.device,
+            checkpoint=checkpoint,
         )
 
     print(
@@ -138,15 +153,32 @@ def main() -> None:
     )
 
     if not args.no_save:
+        run_name = (
+            "eval_vpt_ckpt"
+            if args.checkpoint
+            else f"eval_{args.policy}"
+        )
         run = RunLog(
             args.output_dir,
-            f"eval_{args.policy}",
+            run_name,
         )
 
         run.save_config(
             _resolve(args.config)
         )
 
+        run.save_metrics(
+            {
+                "policy": args.policy,
+                "model": args.model,
+                "checkpoint": (
+                    _resolve(args.checkpoint)
+                    if args.checkpoint
+                    else None
+                ),
+            },
+            filename="policy.json",
+        )
         run.save_metrics(summary)
         run.save_records(records)
         run.save_git_commit()
