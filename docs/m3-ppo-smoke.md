@@ -93,3 +93,5 @@ a second environment on this GPU.
   Do not run it on the local 4060 with one environment: at ~45 steps/s it
   would take about 6 hours, and four local environments already exhaust the
   31 GB system RAM.
+- Follow `docs/1m-run.md` for the exact command, 8-environment preflight,
+  evaluation, and cleanup.
