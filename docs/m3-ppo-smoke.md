@@ -75,14 +75,17 @@ a second environment on this GPU.
    in an importable module (`minecombat.train.generators`), not in `__main__`.
 5. **Single display** — the local `xvfb-run` shim shares `DISPLAY=:0`; multiple
    Minecraft clients conflict, so the smoke uses one environment.
-6. **Value-head warning** — MineStudio's `ScaledMSEHead` warns that the value
-   target shape `(1, 1, 64)` differs from the prediction `(1, 64)`. The update
-   runs, but this should be reviewed before the 1M-step run.
+6. **Value-head warning** — MineStudio's `NormalizeEwma` turns a `(1, 64)`
+   value target into `(1, 1, 64)`, so `ScaledMSEHead` warned about broadcasting.
+   The loss was numerically unchanged, but the warning hid real shape errors.
+   `minecombat.train.patches.patch_scaled_mse_head()` now reshapes the
+   normalized target back to the prediction shape when the element count
+   matches. The warning is gone in the 1-iteration smoke, and
+   `tests/test_train_patches.py` checks the loss is identical.
 
 ## Next
 
 - Install real Xvfb or VirtualGL for multiple environments.
-- Review the value-head shape warning.
 - Start the 1M-step run on a 4090 or cloud GPU. Do not run it on the local
   4060 with one environment: at ~45 steps/s it would take about 6 hours, and
   the single display prevents parallel environments.
