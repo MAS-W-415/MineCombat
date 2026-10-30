@@ -8,9 +8,19 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 
 ## 当前状态
 
-`M0 — 环境打通` 已在本地 RTX 4060 完成 / `M1 — 僵尸竞技场` 进行中
+`M0 — 环境打通`、`M1 — 僵尸竞技场`、`M2 — 基线与指标` 已完成。
+`M3 — 首次 PPO` 进行中：单卡训练链路、10k smoke、dense damage 信号和
+50-seed checkpoint 评估都已跑通。1M 长跑需要 24 GB GPU / 64 GB RAM 的机器；
+本地 RTX 4060 单环境约 45 steps/s。
 
-仓库包含环境骨架、奖励实现、评估脚本和单卡训练配置。M0 的测量结果和环境 workaround 记录在 [docs/m0-report.md](docs/m0-report.md)。基线与第一次 PPO 实验会在 [Issues](https://github.com/MAS-W-415/MineCombat/issues) 中跟踪。
+主要结果：
+
+- [M2 基线](docs/m2-baseline.md)：随机策略 0% 胜率 / 96% 死亡率；zero-shot VPT 2% 胜率 / 28% 死亡率。
+- [M3 PPO smoke](docs/m3-ppo-smoke.md)：10k steps、20 次 update、峰值显存 6.3 GiB。
+- [Dense damage](docs/m3-dense-damage.md)：10k 时首次出现非零伤害比（0.0897）。
+- [1M 运行手册](docs/1m-run.md)：下一台机器上的完整命令与前置检查。
+
+基线与 PPO 实验在 [Issues](https://github.com/MAS-W-415/MineCombat/issues) 中跟踪。
 
 ## 为什么做这个项目
 
@@ -29,7 +39,7 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 | 阶段 | 敌人 | 技能 | 状态 |
 |---|---|---|---|
 | 0 | 环境 | 稳定 reset、渲染、VPT 推理、日志 | 已完成 |
-| 1 | 僵尸 | 接近、瞄准、攻击、躲避伤害 | 进行中 |
+| 1 | 僵尸 | 接近、瞄准、攻击、躲避伤害 | 场景与基线已完成；PPO 进行中 |
 | 2 | 骷髅 | 弹道规避、距离控制 | 计划中 |
 | 3 | 苦力怕 + 混合 | 爆炸风险、多敌人、地形 | 计划中 |
 | 4 | 末影龙 | 长程战术、高层 Harness | 计划中 |
@@ -45,7 +55,7 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 初始奖励：
 
 ```text
-r_t = 0.1 * Δdamage_dealt
+r_t = 0.01 * Δdamage_dealt   # damage_dealt 以 0.1 HP 为单位
     - 0.2 * Δhp_lost
     - 0.001
     + 10 * kill
@@ -99,18 +109,20 @@ python scripts/smoke_test.py --policy vpt --steps 600
 
 ## 训练
 
-本地 RTX 4060 Laptop 只有 8 GB VRAM，所以第一版 PPO 配置刻意保守：
-
-- 1 个 rollout worker，8–12 个环境
-- 每卡 batch size 1
-- context length 64
-- VPT 1x
-
-MineStudio 官方配置默认需要多张 GPU。单卡配置见 `configs/ppo/zombie_vpt1x.yaml`；正式长跑建议放到 4090 或云端。
+本地 RTX 4060 Laptop 只有 8 GB VRAM，所以 smoke 只开 1 个环境。
+基础配置面向 24 GB GPU：8 个环境、batch size 4、context length 64、VPT 1x。
 
 ```bash
-bash scripts/train_zombie.sh
+# 本地链路 smoke（单环境）
+bash scripts/start_ray.sh
+bash scripts/train_zombie.sh --smoke
+
+# 24 GB GPU / 64 GB RAM 机器上的 1M 长跑
+bash scripts/train_zombie.sh --num-iterations 20 --num-envs 8 --batch-size 4
 ```
+
+MineStudio 官方配置默认需要多张 GPU。单卡配置见
+`configs/ppo/zombie_vpt1x.yaml`；完整长跑步骤见 [docs/1m-run.md](docs/1m-run.md)。
 
 ## 研究问题
 
