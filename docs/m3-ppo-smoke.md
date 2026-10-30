@@ -45,7 +45,21 @@ Result:
 - `20 × 2 fragments × 256 steps ≈ 10,240` environment steps.
 - Checkpoint saved at `experiments/ppo_smoke/checkpoints/2026-10-30_18-22-45/20`.
 - No OOM, no trainer crash.
-- Runtime: about 5 minutes on the local RTX 4060 with one environment.
+- Runtime: 226 s from `Start training` to the final checkpoint
+  (≈45 environment steps/s with one environment).
+- Final episode statistics: mean reward ≈ -2.83, episode length ≈ 566.
+
+### VRAM
+
+A separate 2-iteration run was monitored with `nvidia-smi` once per second:
+
+```text
+peak total GPU memory: 6484 MiB (~6.3 GiB)
+```
+
+This includes about 0.6 GiB of desktop overhead, so the training stack itself
+uses roughly 5.9 GiB. It fits in the 8 GB budget, but leaves little headroom for
+a second environment on this GPU.
 
 ## Issues found
 
@@ -69,5 +83,6 @@ Result:
 
 - Install real Xvfb or VirtualGL for multiple environments.
 - Review the value-head shape warning.
-- Run the 10k-step smoke (`--num-iterations 20`).
-- Then start the 1M-step run on a 4090 or cloud GPU.
+- Start the 1M-step run on a 4090 or cloud GPU. Do not run it on the local
+  4060 with one environment: at ~45 steps/s it would take about 6 hours, and
+  the single display prevents parallel environments.
