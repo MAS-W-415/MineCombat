@@ -225,6 +225,9 @@ chmod +x .venv/bin/xvfb-run
 # Work around the MalmoEnv server startup race:
 python scripts/patch_minestudio.py
 
+# Fix the engine left-click lock (leftClickCounter=10000):
+python scripts/patch_minestudio_engine.py
+
 # Clear stale instance state after a crashed run:
 bash scripts/clean_minestudio_runtime.sh
 ```

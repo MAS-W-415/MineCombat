@@ -12,6 +12,11 @@ max_episode_steps: 600
 
 preferred_spawn_biome: plains
 
+# Flat arena around the player. This removes terrain variance from stage 1.
+arena:
+  build_platform: true
+  platform_radius: 8
+
 # Minecraft world settings
 world:
   biome: plains
