@@ -33,8 +33,10 @@ class ArenaResetCallback(MinecraftCallback):
         weather: str = "clear",
         do_mob_spawning: bool = False,
         do_daylight_cycle: bool = False,
+        difficulty: str = "normal",
         build_platform: bool = True,
         platform_radius: int = 8,
+        night_vision: bool = True,
     ) -> None:
         self.biome = biome
         self.random_tp_range = random_tp_range
@@ -42,23 +44,29 @@ class ArenaResetCallback(MinecraftCallback):
         self.weather = weather
         self.do_mob_spawning = do_mob_spawning
         self.do_daylight_cycle = do_daylight_cycle
+        self.difficulty = difficulty
         self.build_platform = build_platform
         self.platform_radius = platform_radius
+        self.night_vision = night_vision
 
     def _world_commands(self) -> list[str]:
         return [
             f"/time set {self.time}",
             f"/weather {self.weather}",
+            f"/difficulty {self.difficulty}",
             f"/gamerule doMobSpawning {str(self.do_mob_spawning).lower()}",
             f"/gamerule doDaylightCycle {str(self.do_daylight_cycle).lower()}",
         ]
 
     def _player_commands(self) -> list[str]:
-        return [
+        commands = [
             "/clear @p",
             "/effect give @p minecraft:instant_health 1 10 true",
             "/effect give @p minecraft:saturation 1 10 true",
         ]
+        if self.night_vision:
+            commands.append("/effect give @p minecraft:night_vision 99999 1 true")
+        return commands
 
     def _platform_commands(self) -> list[str]:
         if not self.build_platform:

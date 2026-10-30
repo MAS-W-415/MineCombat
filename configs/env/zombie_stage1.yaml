@@ -15,7 +15,8 @@ preferred_spawn_biome: plains
 # Flat arena around the player. This removes terrain variance from stage 1.
 arena:
   build_platform: true
-  platform_radius: 8
+  platform_radius: 12
+  night_vision: true
 
 # Minecraft world settings
 world:
@@ -23,6 +24,7 @@ world:
   random_tp_range: 50
   time: midnight
   weather: clear
+  difficulty: normal
   do_mob_spawning: false
   do_daylight_cycle: false
 
