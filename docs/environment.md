@@ -177,10 +177,22 @@ That is roughly `20 × 2 fragments × 256 steps ≈ 10,240` environment steps.
 
 ### Multiple environments
 
-The local `xvfb-run` shim runs every Minecraft client on the same `DISPLAY`.
-Two or more clients can conflict, so `--smoke` uses `num_envs=1`. For the 1M-step
-run, install a real Xvfb (or VirtualGL per instance) so each client gets its own
-display, then increase `worker_config.num_envs`.
+Measured on the local machine:
+
+| Envs | Result | Peak GPU memory | Throughput |
+|---:|---|---:|---:|
+| 1 | works | 6484 MiB | ~45 steps/s |
+| 2 | works | 6710 MiB | ~22 steps/s |
+| 4 | OOM (system RAM) | 3060 MiB before crash | — |
+
+Two Minecraft clients can share `DISPLAY=:0`; the display is not the blocker.
+The 4-env run died because the node hit 29.55 GB / 31.12 GB system memory, not
+because of VRAM. Each Java client has a large resident set, so the local 31 GB
+machine can only run two clients alongside Ray and the trainer.
+
+Two environments are also slower than one here: both clients compete for CPU
+and the single GPU. Keep `num_envs=1` for local smoke tests. Use a machine with
+more system RAM and a larger GPU (4090 or cloud) for 8-environment training.
 
 ## Single-GPU PPO notes
 
