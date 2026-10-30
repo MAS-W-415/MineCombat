@@ -71,3 +71,21 @@ def test_other_mob_does_not_count() -> None:
     calc.reset(info())
     reward = calc.compute({"health": 20.0, "damage_dealt": {"skeleton": 5.0}})
     assert reward == pytest.approx(-0.001)
+
+def test_inplace_event_update_is_counted() -> None:
+    calc = CombatRewardCalculator()
+
+    state = {
+        "health": 20.0,
+        "damage_dealt": {"zombie": 0.0},
+        "kill_entity": {"zombie": 0.0},
+    }
+
+    calc.reset(state)
+
+    # 模拟底层环境原地更新嵌套字典
+    state["damage_dealt"]["zombie"] = 4.0
+
+    reward = calc.compute(state)
+
+    assert reward == pytest.approx(0.4 - 0.001)

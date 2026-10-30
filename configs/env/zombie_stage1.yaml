@@ -1,0 +1,48 @@
+# Stage 1: Single-zombie combat
+
+seed: 42
+
+# Observation and action interfaces
+obs_size: [128, 128]
+render_size: [640, 360]
+action_type: agent
+
+# Maximum episode length, measured in environment steps
+max_episode_steps: 600
+
+preferred_spawn_biome: plains
+
+# Minecraft world settings
+world:
+  biome: plains
+  random_tp_range: 50
+  time: midnight
+  weather: clear
+  do_mob_spawning: false
+  do_daylight_cycle: false
+
+# Initial player setup
+player:
+  commands:
+    - "/give @p minecraft:stone_sword 1"
+
+# Zombie spawn configuration
+zombie:
+  mob: zombie
+  count: 1
+  min_distance: 4.0
+  max_distance: 10.0
+  spawn_height: 2.0
+  randomize_player_yaw: true
+  persistence_required: true
+
+# Reward coefficients
+reward:
+  target_mob: zombie
+  kill: 10.0
+  death: -5.0
+  damage_dealt: 0.1
+  damage_taken: 0.2
+  time: 0.001
+  clip_min: -10.0
+  clip_max: 20.0
