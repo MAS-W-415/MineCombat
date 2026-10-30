@@ -8,9 +8,20 @@ MineCombat is a research project built on [MineStudio](https://github.com/CraftJ
 
 ## Status
 
-`M0 — environment bring-up` complete on the local RTX 4060 / `M1 — zombie arena` in progress.
+`M0 — environment bring-up`, `M1 — zombie arena`, and `M2 — baselines` are
+complete. `M3 — first PPO` is in progress: the single-GPU pipeline, 10k smoke,
+dense damage signal, and 50-seed checkpoint evaluation work. The 1M-step run is
+blocked on a 24 GB GPU / 64 GB RAM host; the local RTX 4060 runs one environment
+at ~45 steps/s.
 
-The repository contains the environment skeleton, reward implementation, evaluation harness, and single-GPU training configuration. M0 measurements and workarounds are documented in [docs/m0-report.md](docs/m0-report.md). The first baseline and PPO runs are tracked in [Issues](https://github.com/MAS-W-415/MineCombat/issues).
+Key results:
+
+- [M2 baselines](docs/m2-baseline.md): random 0% win / 96% death; zero-shot VPT 2% win / 28% death.
+- [M3 PPO smoke](docs/m3-ppo-smoke.md): 10k steps, 20 updates, 6.3 GiB peak GPU memory.
+- [Dense damage](docs/m3-dense-damage.md): first nonzero damage ratio (0.0897) at 10k.
+- [1M runbook](docs/1m-run.md): exact command and preflight for the next host.
+
+The first baseline and PPO runs are tracked in [Issues](https://github.com/MAS-W-415/MineCombat/issues).
 
 ## Why this project
 
@@ -29,7 +40,7 @@ The project studies a curriculum from a single zombie to mixed enemies and, even
 | Stage | Enemy | Skills | Status |
 |---|---|---|---|
 | 0 | Environment | Stable reset, rendering, VPT inference, logging | Complete |
-| 1 | Zombie | Approach, aim, attack, avoid damage | In progress |
+| 1 | Zombie | Approach, aim, attack, avoid damage | Arena + baselines complete; PPO in progress |
 | 2 | Skeleton | Projectile avoidance, distance control | Planned |
 | 3 | Creeper + mixed | Explosion risk, multiple enemies, terrain | Planned |
 | 4 | Ender Dragon | Long-horizon tactics, high-level harness | Planned |
@@ -99,18 +110,22 @@ python scripts/smoke_test.py --policy vpt --steps 600
 
 ## Training
 
-The local RTX 4060 Laptop has 8 GB VRAM, so the first PPO configuration is deliberately small:
-
-- 1 rollout worker, 8–12 environments,
-- batch size 1 per GPU,
-- context length 64,
-- VPT 1x.
-
-The official MineStudio configuration assumes multiple GPUs. Use `configs/ppo/zombie_vpt1x.yaml` for the single-GPU profile and move to a 4090 or cloud GPU for longer runs.
+The local RTX 4060 Laptop has 8 GB VRAM, so the smoke profile uses one
+environment. The base config is sized for a 24 GB GPU with 8 environments,
+batch size 4, context length 64, and VPT 1x.
 
 ```bash
-bash scripts/train_zombie.sh
+# Local pipeline smoke (one environment)
+bash scripts/start_ray.sh
+bash scripts/train_zombie.sh --smoke
+
+# 1M-step run on a 24 GB GPU / 64 GB RAM host
+bash scripts/train_zombie.sh --num-iterations 20 --num-envs 8 --batch-size 4
 ```
+
+The official MineStudio configuration assumes multiple GPUs. Use
+`configs/ppo/zombie_vpt1x.yaml` for the single-GPU profile and see
+[docs/1m-run.md](docs/1m-run.md) for the full runbook.
 
 ## Research questions
 
