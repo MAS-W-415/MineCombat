@@ -80,6 +80,9 @@ def make_zombie_env(
             difficulty=str(
                 world.get("difficulty", "normal")
             ),
+            natural_regeneration=bool(
+                world.get("natural_regeneration", False)
+            ),
             build_platform=bool(
                 arena.get("build_platform", True)
             ),

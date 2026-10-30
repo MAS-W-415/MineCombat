@@ -10,13 +10,17 @@ from minecombat.envs.callbacks.combat_episode import CombatEpisodeCallback
 def make_info(
     health: float = 20.0,
     kills: float = 0.0,
+    time_since_death: float | None = None,
 ) -> dict:
-    return {
+    info = {
         "health": health,
         "kill_entity": {
             "zombie": kills,
         },
     }
+    if time_since_death is not None:
+        info["custom"] = {"time_since_death": time_since_death}
+    return info
 
 
 def run_step(
@@ -25,6 +29,7 @@ def run_step(
     kills: float = 0.0,
     terminated: bool = False,
     truncated: bool = False,
+    time_since_death: float | None = None,
 ):
     return callback.after_step(
         sim=None,
@@ -32,7 +37,7 @@ def run_step(
         reward=3.5,
         terminated=terminated,
         truncated=truncated,
-        info=make_info(health, kills),
+        info=make_info(health, kills, time_since_death),
     )
 
 
@@ -79,6 +84,35 @@ def test_player_death_terminates_episode():
     assert truncated is False
     assert info["combat_outcome"] == "death"
     assert info["combat_success"] is False
+
+
+def test_death_by_time_since_death_reset():
+    callback = CombatEpisodeCallback()
+    callback.after_reset(None, {}, make_info(time_since_death=10))
+
+    _, _, terminated, truncated, info = run_step(
+        callback,
+        health=20,
+        time_since_death=0,
+    )
+
+    assert terminated is True
+    assert truncated is False
+    assert info["combat_outcome"] == "death"
+
+
+def test_increasing_time_since_death_is_not_death():
+    callback = CombatEpisodeCallback()
+    callback.after_reset(None, {}, make_info(time_since_death=5))
+
+    _, _, terminated, _, info = run_step(
+        callback,
+        health=20,
+        time_since_death=6,
+    )
+
+    assert terminated is False
+    assert info["combat_outcome"] == "ongoing"
 
 
 def test_simultaneous_death_and_kill_counts_as_failure():
