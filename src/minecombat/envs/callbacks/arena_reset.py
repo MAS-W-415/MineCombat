@@ -33,6 +33,8 @@ class ArenaResetCallback(MinecraftCallback):
         weather: str = "clear",
         do_mob_spawning: bool = False,
         do_daylight_cycle: bool = False,
+        build_platform: bool = True,
+        platform_radius: int = 8,
     ) -> None:
         self.biome = biome
         self.random_tp_range = random_tp_range
@@ -40,6 +42,8 @@ class ArenaResetCallback(MinecraftCallback):
         self.weather = weather
         self.do_mob_spawning = do_mob_spawning
         self.do_daylight_cycle = do_daylight_cycle
+        self.build_platform = build_platform
+        self.platform_radius = platform_radius
 
     def _world_commands(self) -> list[str]:
         return [
@@ -54,6 +58,15 @@ class ArenaResetCallback(MinecraftCallback):
             "/clear @p",
             "/effect give @p minecraft:instant_health 1 10 true",
             "/effect give @p minecraft:saturation 1 10 true",
+        ]
+
+    def _platform_commands(self) -> list[str]:
+        if not self.build_platform:
+            return []
+        r = max(1, int(self.platform_radius))
+        return [
+            f"/fill ~-{r} ~-1 ~-{r} ~{r} ~-1 ~{r} minecraft:grass_block",
+            f"/fill ~-{r} ~ ~-{r} ~{r} ~4 ~{r} minecraft:air",
         ]
 
     def _random_location(self, sim) -> tuple[int, int]:
@@ -92,12 +105,17 @@ class ArenaResetCallback(MinecraftCallback):
             *self._world_commands(),
             *self._player_commands(),
             f"/teleportbiome @a {self.biome} {x} ~0 {z}",
+            *self._platform_commands(),
         ]
         self._execute(sim, commands)
         return False
 
     def after_reset(self, sim, obs, info):
-        commands = [*self._world_commands(), *self._player_commands()]
+        commands = [
+            *self._world_commands(),
+            *self._platform_commands(),
+            *self._player_commands(),
+        ]
         cmd_obs, cmd_info = self._execute(sim, commands)
         if cmd_obs is not None and cmd_info is not None:
             obs, info = sim._wrap_obs_info(cmd_obs, cmd_info)

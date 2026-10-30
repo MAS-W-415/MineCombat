@@ -21,6 +21,8 @@ wandb/
 experiments/**/videos/
 experiments/**/checkpoints/
 experiments/**/*.mp4
+experiments/**/*.png
+experiments/**/*.jpg
 experiments/**/*.pt
 experiments/**/*.pth
 experiments/**/*.ckpt

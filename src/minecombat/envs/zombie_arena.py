@@ -50,6 +50,7 @@ def make_zombie_env(
 
     # 2. Extract configuration sections.
     world = dict(cfg.get("world", {}))
+    arena = dict(cfg.get("arena", {}))
     player = dict(cfg.get("player", {}))
     zombie = dict(cfg.get("zombie", {}))
     reward = dict(cfg.get("reward", {}))
@@ -75,6 +76,12 @@ def make_zombie_env(
             ),
             do_daylight_cycle=bool(
                 world.get("do_daylight_cycle", False)
+            ),
+            build_platform=bool(
+                arena.get("build_platform", True)
+            ),
+            platform_radius=int(
+                arena.get("platform_radius", 8)
             ),
         ),
 
