@@ -146,6 +146,42 @@ For NVIDIA GPUs without a desktop session, install VirtualGL and run:
 MINESTUDIO_GPU_RENDER=1 python -m minestudio.simulator.entry
 ```
 
+## Ray for online PPO
+
+The online trainer uses Ray and requires custom resources:
+
+- `database: 10000`
+- `rollout_workers: 100`
+- `wandb: 1`
+
+The Ray head must be started with JDK 8 in its environment; otherwise the
+Minecraft engine fails with `javax/xml/bind/JAXBException`. Use:
+
+```bash
+bash scripts/start_ray.sh
+bash scripts/train_zombie.sh --smoke
+bash scripts/stop_ray.sh
+```
+
+The helper starts Ray with `RAY_AUTH_MODE=disabled` for local development and
+sets `JAVA_HOME` to the user-local JDK 8 when available.
+
+`--smoke` uses one environment and one PPO iteration. For a 10k-step pipeline
+test:
+
+```bash
+bash scripts/train_zombie.sh --smoke --num-iterations 20
+```
+
+That is roughly `20 × 2 fragments × 256 steps ≈ 10,240` environment steps.
+
+### Multiple environments
+
+The local `xvfb-run` shim runs every Minecraft client on the same `DISPLAY`.
+Two or more clients can conflict, so `--smoke` uses `num_envs=1`. For the 1M-step
+run, install a real Xvfb (or VirtualGL per instance) so each client gets its own
+display, then increase `worker_config.num_envs`.
+
 ## Single-GPU PPO notes
 
 MineStudio's official online config assumes multiple GPUs:

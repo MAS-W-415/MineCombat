@@ -9,5 +9,17 @@ if [[ -f .venv/bin/activate ]]; then
   source .venv/bin/activate
 fi
 
+LOCAL_JDK8="${HOME}/.local/opt/jdk8/usr/lib/jvm/java-8-openjdk-amd64"
+if [[ -x "${LOCAL_JDK8}/bin/java" ]]; then
+  export JAVA_HOME="${JAVA_HOME:-${LOCAL_JDK8}}"
+  export PATH="${JAVA_HOME}/bin:${PATH}"
+fi
+
+export RAY_AUTH_MODE="${RAY_AUTH_MODE:-disabled}"
+
+if ! ray status >/dev/null 2>&1; then
+  bash scripts/start_ray.sh
+fi
+
 export PYTHONPATH="${PYTHONPATH:-}:$ROOT/src"
 python -m minecombat.train.ppo --config configs/ppo/zombie_vpt1x.yaml "$@"
