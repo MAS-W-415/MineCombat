@@ -77,7 +77,7 @@ The gates are provisional and will be revised after the first baseline.
 ## 5. Reward
 
 ```text
-r_t = 0.1 * Δdamage_dealt
+r_t = 0.01 * Δdamage_dealt   # damage_dealt is in tenths of a HP
     - 0.2 * Δhp_lost
     - 0.001
     + 10 * kill

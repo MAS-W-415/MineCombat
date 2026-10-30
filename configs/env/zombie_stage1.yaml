@@ -49,7 +49,9 @@ reward:
   target_mob: zombie
   kill: 10.0
   death: -5.0
-  damage_dealt: 0.1
+  # Minecraft stores damage_dealt in tenths of a HP (199 ≈ 20 HP).
+  # 0.01 gives 0.1 reward per HP, i.e. ~2 reward for a full zombie.
+  damage_dealt: 0.01
   damage_taken: 0.2
   time: 0.001
   clip_min: -10.0

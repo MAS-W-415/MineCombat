@@ -22,6 +22,11 @@ does not win. This is expected: 10k steps is a pipeline smoke, not a training
 run. It does not show that PPO improves over zero-shot. That question needs the
 1M-step run (#10).
 
+This checkpoint was trained before the `custom.damage_dealt` observation fix,
+so it did not receive the dense damage term. The evaluation metrics (win,
+death, HP, steps) do not depend on the reward and remain comparable. The
+dense-damage follow-up is in `docs/m3-dense-damage.md`.
+
 ## Artifacts
 
 - `experiments/20261030_190258_eval_vpt_ckpt/`

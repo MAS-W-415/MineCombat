@@ -17,7 +17,7 @@ def test_damage_dealt_reward() -> None:
     calc = CombatRewardCalculator()
     calc.reset(info())
     reward = calc.compute(info(damage=4.0))
-    assert reward == pytest.approx(0.4 - 0.001)
+    assert reward == pytest.approx(0.04 - 0.001)
 
 
 def test_kill_reward() -> None:
@@ -57,7 +57,7 @@ def test_scalar_event_fallback() -> None:
     calc = CombatRewardCalculator()
     calc.reset({"health": 20.0, "damage_dealt": 0.0})
     reward = calc.compute({"health": 20.0, "damage_dealt": 5.0})
-    assert reward == pytest.approx(0.5 - 0.001)
+    assert reward == pytest.approx(0.05 - 0.001)
 
 
 def test_missing_events_are_neutral() -> None:
@@ -88,4 +88,4 @@ def test_inplace_event_update_is_counted() -> None:
 
     reward = calc.compute(state)
 
-    assert reward == pytest.approx(0.4 - 0.001)
+    assert reward == pytest.approx(0.04 - 0.001)

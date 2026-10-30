@@ -59,6 +59,10 @@ def make_zombie_env(
     from minestudio.simulator import MinecraftSim
     from minestudio.simulator.callbacks import CommandsCallback
 
+    from .patches import patch_observe_from_full_stats
+
+    patch_observe_from_full_stats()
+
     # 3. Construct callbacks.
     callbacks = [
         ArenaResetCallback(

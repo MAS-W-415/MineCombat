@@ -49,6 +49,10 @@ Result:
   (≈45 environment steps/s with one environment).
 - Final episode statistics: mean reward ≈ -2.83, episode length ≈ 566.
 
+This run predates the `damage_dealt` fix below, so it trained with the dense
+damage term at zero. A follow-up 10k smoke with the dense signal and its
+50-seed evaluation are in `docs/m3-dense-damage.md`.
+
 ### VRAM
 
 A separate 2-iteration run was monitored with `nvidia-smi` once per second:
@@ -86,6 +90,12 @@ a second environment on this GPU.
    normalized target back to the prediction shape when the element count
    matches. The warning is gone in the 1-iteration smoke, and
    `tests/test_train_patches.py` checks the loss is identical.
+7. **Dropped damage stat** — the engine emits `custom.damage_dealt`, but
+   `ObserveFromFullStats` only looked at the top level, so the dense damage
+   reward was zero. `minecombat.envs.patches.patch_observe_from_full_stats()`
+   now reads the `custom` mapping, and `make_zombie_env` applies it. The
+   scripted melee test reports `damage=201` (≈20 HP) and the weight is `0.01`
+   per stat point.
 
 ## Next
 

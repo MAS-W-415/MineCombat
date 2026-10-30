@@ -96,17 +96,18 @@ Fix: patch `MouseHelper.class` so the instruction writes `0` instead of
 python scripts/patch_minestudio_engine.py
 ```
 
-After the patch, the scripted melee test kills the zombie:
+After the patch, the scripted melee test kills the zombie and reports damage:
 
 ```text
-step=144 reward=+9.999 kills={'zombie': 1} outcome=success terminated=True
-RESULT damage=0.0 kills=1.0 outcome=success reward=9.855 passed=True
+step=144 reward=+10.089 damage=201.0 kills=1.0 outcome=success terminated=True
+RESULT damage=201.0 kills=1.0 outcome=success reward=11.865 passed=True
 ```
 
-`damage_dealt` is still empty in this MineStudio build, so the dense damage
-term is currently zero. The kill event and episode outcome are reliable. The
-dense damage reward will need a different observation source (for example a
-mob-health query) or a MineStudio fix.
+The engine stores `damage_dealt` under `info["custom"]["damage_dealt"]`, but
+MineStudio's `ObserveFromFullStats` only looked at the top level, so the value
+was silently dropped. `minecombat.envs.patches.patch_observe_from_full_stats()`
+now reads custom stats; `make_zombie_env` applies it. The stat is in tenths of
+a HP (201 ≈ 20 HP), so the reward weight is `0.01` per stat point.
 
-The patch is applied automatically by `scripts/setup.sh`. It is idempotent and
-keeps a `.bak` copy of the engine jar.
+The engine patch is applied automatically by `scripts/setup.sh`. It is
+idempotent and keeps a `.bak` copy of the engine jar.

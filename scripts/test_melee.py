@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minecombat.envs import make_zombie_env  # noqa: E402
+from minecombat.envs.callbacks._info import event_count  # noqa: E402
 
 
 def resolve(path: str) -> str:
@@ -91,10 +92,10 @@ def main() -> int:
             final_info = info
             final_terminated = terminated or truncated
 
-            damage = dict(info.get("damage_dealt") or {})
-            kills = dict(info.get("kill_entity") or {})
-            max_damage = max(max_damage, float(damage.get("zombie", 0.0)))
-            max_kills = max(max_kills, float(kills.get("zombie", 0.0)))
+            damage = event_count(info, "damage_dealt", "zombie")
+            kills = event_count(info, "kill_entity", "zombie")
+            max_damage = max(max_damage, damage)
+            max_kills = max(max_kills, kills)
 
             if step % 10 == 0 or max_damage > 0 or final_terminated:
                 cv2.imwrite(str(save_dir / f"step_{step:03d}.png"), info["pov"])
@@ -109,9 +110,11 @@ def main() -> int:
 
         cv2.imwrite(str(save_dir / "after_attack.png"), final_info["pov"])
         outcome = final_info.get("combat_outcome")
-        # damage_dealt is not populated by this MineStudio build; the kill and
-        # outcome are the reliable signals for the melee integration test.
-        passed = max_kills >= 1 and outcome == "success"
+        passed = (
+            max_damage > 0
+            and max_kills >= 1
+            and outcome == "success"
+        )
         print(
             f"RESULT damage={max_damage} kills={max_kills} outcome={outcome} "
             f"reward={total_reward:.3f} passed={passed}"
