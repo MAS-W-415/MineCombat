@@ -73,8 +73,12 @@ a second environment on this GPU.
    JDK 8.
 4. **Multiprocessing pickle** — `env_generator` and `policy_generator` must live
    in an importable module (`minecombat.train.generators`), not in `__main__`.
-5. **Single display** — the local `xvfb-run` shim shares `DISPLAY=:0`; multiple
-   Minecraft clients conflict, so the smoke uses one environment.
+5. **Multi-env capacity** — two clients share `DISPLAY=:0` and work, but four
+   clients exhaust the 31 GB system RAM (29.55 GB used) even though VRAM stays
+   low. Two environments also halve throughput (~22 vs ~45 steps/s) because
+   the clients compete for CPU and the single GPU. The local smoke therefore
+   uses one environment; 8-environment training needs more system RAM and a
+   larger GPU.
 6. **Value-head warning** — MineStudio's `NormalizeEwma` turns a `(1, 64)`
    value target into `(1, 1, 64)`, so `ScaledMSEHead` warned about broadcasting.
    The loss was numerically unchanged, but the warning hid real shape errors.
@@ -85,7 +89,7 @@ a second environment on this GPU.
 
 ## Next
 
-- Install real Xvfb or VirtualGL for multiple environments.
-- Start the 1M-step run on a 4090 or cloud GPU. Do not run it on the local
-  4060 with one environment: at ~45 steps/s it would take about 6 hours, and
-  the single display prevents parallel environments.
+- Start the 1M-step run on a host with more system RAM and a 4090/cloud GPU.
+  Do not run it on the local 4060 with one environment: at ~45 steps/s it
+  would take about 6 hours, and four local environments already exhaust the
+  31 GB system RAM.
