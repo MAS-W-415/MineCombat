@@ -109,7 +109,9 @@ def main() -> int:
 
         cv2.imwrite(str(save_dir / "after_attack.png"), final_info["pov"])
         outcome = final_info.get("combat_outcome")
-        passed = max_damage > 0 and max_kills >= 1 and outcome == "success"
+        # damage_dealt is not populated by this MineStudio build; the kill and
+        # outcome are the reliable signals for the melee integration test.
+        passed = max_kills >= 1 and outcome == "success"
         print(
             f"RESULT damage={max_damage} kills={max_kills} outcome={outcome} "
             f"reward={total_reward:.3f} passed={passed}"

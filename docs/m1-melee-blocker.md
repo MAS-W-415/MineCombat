@@ -82,13 +82,31 @@ Possible causes:
 3. The left-click key-press transition is consumed before the client tick.
 4. The engine's mouse-button state is not applied to the live client.
 
-## Options
+## Resolution
 
-1. **Fix the engine** (preferred for the research goal): decompile/patch the
-   engine or use a Minecraft version/engine where left-click works.
-2. **Use a bow for Stage 1** (native `use`, clean experiment, but changes the
-   melee research question).
-3. **Temporary command-damage workaround** (keeps the `attack` action but applies
-   damage via a server command; not native melee, should be clearly labelled).
+Root cause found: `net.minecraft.client.MouseHelper.grabMouse()` sets
+`Minecraft.leftClickCounter = 10000` to suppress the click that focuses the
+window. MineStudio never clears it, so left-click attack is disabled for
+10000 client ticks (about 500 seconds). `use` is not gated by this counter.
 
-Do not silently replace native melee with command damage in a research run.
+Fix: patch `MouseHelper.class` so the instruction writes `0` instead of
+`10000`:
+
+```bash
+python scripts/patch_minestudio_engine.py
+```
+
+After the patch, the scripted melee test kills the zombie:
+
+```text
+step=144 reward=+9.999 kills={'zombie': 1} outcome=success terminated=True
+RESULT damage=0.0 kills=1.0 outcome=success reward=9.855 passed=True
+```
+
+`damage_dealt` is still empty in this MineStudio build, so the dense damage
+term is currently zero. The kill event and episode outcome are reliable. The
+dense damage reward will need a different observation source (for example a
+mob-health query) or a MineStudio fix.
+
+The patch is applied automatically by `scripts/setup.sh`. It is idempotent and
+keeps a `.bak` copy of the engine jar.

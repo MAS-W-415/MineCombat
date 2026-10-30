@@ -65,6 +65,9 @@ fi
 # Work around the MalmoEnv server startup race.
 python scripts/patch_minestudio.py || true
 
+# Fix the left-click lock (leftClickCounter=10000) in the engine.
+python scripts/patch_minestudio_engine.py || true
+
 echo
 echo "Environment ready."
 echo "  source .venv/bin/activate"
