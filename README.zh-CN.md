@@ -8,9 +8,9 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 
 ## 当前状态
 
-`M0 — 环境打通` / `M1 — 僵尸竞技场`
+`M0 — 环境打通` 已在本地 RTX 4060 完成 / `M1 — 僵尸竞技场` 进行中
 
-仓库目前包含环境骨架、奖励实现、评估脚本和单卡训练配置。基线与第一次 PPO 实验会在 [Issues](https://github.com/MAS-W-415/MineCombat/issues) 中跟踪。
+仓库包含环境骨架、奖励实现、评估脚本和单卡训练配置。M0 的测量结果和环境 workaround 记录在 [docs/m0-report.md](docs/m0-report.md)。基线与第一次 PPO 实验会在 [Issues](https://github.com/MAS-W-415/MineCombat/issues) 中跟踪。
 
 ## 为什么做这个项目
 
@@ -28,8 +28,8 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 
 | 阶段 | 敌人 | 技能 | 状态 |
 |---|---|---|---|
-| 0 | 环境 | 稳定 reset、渲染、VPT 推理、日志 | 进行中 |
-| 1 | 僵尸 | 接近、瞄准、攻击、躲避伤害 | 下一步 |
+| 0 | 环境 | 稳定 reset、渲染、VPT 推理、日志 | 已完成 |
+| 1 | 僵尸 | 接近、瞄准、攻击、躲避伤害 | 进行中 |
 | 2 | 骷髅 | 弹道规避、距离控制 | 计划中 |
 | 3 | 苦力怕 + 混合 | 爆炸风险、多敌人、地形 | 计划中 |
 | 4 | 末影龙 | 长程战术、高层 Harness | 计划中 |

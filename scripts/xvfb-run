@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Local shim for machines that have a working X display but no xvfb-run.
+# MineStudio's launchClient.sh calls `xvfb-run -a java ...` in CPU device mode.
+set -euo pipefail
+
+if [[ -z "${DISPLAY:-}" ]]; then
+  echo "xvfb-run shim: DISPLAY is not set" >&2
+  exit 1
+fi
+
+while [[ $# -gt 0 && "$1" == -* ]]; do
+  case "$1" in
+    -s|--server-args)
+      shift 2
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done
+
+exec "$@"
