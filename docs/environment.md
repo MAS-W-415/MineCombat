@@ -38,6 +38,25 @@ sudo update-alternatives --config java
 java -version  # should report 1.8
 ```
 
+### User-local JDK 8 without sudo
+
+If sudo is unavailable, the Ubuntu packages can be extracted into a user
+directory:
+
+```bash
+mkdir -p /tmp/opencode/jdk8debs
+cd /tmp/opencode/jdk8debs
+apt-get download openjdk-8-jdk-headless openjdk-8-jre-headless
+mkdir -p "$HOME/.local/opt/jdk8"
+for deb in *.deb; do dpkg-deb -x "$deb" "$HOME/.local/opt/jdk8"; done
+
+export JAVA_HOME="$HOME/.local/opt/jdk8/usr/lib/jvm/java-8-openjdk-amd64"
+export PATH="$JAVA_HOME/bin:$PATH"
+java -version  # should report 1.8
+```
+
+`scripts/setup.sh` automatically uses this path when it exists.
+
 ## Create the Python environment
 
 The repository uses a local virtual environment instead of conda:
@@ -48,6 +67,14 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -e ".[dev]"
+```
+
+If `python3 -m venv` fails with `ensurepip is not available`, install
+`virtualenv` in user space and use it instead:
+
+```bash
+python3 -m pip install --user virtualenv
+python3 -m virtualenv .venv
 ```
 
 Or run:
@@ -66,6 +93,15 @@ python -m minestudio.simulator.entry
 
 If the command asks for confirmation, accept the download. The engine is stored
 under the MineStudio cache directory.
+
+If `huggingface.co` is unreachable, use the mirror:
+
+```bash
+export HF_ENDPOINT=https://hf-mirror.com
+```
+
+The environment variable is read by `huggingface_hub`, so it also applies to
+the VPT checkpoint download.
 
 ## VPT 1x checkpoint
 
@@ -153,6 +189,16 @@ Record the following numbers in the M0 issue:
 - reset time,
 - any rendering warnings.
 
+### Measured on the local RTX 4060 (M0)
+
+| Metric | Value |
+|---|---|
+| Random-policy throughput | ~102 steps/s |
+| VPT 1x throughput | ~67–78 steps/s |
+| Peak VRAM (simulator + VPT) | ~1078 MiB |
+| Fast reset time | ~3.7–4.1 s |
+| 600-step VPT episode | completed without crash |
+
 ## GitHub project board
 
 The repository backlog is tracked in GitHub Projects v2. Creating the board
@@ -165,6 +211,25 @@ bash scripts/create_project_board.sh
 
 The script creates the `MineCombat Roadmap` project if needed, adds `Stage`,
 `Area`, and `Priority` fields, and adds all open issues.
+
+## M0 workarounds
+
+The local M0 bring-up found several MineStudio integration issues. The helper
+scripts make them reproducible:
+
+```bash
+# If the machine has DISPLAY but no xvfb-run:
+cp scripts/xvfb-run .venv/bin/xvfb-run
+chmod +x .venv/bin/xvfb-run
+
+# Work around the MalmoEnv server startup race:
+python scripts/patch_minestudio.py
+
+# Clear stale instance state after a crashed run:
+bash scripts/clean_minestudio_runtime.sh
+```
+
+`scripts/setup.sh` performs the first two steps automatically.
 
 ## Troubleshooting
 
@@ -187,3 +252,13 @@ and accept the prompt.
 
 Use the single-GPU profile and reduce the environment count, context length, or
 batch size. The simulator and the trainer share the same 8 GB card.
+
+### `Connection refused` or `a bytes-like object is required, not 'NoneType'`
+
+MineStudio can launch a new Minecraft process before the MalmoEnv TCP server is
+listening. Run `python scripts/patch_minestudio.py` and retry. If the error
+persists after a crashed run, clear the runtime state:
+
+```bash
+bash scripts/clean_minestudio_runtime.sh
+```

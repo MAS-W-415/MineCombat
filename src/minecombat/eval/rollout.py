@@ -9,7 +9,6 @@ import numpy as np
 from ..envs.callbacks._info import event_count, scalar
 from .metrics import EpisodeRecord
 
-
 FINAL_OUTCOMES = {
     "success",
     "death",

@@ -41,7 +41,7 @@ class RandomZombieSpawnCallback(MinecraftCallback):
 
         if cfg.randomize_player_yaw:
             yaw = float(rng.uniform(-180.0, 180.0))
-            commands.append(f"/tp @p ~ ~ ~ {yaw:.2f} 0")
+            commands.append(f"/tp @p ~ ~ ~ {yaw:.2f} 0.0")
 
         nbt = "{PersistenceRequired:1b}" if cfg.persistence_required else ""
         for _ in range(int(cfg.count)):

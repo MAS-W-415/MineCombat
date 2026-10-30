@@ -8,9 +8,9 @@ MineCombat is a research project built on [MineStudio](https://github.com/CraftJ
 
 ## Status
 
-`M0 — environment bring-up` / `M1 — zombie arena`
+`M0 — environment bring-up` complete on the local RTX 4060 / `M1 — zombie arena` in progress.
 
-The repository currently contains the environment skeleton, reward implementation, evaluation harness, and single-GPU training configuration. The first baseline and PPO runs are tracked in [Issues](https://github.com/MAS-W-415/MineCombat/issues).
+The repository contains the environment skeleton, reward implementation, evaluation harness, and single-GPU training configuration. M0 measurements and workarounds are documented in [docs/m0-report.md](docs/m0-report.md). The first baseline and PPO runs are tracked in [Issues](https://github.com/MAS-W-415/MineCombat/issues).
 
 ## Why this project
 
@@ -28,8 +28,8 @@ The project studies a curriculum from a single zombie to mixed enemies and, even
 
 | Stage | Enemy | Skills | Status |
 |---|---|---|---|
-| 0 | Environment | Stable reset, rendering, VPT inference, logging | In progress |
-| 1 | Zombie | Approach, aim, attack, avoid damage | Next |
+| 0 | Environment | Stable reset, rendering, VPT inference, logging | Complete |
+| 1 | Zombie | Approach, aim, attack, avoid damage | In progress |
 | 2 | Skeleton | Projectile avoidance, distance control | Planned |
 | 3 | Creeper + mixed | Explosion risk, multiple enemies, terrain | Planned |
 | 4 | Ender Dragon | Long-horizon tactics, high-level harness | Planned |
