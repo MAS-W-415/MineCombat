@@ -77,11 +77,17 @@ def make_zombie_env(
             do_daylight_cycle=bool(
                 world.get("do_daylight_cycle", False)
             ),
+            difficulty=str(
+                world.get("difficulty", "normal")
+            ),
             build_platform=bool(
                 arena.get("build_platform", True)
             ),
             platform_radius=int(
                 arena.get("platform_radius", 8)
+            ),
+            night_vision=bool(
+                arena.get("night_vision", True)
             ),
         ),
 

@@ -44,11 +44,21 @@ class RandomZombieSpawnCallback(MinecraftCallback):
             commands.append(f"/tp @p ~ ~ ~ {yaw:.2f} 0.0")
 
         nbt = "{PersistenceRequired:1b}" if cfg.persistence_required else ""
+        spawns: list[dict[str, float | str]] = []
         for _ in range(int(cfg.count)):
             angle = float(rng.uniform(0.0, 2.0 * math.pi))
             distance = float(rng.uniform(cfg.min_distance, cfg.max_distance))
             x = math.cos(angle) * distance
             z = math.sin(angle) * distance
+            spawns.append(
+                {
+                    "mob": cfg.mob,
+                    "x": x,
+                    "z": z,
+                    "distance": distance,
+                    "angle": angle,
+                }
+            )
             commands.append(
                 f"/execute as @p at @p run summon minecraft:{cfg.mob} "
                 f"~{x:.3f} ~{cfg.spawn_height:.3f} ~{z:.3f} {nbt}".rstrip()
@@ -60,4 +70,5 @@ class RandomZombieSpawnCallback(MinecraftCallback):
         for command in commands:
             obs, _, _, info = sim.env.execute_cmd(command)
         obs, info = sim._wrap_obs_info(obs, info)
+        info["spawn_debug"] = spawns
         return obs, info
