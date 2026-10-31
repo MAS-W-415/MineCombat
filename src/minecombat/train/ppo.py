@@ -15,6 +15,7 @@ from omegaconf import OmegaConf
 
 from .generators import env_generator, policy_generator
 
+from .preflight import validate_ppo_config
 
 def project_root() -> Path:
     return Path(__file__).resolve().parents[3]
@@ -91,6 +92,13 @@ def main() -> None:
         cfg.train_config.save_path = args.save_path
     if args.name is not None:
         cfg.logger_config.name = args.name
+
+    gpu_budget = validate_ppo_config(cfg, root)
+
+    print(
+        f"PPO preflight passed. "
+        f"Configured GPU budget: {gpu_budget:.2f}"
+    )
 
     if args.dry_run:
         print(OmegaConf.to_yaml(cfg))
