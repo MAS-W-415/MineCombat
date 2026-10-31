@@ -12,8 +12,12 @@ from functools import partial
 from pathlib import Path
 
 from omegaconf import OmegaConf
-
-from .generators import env_generator, policy_generator
+from .generators import (
+    conditioned_env_generator,
+    conditioned_policy_generator,
+    env_generator,
+    policy_generator,
+)
 
 
 def project_root() -> Path:
@@ -55,6 +59,25 @@ def main() -> None:
         action="store_true",
         help="Use a tiny single-iteration profile for pipeline validation.",
     )
+    parser.add_argument(
+        "--conditioned",
+        action="store_true",
+        help="Enable conditioned VPT training.",
+    )
+    parser.add_argument(
+        "--num-tactics",
+        type=int,
+        default=4,
+    )
+    parser.add_argument(
+        "--tactic-id",
+        type=int,
+        default=0,
+    )
+    parser.add_argument(
+        "--sample-tactic-per-episode",
+        action="store_true",
+    )
     args = parser.parse_args()
 
     root = project_root()
@@ -92,6 +115,17 @@ def main() -> None:
     if args.name is not None:
         cfg.logger_config.name = args.name
 
+    OmegaConf.update(
+        cfg,
+        "harness",
+        {
+            "conditioned": args.conditioned,
+            "num_tactics": args.num_tactics,
+            "tactic_id": args.tactic_id,
+            "sample_tactic_per_episode": args.sample_tactic_per_episode,
+        },
+        force_add=True,
+    )
     if args.dry_run:
         print(OmegaConf.to_yaml(cfg))
         return
@@ -106,9 +140,37 @@ def main() -> None:
         namespace="online",
     )
 
-    env_gen = partial(env_generator, cfg.env.config)
-    policy_gen = partial(policy_generator, cfg.model.repo_id)
+    if args.conditioned:
+        if args.num_tactics < 1:
+            parser.error("--num-tactics must be positive")
 
+        if not 0 <= args.tactic_id < args.num_tactics:
+            parser.error("--tactic-id is out of range")
+
+        env_gen = partial(
+            conditioned_env_generator,
+            cfg.env.config,
+            args.num_tactics,
+            args.tactic_id,
+            args.sample_tactic_per_episode,
+        )
+
+        policy_gen = partial(
+            conditioned_policy_generator,
+            cfg.model.repo_id,
+            args.num_tactics,
+        )
+
+    else:
+        env_gen = partial(
+            env_generator,
+            cfg.env.config,
+        )
+
+        policy_gen = partial(
+            policy_generator,
+            cfg.model.repo_id,
+        )
     online_cfg = build_online_config(cfg)
     whole_config = OmegaConf.to_yaml(cfg)
     start_rolloutmanager(policy_gen, env_gen, online_cfg)
