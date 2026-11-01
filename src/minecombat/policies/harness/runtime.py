@@ -136,6 +136,7 @@ class HarnessRuntime:
             steps_since_decision=steps_since_decision + 1,
             total_steps=state.total_steps + 1,
             last_decision_updated=should_update,
+            last_features=features,           
         )
 
         return action, next_state
