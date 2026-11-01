@@ -64,7 +64,7 @@ class HarnessState:
     steps_since_decision: int = 0
     total_steps: int = 0
     last_decision_updated: bool = False
-
+    last_features: Any = None
 
 class TacticalPolicy(Protocol):
     """Interface of the high-level tactical policy."""
