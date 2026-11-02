@@ -83,6 +83,25 @@ def test_overlay_can_extend_another_overlay() -> None:
     assert cfg["reward"]["kill"] == 10.0
 
 
+def test_curriculum_overlays_match_dataclass() -> None:
+    soft = load_config(
+        "configs/env/zombie_stage1_easy_soft_mask.yaml"
+    )
+    weak_zombie = ZombieSpawnConfig(**soft["zombie"])
+    assert weak_zombie.attributes == {
+        "generic.movement_speed": 0.15,
+        "generic.attack_damage": 2.0,
+    }
+    assert soft["action_mask"]["mask_inventory"] is True
+
+    angle = load_config(
+        "configs/env/zombie_stage1_easy_angle30_mask.yaml"
+    )
+    jittered_zombie = ZombieSpawnConfig(**angle["zombie"])
+    assert jittered_zombie.spawn_angle_deg == 90.0
+    assert jittered_zombie.spawn_angle_jitter_deg == 30.0
+
+
 def test_circular_base_raises(tmp_path) -> None:
     (tmp_path / "a.yaml").write_text(
         "base: b.yaml\n",
