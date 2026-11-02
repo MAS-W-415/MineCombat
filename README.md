@@ -23,6 +23,7 @@ Key results:
 - [R1 reward ablation](docs/m3-100k-reward-r1.md): stronger aggression reward did not help; deaths rose, damage fell.
 - [Easy front-spawn curriculum](docs/m3-100k-easy-curriculum.md): first kill, but only 2/50 episodes dealt damage; attack behavior is still unreliable.
 - [Stationary-target curriculum](docs/m3-100k-stationary.md): 0 kills; action diagnosis shows the policy presses attack in <1% of steps. Attack discovery is the bottleneck.
+- [Attack-shaped stationary run](docs/m3-100k-stationary-attack.md): 7/50 episodes dealt damage (up from 0/50), but still 0 kills; 300k or stronger exploration is next.
 - [1M runbook](docs/1m-run.md): exact command and preflight for the next host.
 
 The first baseline and PPO runs are tracked in [Issues](https://github.com/MAS-W-415/MineCombat/issues).

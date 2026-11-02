@@ -22,6 +22,7 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 - [R1 奖励消融](docs/m3-100k-reward-r1.md)：加强进攻奖励没有效果，死亡更多、伤害更少。
 - [简单正前方课程](docs/m3-100k-easy-curriculum.md)：首次出现击杀，但 50 局只有 2 局造成伤害，攻击行为仍不稳定。
 - [静止靶课程](docs/m3-100k-stationary.md)：0 击杀；动作诊断显示攻击键按下率低于 1%，瓶颈是“不会发现攻击动作”。
+- [静止靶 + 攻击奖励](docs/m3-100k-stationary-attack.md)：有伤害的局数从 0/50 升到 7/50，但仍 0 击杀；下一步是 300k 或更强探索。
 - [1M 运行手册](docs/1m-run.md)：下一台机器上的完整命令与前置检查。
 
 基线与 PPO 实验在 [Issues](https://github.com/MAS-W-415/MineCombat/issues) 中跟踪。
