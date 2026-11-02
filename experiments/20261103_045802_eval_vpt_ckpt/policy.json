@@ -1,0 +1,5 @@
+{
+  "policy": "vpt",
+  "model": "CraftJarvis/MineStudio_VPT.foundation_model_1x",
+  "checkpoint": "experiments/flat_100k_mixed_angle60_mask_warm/checkpoints/2026-11-03_04-22-35/2/model.ckpt"
+}

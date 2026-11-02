@@ -1,0 +1,10 @@
+# Easy AI + inventory mask with mixed distance and +/-60 degree spawn jitter.
+#
+# Third step of the aim curriculum after the successful mixed + +/-30 run.
+
+base: zombie_stage1_easy_mask.yaml
+
+zombie:
+  min_distance: 3.0
+  max_distance: 7.0
+  spawn_angle_jitter_deg: 60.0

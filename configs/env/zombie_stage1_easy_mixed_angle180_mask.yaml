@@ -1,0 +1,12 @@
+# Easy AI + inventory mask with mixed distance and full 360 degree spawn angle.
+#
+# Final curriculum step before the standard random-spawn evaluation: the
+# relative angle is uniform over the full circle, but distance stays 3-7 and
+# the player yaw stays fixed for comparability with the previous stages.
+
+base: zombie_stage1_easy_mask.yaml
+
+zombie:
+  min_distance: 3.0
+  max_distance: 7.0
+  spawn_angle_jitter_deg: 180.0

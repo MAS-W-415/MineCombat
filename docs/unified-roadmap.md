@@ -81,7 +81,7 @@ training.
 | M0 environment | complete |
 | M1 zombie arena | complete |
 | M2 baselines | complete |
-| RQ1 flat PPO | in progress; 44% easy, 34% at ±30°, 48% mixed distance, 4% random |
+| RQ1 flat PPO | in progress; 58% easy, 34% at ±30°, 45% mixed distance, 4% random |
 | Stage-1 gate | not passed |
 | HH1 conditioned VPT | 10k engineering validation; tactics weak, 0% win |
 | HH2 high-level PPO | implemented; GPU validation pending |
@@ -89,11 +89,11 @@ training.
 
 ## Immediate next steps
 
-1. Widen the joint curriculum from ±30° to ±60°, then ±90° and ±180°,
-   confirming every stage on 50 seeds.
-2. Measure random spawn with 50 seeds at every stage; 20 seeds are triage only.
-3. Move the 1M consolidation run to the 24 GB / 64 GB host once the angle
-   curriculum shows a stable random-spawn trend.
+1. Run the camera-entropy A/B on the ±60° curriculum; the ±60° target collapsed
+   to 8% because off-screen targets require search, not just aiming.
+2. If camera entropy does not help, move the joint ±30° curriculum to the
+   24 GB / 64 GB host for a 1M consolidation run.
+3. Measure random spawn with 50 seeds at every stage; 20 seeds are triage only.
 4. Pass the stage-1 gate on the random-spawn task, then resume HH1/HH2.
 
 ## Non-goals
