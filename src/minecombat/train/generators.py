@@ -25,25 +25,49 @@ def policy_generator(repo_id: str):
     )
 
 
+
 def conditioned_env_generator(
     config_path: str,
     num_tactics: int,
     tactic_id: int,
     sample_per_episode: bool,
+    enable_tactical_rewards: bool = False,
 ):
-    """Environment that records the tactic in each observation."""
+    """Build a conditioned PPO environment.
+
+    Optionally apply tactic-specific auxiliary rewards.
+    """
+
     from minecombat.policies.harness.rollout_conditioning import (
         EpisodeTacticObservationWrapper,
     )
 
+    # Current auxiliary reward design supports two tactics.
+    if enable_tactical_rewards and num_tactics != 2:
+        raise ValueError(
+            "Tactical rewards currently require num_tactics=2"
+        )
+
+    # Step 1: Create the original Minecraft environment.
     env = env_generator(config_path)
 
-    return EpisodeTacticObservationWrapper(
+    # Step 2: Attach a tactic ID to observations.
+    env = EpisodeTacticObservationWrapper(
         env,
         num_tactics=num_tactics,
         tactic_id=tactic_id,
         sample_per_episode=sample_per_episode,
     )
+
+    # Step 3: Optionally modify rewards for low-level PPO.
+    if enable_tactical_rewards:
+        from minecombat.policies.harness.tactical_reward_wrapper import (
+            TacticalRewardWrapper,
+        )
+
+        env = TacticalRewardWrapper(env)
+
+    return env
 
 
 def conditioned_policy_generator(
