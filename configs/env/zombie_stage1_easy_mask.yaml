@@ -1,0 +1,6 @@
+# Easy AI curriculum with inventory masking.
+
+base: zombie_stage1_easy.yaml
+
+action_mask:
+  mask_inventory: true
