@@ -24,6 +24,7 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 - [静止靶课程](docs/m3-100k-stationary.md)：0 击杀；动作诊断显示攻击键按下率低于 1%，瓶颈是“不会发现攻击动作”。
 - [静止靶 + 攻击奖励](docs/m3-100k-stationary-attack.md)：有伤害的局数从 0/50 升到 7/50，但仍 0 击杀。
 - [Phase 1 探针](docs/m3-phase1-probes.md)：屏蔽背包动作后首次出现可复现击杀；静止靶 8% 胜率、0 死亡。
+- [100k mask warm-start](docs/m3-mask-warm-100k.md)：静止靶 22% 胜率，正前方 AI 僵尸 30% 胜率；随机刷新仍是 0%。
 - [1M 运行手册](docs/1m-run.md)：下一台机器上的完整命令与前置检查。
 
 术语说明见 [docs/glossary.md](docs/glossary.md)：`M` 是里程碑，`RQ` 是研究问题，`HH` 是 Harness 阶段。统一路线见 [docs/unified-roadmap.md](docs/unified-roadmap.md)：flat PPO 是对照组，Harness 是同一路线上的扩展。公共训练预检见 [docs/training-common.md](docs/training-common.md)。
