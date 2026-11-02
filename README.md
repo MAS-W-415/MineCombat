@@ -22,6 +22,7 @@ Key results:
 - [100k flat PPO](docs/m3-100k-eval.md): 0% win, 16% death, damage ratio 0.0313; weak signal, not yet a usable policy.
 - [R1 reward ablation](docs/m3-100k-reward-r1.md): stronger aggression reward did not help; deaths rose, damage fell.
 - [Easy front-spawn curriculum](docs/m3-100k-easy-curriculum.md): first kill, but only 2/50 episodes dealt damage; attack behavior is still unreliable.
+- [Stationary-target curriculum](docs/m3-100k-stationary.md): 0 kills; action diagnosis shows the policy presses attack in <1% of steps. Attack discovery is the bottleneck.
 - [1M runbook](docs/1m-run.md): exact command and preflight for the next host.
 
 The first baseline and PPO runs are tracked in [Issues](https://github.com/MAS-W-415/MineCombat/issues).
