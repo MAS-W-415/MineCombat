@@ -1,0 +1,9 @@
+# Easy AI + inventory mask with +/-30 degree spawn jitter.
+#
+# First step of the aim curriculum: the zombie is still near the front, but
+# the policy must make a small turn instead of relying on a fixed target.
+
+base: zombie_stage1_easy_mask.yaml
+
+zombie:
+  spawn_angle_jitter_deg: 30.0
