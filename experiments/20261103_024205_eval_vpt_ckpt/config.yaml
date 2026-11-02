@@ -1,0 +1,14 @@
+# Easy curriculum overlay.
+#
+# The zombie spawns directly in front of the player at 3-4 blocks.
+# All other settings are inherited from zombie_stage1.yaml.
+
+base: zombie_stage1.yaml
+
+zombie:
+  min_distance: 3.0
+  max_distance: 4.0
+  spawn_height: 0.0
+  randomize_player_yaw: false
+  spawn_angle_deg: 90.0
+  player_yaw: 0.0
