@@ -107,11 +107,17 @@ target is. Options:
 
 ## Next
 
+Update: the joint ±30 checkpoint was evaluated on the combined config
+(`configs/env/zombie_stage1_easy_mixed_angle30_mask.yaml`) for 50 seeds three
+times: 10%, 24%, and 20% (mean ~18%). Composition is weak even though the
+separate tasks look much better. See `docs/m3-evaluation-variance.md` for the
+variance analysis.
+
 Decision point:
 
-- For a **visible-combat gate**, evaluate the joint ±30 checkpoint on the
-  combined config `configs/env/zombie_stage1_easy_mixed_angle30_mask.yaml` for
-  50 seeds. If it is near 50%, promote it and run 1M on that curriculum.
+- For a **visible-combat gate**, re-baseline the combined config with 3×50
+  seeds and decide whether to keep training that curriculum (e.g. a 1M run on
+  the host) or simplify the gate to a single visible task.
 - For a **full 360° gate**, add a search mechanism: scan-at-reset or auto-face
   for curriculum, or a relative-direction observation for HH. More flat 100k
   width stages are not justified by the current evidence.
