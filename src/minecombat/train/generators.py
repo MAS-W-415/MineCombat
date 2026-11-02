@@ -21,24 +21,16 @@ def policy_generator(
     pretrained VPT weights. This is a warm start, not a full resume: the
     optimizer and iteration counter start fresh.
     """
-    from minestudio.models import VPTPolicy
-    from minestudio.utils import get_compute_device
+    from minecombat.policies.vpt import load_vpt_model
 
     from .patches import patch_scaled_mse_head
 
     patch_scaled_mse_head()
 
-    policy = VPTPolicy.from_pretrained(repo_id)
-
-    if checkpoint is not None:
-        import torch
-
-        state = torch.load(checkpoint, map_location="cpu")
-        if isinstance(state, dict) and "model" in state:
-            state = state["model"]
-        policy.load_state_dict(state, strict=True)
-
-    return policy.to(get_compute_device())
+    return load_vpt_model(
+        repo_id=repo_id,
+        checkpoint=checkpoint,
+    )
 
 
 
@@ -91,22 +83,18 @@ def conditioned_policy_generator(
     num_tactics: int,
 ):
     """Construct a trainable conditioned VPT."""
-    from minestudio.models import VPTPolicy
-    from minestudio.utils import get_compute_device
-
     from minecombat.policies.harness.conditioned_vpt import (
         ConditionedVPTPolicy,
     )
+    from minecombat.policies.vpt import load_vpt_model
 
     from .patches import patch_scaled_mse_head
 
     patch_scaled_mse_head()
 
-    base_policy = VPTPolicy.from_pretrained(repo_id)
+    base_policy = load_vpt_model(repo_id)
 
-    policy = ConditionedVPTPolicy(
+    return ConditionedVPTPolicy(
         base_policy=base_policy,
         num_tactics=num_tactics,
     )
-
-    return policy.to(get_compute_device())

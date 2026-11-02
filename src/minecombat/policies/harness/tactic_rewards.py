@@ -7,7 +7,7 @@ import math
 from collections.abc import Mapping
 from dataclasses import dataclass
 
-from minecombat.envs.callbacks._info import event_count, scalar
+from minecombat.envs.callbacks.combat_stats import CombatStatsTracker
 
 
 @dataclass(frozen=True)
@@ -37,30 +37,13 @@ class TacticalRewardCalculator:
 
     def __init__(self, config: TacticalRewardConfig | None = None):
         self.config = config or TacticalRewardConfig()
+        self.tracker = CombatStatsTracker(target_mob="zombie")
         self._initialized = False
-
-    @staticmethod
-    def _damage_total(info: Mapping) -> float:
-        """Read the cumulative damage statistic."""
-
-        value = info.get("damage_dealt")
-
-        if value is None:
-            custom = info.get("custom", {})
-            if isinstance(custom, Mapping):
-                value = custom.get("damage_dealt", 0.0)
-
-        return event_count(
-            {"damage_dealt": value},
-            "damage_dealt",
-            "zombie",
-        )
 
     def reset(self, info: Mapping) -> None:
         """Initialize counters for a new episode."""
 
-        self.prev_damage = self._damage_total(info)
-        self.prev_hp = scalar(info.get("health"), default=20.0)
+        self.tracker.reset(info)
         self._initialized = True
 
     def compute(
@@ -81,33 +64,18 @@ class TacticalRewardCalculator:
         if not math.isfinite(base_reward):
             raise ValueError("Base reward must be finite")
 
-        damage_total = self._damage_total(info)
-        hp = scalar(info.get("health"), default=self.prev_hp)
-
-        damage_delta = max(
-            0.0,
-            damage_total - self.prev_damage,
-        )
-
-        hp_loss = max(
-            0.0,
-            self.prev_hp - hp,
-        )
+        stats = self.tracker.update(info)
 
         if tactic_id == 0:
             auxiliary_reward = (
                 self.config.aggressive_damage_bonus
-                * damage_delta
+                * stats.damage_dealt
             )
         else:
             auxiliary_reward = (
                 -self.config.defensive_hp_penalty
-                * hp_loss
+                * stats.hp_lost
             )
-
-        # Update history exactly once per environment step.
-        self.prev_damage = damage_total
-        self.prev_hp = hp
 
         training_reward = base_reward + auxiliary_reward
 

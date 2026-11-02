@@ -13,16 +13,13 @@ from pathlib import Path
 
 from omegaconf import OmegaConf
 
+from .common import project_root
 from .generators import (
     conditioned_env_generator,
     conditioned_policy_generator,
     env_generator,
     policy_generator,
 )
-
-
-def project_root() -> Path:
-    return Path(__file__).resolve().parents[3]
 
 
 def build_online_config(cfg):
