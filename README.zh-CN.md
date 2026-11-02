@@ -19,7 +19,8 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 - [M3 PPO smoke](docs/m3-ppo-smoke.md)：10k steps、20 次 update、峰值显存 6.3 GiB。
 - [Dense damage](docs/m3-dense-damage.md)：10k 时首次出现非零伤害比（0.0090）。
 - [100k flat PPO](docs/m3-100k-eval.md)：0% 胜率、16% 死亡率、伤害比 0.0313；有微弱学习信号，但还不是可用策略。
-- [R1 奖励消融](docs/m3-100k-reward-r1.md)：加强进攻奖励没有效果，死亡更多、伤害更少；下一步应解决探索问题。
+- [R1 奖励消融](docs/m3-100k-reward-r1.md)：加强进攻奖励没有效果，死亡更多、伤害更少。
+- [简单正前方课程](docs/m3-100k-easy-curriculum.md)：首次出现击杀，但 50 局只有 2 局造成伤害，攻击行为仍不稳定。
 - [1M 运行手册](docs/1m-run.md)：下一台机器上的完整命令与前置检查。
 
 基线与 PPO 实验在 [Issues](https://github.com/MAS-W-415/MineCombat/issues) 中跟踪。
