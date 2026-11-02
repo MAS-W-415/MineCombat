@@ -1,0 +1,11 @@
+# Easy AI + inventory mask with mixed distance and +/-90 degree spawn jitter.
+#
+# Fourth step of the aim curriculum: targets can be at the edge of or just
+# outside the field of view, so the policy must turn before engaging.
+
+base: zombie_stage1_easy_mask.yaml
+
+zombie:
+  min_distance: 3.0
+  max_distance: 7.0
+  spawn_angle_jitter_deg: 90.0
