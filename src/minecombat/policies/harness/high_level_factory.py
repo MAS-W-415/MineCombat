@@ -1,5 +1,5 @@
 
-"""Construct the H2 trainable hierarchical combat harness."""
+"""Construct the HH2 trainable hierarchical combat harness."""
 
 from __future__ import annotations
 
@@ -24,22 +24,22 @@ def build_high_level_training_harness(
     grid_size: int = 8,
     hidden_dim: int = 128,
 ) -> HarnessRuntime:
-    """Build H2 with a frozen H1 conditioned VPT."""
+    """Build HH2 with a frozen HH1 conditioned VPT."""
 
     checkpoint = Path(conditioned_checkpoint).expanduser()
 
-    # H2 must start from a trained H1 checkpoint.
+    # HH2 must start from a trained HH1 checkpoint.
     if not checkpoint.is_file():
         raise FileNotFoundError(
-            f"H1 checkpoint not found: {checkpoint}"
+            f"HH1 checkpoint not found: {checkpoint}"
         )
 
     if num_tactics != 2:
         raise ValueError(
-            "Current H2 training requires num_tactics=2"
+            "Current HH2 training requires num_tactics=2"
         )
 
-    # 1. Reuse the existing H1 checkpoint loader.
+    # 1. Reuse the existing HH1 checkpoint loader.
     base_harness = build_conditioned_harness(
         repo_id=repo_id,
         device=device,
@@ -54,7 +54,7 @@ def build_high_level_training_harness(
     low_policy.requires_grad_(False)
     low_policy.eval()
 
-    # 3. Create compact visual features for H2.
+    # 3. Create compact visual features for HH2.
     feature_adapter = VisualGridFeatureAdapter(
         grid_size=grid_size,
     )

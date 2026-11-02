@@ -1,10 +1,10 @@
-# MineCombat H2 — High-Level PPO GPU Training & Acceptance Runbook
+# MineCombat HH2 — High-Level PPO GPU Training & Acceptance Runbook
 
 **Project:** MineCombat
 **Branch:** `feat/h2-online-training`
 **Status:** Local Mock Tests Completed / GPU Validation Pending
-**Training Target:** H2 High-Level Tactical Actor-Critic
-**Low-Level Model:** Frozen H1 Conditioned VPT
+**Training Target:** HH2 High-Level Tactical Actor-Critic
+**Low-Level Model:** Frozen HH1 Conditioned VPT
 **Environment:** MineStudio Zombie Arena — Stage 1
 
 ---
@@ -13,15 +13,15 @@
 
 ### 1.1 Primary Goal
 
-验证 MineCombat 的 H2 分层强化学习系统能否在真实 Minecraft 环境中完成以下闭环：
+验证 MineCombat 的 HH2 分层强化学习系统能否在真实 Minecraft 环境中完成以下闭环：
 
-1. 加载训练后的 H1 Conditioned VPT Checkpoint。
-2. 冻结 H1 底层策略。
-3. 由 H2 High-Level Actor-Critic 选择战术编号。
+1. 加载训练后的 HH1 Conditioned VPT Checkpoint。
+2. 冻结 HH1 底层策略。
+3. 由 HH2 High-Level Actor-Critic 选择战术编号。
 4. 底层 VPT 根据战术编号执行 Minecraft 动作。
 5. 采集真实环境的 Reward 和高层 Semi-MDP Transition。
 6. 使用 Semi-MDP PPO 更新高层策略。
-7. 保存并重新加载 H2 Checkpoint。
+7. 保存并重新加载 HH2 Checkpoint。
 
 ### 1.2 Validation Levels
 
@@ -35,7 +35,7 @@
 
 本次 GPU Smoke Test 优先完成 L1 和 L2。
 
-**L1 通过不代表 H2 已经学会高层战术选择。**
+**L1 通过不代表 HH2 已经学会高层战术选择。**
 
 ---
 
@@ -51,7 +51,7 @@ VisualGridFeatureAdapter
           |
           |  192-D Feature Vector
           v
-H2 High-Level Actor-Critic
+HH2 High-Level Actor-Critic
           |
           |  tactic_id ∈ {0, 1}
           v
@@ -59,7 +59,7 @@ FixedIntervalGate
           |
           |  One decision every 20 steps
           v
-Frozen H1 Conditioned VPT
+Frozen HH1 Conditioned VPT
           |
           |  Minecraft Native Action
           v
@@ -77,16 +77,16 @@ TacticalRolloutCollector
 High-Level PPO Update
           |
           v
-H2 Actor-Critic Checkpoint
+HH2 Actor-Critic Checkpoint
 ```
 
 ### 2.2 Main Components
 
 | File                    | Responsibility               |
 | ----------------------- | ---------------------------- |
-| `high_level_factory.py` | 加载冻结 H1，组装 H2 Harness |
+| `high_level_factory.py` | 加载冻结 HH1，组装 HH2 Harness |
 | `visual_features.py`    | 将图像提取为高层特征         |
-| `tactical_policy.py`    | H2 Actor-Critic              |
+| `tactical_policy.py`    | HH2 Actor-Critic              |
 | `runtime.py`            | 高低层策略调度               |
 | `high_level_session.py` | 动作、奖励与轨迹记录         |
 | `tactical_rollout.py`   | Semi-MDP Transition          |
@@ -101,13 +101,13 @@ H2 Actor-Critic Checkpoint
 
 - 单个 Minecraft Environment。
 - 同步 On-Policy PPO 训练。
-- 冻结 H1 Conditioned VPT。
-- 只更新 H2 Actor-Critic。
+- 冻结 HH1 Conditioned VPT。
+- 只更新 HH2 Actor-Critic。
 - 固定间隔战术决策。
-- 基于原始战斗任务奖励训练 H2。
+- 基于原始战斗任务奖励训练 HH2。
 - 每次 PPO 更新后丢弃旧 Rollout。
 
-**H2 当前不依赖 Ray，也不需要启动 `scripts/start_ray.sh`。**
+**HH2 当前不依赖 Ray，也不需要启动 `scripts/start_ray.sh`。**
 
 ---
 
@@ -135,21 +135,21 @@ H2 Actor-Critic Checkpoint
 - Gymnasium
 - MineCombat 项目依赖
 
-H2 单环境同步训练不需要独立启动 Ray 服务。
+HH2 单环境同步训练不需要独立启动 Ray 服务。
 
-### 3.3 H1 Checkpoint Requirement
+### 3.3 HH1 Checkpoint Requirement
 
-H2 训练必须基于真实 H1 Checkpoint。
+HH2 训练必须基于真实 HH1 Checkpoint。
 
 Checkpoint 应满足：
 
 - Conditioned VPT 使用 2 个战术编号。
 - 包含完整模型权重。
 - 可以恢复 `ConditionedVPTPolicy`。
-- H1 已完成真实 GPU Smoke Test。
+- HH1 已完成真实 GPU Smoke Test。
 - 不存在严重的战术条件传递错误。
 
-如果 H1 尚未形成可区分的行为，可以进行 H2 工程 Smoke Test，但不能据此评价高层战术学习效果。
+如果 HH1 尚未形成可区分的行为，可以进行 HH2 工程 Smoke Test，但不能据此评价高层战术学习效果。
 
 ---
 
@@ -233,25 +233,25 @@ PYTHONPATH=src python -m pytest tests/ -q
 
 ---
 
-## 5. H1 Checkpoint Preflight
+## 5. HH1 Checkpoint Preflight
 
 ### 5.1 Set Checkpoint Path
 
-将以下路径替换为实际 H1 Checkpoint：
+将以下路径替换为实际 HH1 Checkpoint：
 
 ```bash
-export H1_CKPT="/absolute/path/to/H1/model.ckpt"
+export HH1_CKPT="/absolute/path/to/HH1/model.ckpt"
 
-test -f "$H1_CKPT" && echo "H1 checkpoint found"
-sha256sum "$H1_CKPT"
+test -f "$HH1_CKPT" && echo "HH1 checkpoint found"
+sha256sum "$HH1_CKPT"
 ```
 
-记录 SHA256，确保后续实验使用同一份 H1 模型。
+记录 SHA256，确保后续实验使用同一份 HH1 模型。
 
 ### 5.2 Inspect Checkpoint Structure
 
 ```bash
-python - "$H1_CKPT" <<'PY'
+python - "$HH1_CKPT" <<'PY'
 import sys
 import torch
 
@@ -295,7 +295,7 @@ PY
 
 如果 `weights_only=True` 无法读取文件，应先核查保存端格式和来源，不要直接关闭安全加载限制。
 
-### 5.3 Verify Full H1 Loading
+### 5.3 Verify Full HH1 Loading
 
 这是重要的集成风险点。
 
@@ -305,7 +305,7 @@ PY
 low_policy.load_state_dict(state, strict=True)
 ```
 
-恢复 H1 权重。
+恢复 HH1 权重。
 
 因此必须检查：
 
@@ -319,12 +319,12 @@ low_policy.load_state_dict(state, strict=True)
 
 ---
 
-## 6. H2 Model Construction Check
+## 6. HH2 Model Construction Check
 
-正式启动 Minecraft 之前，先独立构建 H2 Harness。
+正式启动 Minecraft 之前，先独立构建 HH2 Harness。
 
 ```bash
-PYTHONPATH=src python - "$H1_CKPT" <<'PY'
+PYTHONPATH=src python - "$HH1_CKPT" <<'PY'
 import sys
 
 from minecombat.policies.harness.high_level_factory import (
@@ -353,8 +353,8 @@ assert high.feature_dim == 192
 assert next(low.parameters()).device.type == "cuda"
 assert next(high.parameters()).device.type == "cuda"
 
-print("H1 frozen:", True)
-print("H2 trainable:", True)
+print("HH1 frozen:", True)
+print("HH2 trainable:", True)
 print("High-level feature dim:", high.feature_dim)
 print("Harness construction passed")
 PY
@@ -362,7 +362,7 @@ PY
 
 ### Acceptance
 
-- [ ] H1 Checkpoint 完整恢复。
+- [ ] HH1 Checkpoint 完整恢复。
 - [ ] 底层 VPT 参数全部冻结。
 - [ ] 底层 VPT 处于 Eval Mode。
 - [ ] 高层 Actor-Critic 参数可训练。
@@ -374,13 +374,13 @@ PY
 
 ---
 
-## 7. H2 CLI Dry Run
+## 7. HH2 CLI Dry Run
 
 执行：
 
 ```bash
 PYTHONPATH=src python -m minecombat.train.high_level \
-  --h1-checkpoint "$H1_CKPT" \
+  --hh1-checkpoint "$HH1_CKPT" \
   --device cuda \
   --num-tactics 2 \
   --interval-steps 20 \
@@ -411,7 +411,7 @@ Dry Run 不会加载模型或检查真实 Checkpoint 的内容，也不会启动
 
 ---
 
-## 8. H2 GPU Smoke Test
+## 8. HH2 GPU Smoke Test
 
 ### 8.1 Goal
 
@@ -441,7 +441,7 @@ mkdir -p "$RUN_DIR"
 set -o pipefail
 
 PYTHONPATH=src python -m minecombat.train.high_level \
-  --h1-checkpoint "$H1_CKPT" \
+  --hh1-checkpoint "$HH1_CKPT" \
   --device cuda \
   --num-tactics 2 \
   --interval-steps 20 \
@@ -461,11 +461,11 @@ PYTHONPATH=src python -m minecombat.train.high_level \
 ```text
 Load pretrained VPT
     ↓
-Restore trained H1 conditioner
+Restore trained HH1 conditioner
     ↓
-Freeze H1 parameters
+Freeze HH1 parameters
     ↓
-Initialize H2 Actor-Critic
+Initialize HH2 Actor-Critic
     ↓
 Create MinecraftSim
     ↓
@@ -475,7 +475,7 @@ Generate high-level transitions
     ↓
 Run high-level PPO update
     ↓
-Save H2 checkpoint
+Save HH2 checkpoint
     ↓
 Close Minecraft environment
 ```
@@ -494,8 +494,8 @@ Close Minecraft environment
 正常情况下会看到类似：
 
 ```text
-[H2] update=1 steps=100 transitions=5 loss=...
-H2 training complete: ...
+[HH2] update=1 steps=100 transitions=5 loss=...
+HH2 training complete: ...
 ```
 
 实际数值取决于环境是否提前终止。
@@ -550,7 +550,7 @@ experiments/h2_smoke_001/
     train.log
 ```
 
-当前 H2 Trainer 每次更新都会覆盖 `high_level_latest.pt`。
+当前 HH2 Trainer 每次更新都会覆盖 `high_level_latest.pt`。
 
 **当前尚未实现恢复训练功能。不要将已经包含该文件的目录直接用于重新启动。**
 
@@ -582,7 +582,7 @@ print("Training history validated")
 PY
 ```
 
-### 10.3 Inspect and Reload H2 Checkpoint
+### 10.3 Inspect and Reload HH2 Checkpoint
 
 ```bash
 PYTHONPATH=src python - "$RUN_DIR" <<'PY'
@@ -666,7 +666,7 @@ PY
 - [ ] Update 计数正确。
 - [ ] 环境步数与训练日志一致。
 
-注意：H2 Checkpoint 只保存高层模型，不包含完整的 H1 Conditioned VPT。因此后续推理必须同时提供对应的 H1 Checkpoint。
+注意：HH2 Checkpoint 只保存高层模型，不包含完整的 HH1 Conditioned VPT。因此后续推理必须同时提供对应的 HH1 Checkpoint。
 
 ---
 
@@ -765,7 +765,7 @@ truncated=True
 - PPO 更新后清空旧 Rollout。
 - 下一轮使用更新后的策略重新采样。
 
-这些是当前 H2 Semi-MDP PPO 正确运行的基础条件。
+这些是当前 HH2 Semi-MDP PPO 正确运行的基础条件。
 
 ---
 
@@ -783,7 +783,7 @@ mkdir -p "$RUN_DIR"
 set -o pipefail
 
 PYTHONPATH=src python -m minecombat.train.high_level \
-  --h1-checkpoint "$H1_CKPT" \
+  --hh1-checkpoint "$HH1_CKPT" \
   --device cuda \
   --num-tactics 2 \
   --interval-steps 20 \
@@ -843,7 +843,7 @@ PYTHONPATH=src python -m minecombat.train.high_level \
 
 ## 13. Behavioral Evaluation — Future Stage
 
-H2 训练运行成功后，需要回答：
+HH2 训练运行成功后，需要回答：
 
 **高层策略是否学会了根据状态选择不同战术？**
 
@@ -863,25 +863,25 @@ H2 训练运行成功后，需要回答：
 
 ### 13.1 Recommended Comparison Groups
 
-- H1 固定 Aggressive。
-- H1 固定 Defensive。
-- H1 随机战术选择。
-- H2 学习得到的战术选择策略。
+- HH1 固定 Aggressive。
+- HH1 固定 Defensive。
+- HH1 随机战术选择。
+- HH2 学习得到的战术选择策略。
 
-尽可能让各组使用相同的 H1 Checkpoint、环境配置和评估种子。
+尽可能让各组使用相同的 HH1 Checkpoint、环境配置和评估种子。
 
 ### 13.2 Current Limitation
 
-`eval_conditioned.py` 是 H1 固定战术评估入口，**不是完整的 H2 高层策略评估入口**。
+`eval_conditioned.py` 是 HH1 固定战术评估入口，**不是完整的 HH2 高层策略评估入口**。
 
 目前尚未提供一个能够同时加载：
 
-- H1 Conditioned VPT Checkpoint；
-- H2 High-Level PPO Checkpoint；
+- HH1 Conditioned VPT Checkpoint；
+- HH2 High-Level PPO Checkpoint；
 
-并执行 H2 确定性评估的专用脚本。
+并执行 HH2 确定性评估的专用脚本。
 
-因此 L3 行为验收需要进一步开发评估工具，在工具完善前不得宣称 H2 已经学会了有效的战术选择策略。
+因此 L3 行为验收需要进一步开发评估工具，在工具完善前不得宣称 HH2 已经学会了有效的战术选择策略。
 
 ---
 
@@ -899,7 +899,7 @@ H2 训练运行成功后，需要回答：
 
 ### 14.2 Single Environment
 
-当前 H2 是单环境同步实现，适合验证完整流程。
+当前 HH2 是单环境同步实现，适合验证完整流程。
 
 不具备 Ray 多 Worker 的高吞吐量采样能力。
 
@@ -919,7 +919,7 @@ VisualGridFeatureAdapter(grid_size=8)
 
 当前每 20 步进行一次高层战术决策。
 
-尚未实现 H3 风险预测或动态决策门控。
+尚未实现 HH3 风险预测或动态决策门控。
 
 ### 14.5 Limited Reproducibility
 
@@ -931,11 +931,11 @@ CLI 的 `--seed` 设置 Python、NumPy 和 PyTorch 随机种子。
 
 ### 14.6 No Per-Tactic Logger
 
-H2 Trainer 目前主要记录 PPO 更新指标。
+HH2 Trainer 目前主要记录 PPO 更新指标。
 
 按战术统计的 Reward、状态、成功率以及选择频率尚未完整接入日志系统。
 
-### 14.7 H1 Checkpoint Compatibility
+### 14.7 HH1 Checkpoint Compatibility
 
 由于还没有真实 GPU Checkpoint 的端到端恢复结果，必须检查 MineStudio 保存格式与 `build_conditioned_harness()` 的加载实现是否匹配。
 
@@ -943,7 +943,7 @@ H2 Trainer 目前主要记录 PPO 更新指标。
 
 ## 15. Troubleshooting
 
-### 15.1 H1 Checkpoint Cannot Load
+### 15.1 HH1 Checkpoint Cannot Load
 
 检查：
 
@@ -961,12 +961,12 @@ H2 Trainer 目前主要记录 PPO 更新指标。
 检查：
 
 - 其他 GPU 进程是否占用显存。
-- H1 是否已冻结。
+- HH1 是否已冻结。
 - Rollout 是否使用 `torch.no_grad()`。
 - 是否存在未释放的模型副本。
 - 实际 VPT 模型显存占用。
 
-当前 H2 训练器单环境运行，调整 Episode 数量不一定能解决模型本身的显存需求。
+当前 HH2 训练器单环境运行，调整 Episode 数量不一定能解决模型本身的显存需求。
 
 ### 15.3 Minecraft Environment Crash
 
@@ -991,7 +991,7 @@ H2 Trainer 目前主要记录 PPO 更新指标。
 - 是否出现重复的 `tactic_ids` 输入。
 - 战术编号是否越界。
 
-这是 H2 GPU Smoke Test 的重点风险之一。
+这是 HH2 GPU Smoke Test 的重点风险之一。
 
 ### 15.5 PPO Loss Is NaN or Inf
 
@@ -1009,7 +1009,7 @@ H2 Trainer 目前主要记录 PPO 更新指标。
 需要区分：
 
 - 训练样本不足。
-- H1 的战术效果不明显。
+- HH1 的战术效果不明显。
 - 两种战术的价值差异较小。
 - Actor 探索不足。
 - 策略真正学会了偏向某个战术。
@@ -1026,8 +1026,8 @@ H2 Trainer 目前主要记录 PPO 更新指标。
 
 ```text
 Git Commit:
-H1 Checkpoint:
-H1 Checkpoint SHA256:
+HH1 Checkpoint:
+HH1 Checkpoint SHA256:
 GPU Model:
 GPU VRAM:
 System RAM:
@@ -1042,8 +1042,8 @@ MineStudio Version:
 
 ```text
 Environment Started: Yes / No
-H1 Loaded: Yes / No
-H1 Frozen: Yes / No
+HH1 Loaded: Yes / No
+HH1 Frozen: Yes / No
 Tactical Condition Forwarded: Yes / No / Not Checked
 PPO Updates Completed:
 Episodes Completed:
@@ -1064,7 +1064,7 @@ Critical Errors:
 - `train.log`
 - `high_level_latest.pt`
 - GPU 显存监控记录
-- H1 Checkpoint 的来源与校验值
+- HH1 Checkpoint 的来源与校验值
 - 实际完成的测试输出
 - 错误日志与修复说明
 
@@ -1074,9 +1074,9 @@ Critical Errors:
 
 | Check                          | Result                    | Notes |
 | ------------------------------ | ------------------------- | ----- |
-| H1 Checkpoint Load             | PASS / FAIL               |       |
-| Frozen H1 Verification         | PASS / FAIL               |       |
-| H2 Actor-Critic Initialization | PASS / FAIL               |       |
+| HH1 Checkpoint Load             | PASS / FAIL               |       |
+| Frozen HH1 Verification         | PASS / FAIL               |       |
+| HH2 Actor-Critic Initialization | PASS / FAIL               |       |
 | Minecraft Environment          | PASS / FAIL               |       |
 | Tactical ID Forwarding         | PASS / FAIL / NOT CHECKED |       |
 | Episode Collection             | PASS / FAIL               |       |
@@ -1094,14 +1094,14 @@ Critical Errors:
 
 全部满足：
 
-- [ ] 真实 H1 Checkpoint 成功加载。
-- [ ] H1 参数被冻结。
+- [ ] 真实 HH1 Checkpoint 成功加载。
+- [ ] HH1 参数被冻结。
 - [ ] 真实 Minecraft 环境正常运行。
 - [ ] 至少完成一个真实 Episode。
 - [ ] 至少完成一次高层 PPO 更新。
 - [ ] 优化器状态证明参数执行过更新。
 - [ ] Loss 和模型参数均为有限值。
-- [ ] H2 Checkpoint 成功保存并重新加载。
+- [ ] HH2 Checkpoint 成功保存并重新加载。
 
 ### L2 — Hierarchical Correctness
 
@@ -1113,16 +1113,16 @@ Critical Errors:
 - [ ] Transition Duration 与环境步数一致。
 - [ ] 真实 Termination / Truncation 正确。
 - [ ] PPO 采样和更新满足 On-Policy 约束。
-- [ ] H1 权重未参与 PPO 更新。
+- [ ] HH1 权重未参与 PPO 更新。
 - [ ] 多轮更新运行稳定。
 
 ### L3 — Behavioral Effectiveness
 
 后续阶段验证：
 
-- [ ] H2 评估入口已实现。
+- [ ] HH2 评估入口已实现。
 - [ ] 固定种子评估可复现。
-- [ ] H2 与固定战术策略完成对比。
+- [ ] HH2 与固定战术策略完成对比。
 - [ ] 高层战术选择分布已记录。
 - [ ] 有证据表明高层策略能根据状态调整战术。
 - [ ] 战斗表现达到预先设定的对照实验目标。
@@ -1157,10 +1157,10 @@ GPU 验收后，按优先级推进：
 
 1. 处理真实 Checkpoint 加载和推理兼容问题。
 2. 增加高层战术选择及 Reward 统计。
-3. 实现 H2 Checkpoint 恢复续训。
-4. 实现 H2 固定种子评估入口。
+3. 实现 HH2 Checkpoint 恢复续训。
+4. 实现 HH2 固定种子评估入口。
 5. 进行固定战术、随机战术和学习战术的对照实验。
-6. 根据训练效果决定是否扩展高层状态表示、动态决策周期和 H3 风险预测。
+6. 根据训练效果决定是否扩展高层状态表示、动态决策周期和 HH3 风险预测。
 
 **Final Principle:** 完整训练链路、正确的分层数据流和真实行为提升是三个独立验收目标，必须分别提供证据。
 
@@ -1178,6 +1178,6 @@ GPU 验收后，按优先级推进：
 - `src/minecombat/policies/harness/tactical_policy.py`
 - `src/minecombat/policies/harness/conditioned_vpt.py`
 - `configs/env/zombie_stage1.yaml`
-- `docs/h1-tactical-training-runbook.md`
+- `docs/hh1-tactical-training-runbook.md`
 
-**Document Status:** Ready for H2 GPU Engineering Handoff. Real GPU validation results are pending.
+**Document Status:** Ready for HH2 GPU Engineering Handoff. Real GPU validation results are pending.

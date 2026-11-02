@@ -1,5 +1,5 @@
 
-"""Tests for building a trainable H2 harness."""
+"""Tests for building a trainable HH2 harness."""
 
 import numpy as np
 import pytest
@@ -76,7 +76,7 @@ def test_high_level_builder_freezes_h1(monkeypatch, tmp_path):
         )
     )
 
-    # H1 was loaded once with the expected checkpoint.
+    # HH1 was loaded once with the expected checkpoint.
     assert len(loader_calls) == 1
     assert loader_calls[0]["conditioned_checkpoint"] == str(
         checkpoint
@@ -90,7 +90,7 @@ def test_high_level_builder_freezes_h1(monkeypatch, tmp_path):
         for param in low_policy.parameters()
     )
 
-    # The H2 policy must be trainable.
+    # The HH2 policy must be trainable.
     high_policy = harness.tactical_policy
 
     assert isinstance(high_policy, HighLevelTacticalPolicy)

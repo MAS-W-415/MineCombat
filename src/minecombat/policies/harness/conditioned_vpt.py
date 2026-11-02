@@ -1,7 +1,7 @@
 
 """A tactical-condition-aware MineStudio VPT policy.
 
-H1: reuse pretrained VPT modules and inject a learnable
+HH1: reuse pretrained VPT modules and inject a learnable
 tactical residual before the action and value heads.
 """
 

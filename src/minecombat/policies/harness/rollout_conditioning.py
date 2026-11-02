@@ -4,7 +4,7 @@
 Attach the tactic used for action selection to the observation,
 so rollout and PPO training consume the same tactical ID.
 
-This is an H1 data-flow baseline, not a learned tactical policy.
+This is an HH1 data-flow baseline, not a learned tactical policy.
 """
 
 from __future__ import annotations

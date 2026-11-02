@@ -25,6 +25,8 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 - [静止靶 + 攻击奖励](docs/m3-100k-stationary-attack.md)：有伤害的局数从 0/50 升到 7/50，但仍 0 击杀；下一步是 300k 或更强探索。
 - [1M 运行手册](docs/1m-run.md)：下一台机器上的完整命令与前置检查。
 
+术语说明见 [docs/glossary.md](docs/glossary.md)：`M` 是里程碑，`RQ` 是研究问题，`HH` 是 Harness 阶段。
+
 基线与 PPO 实验在 [Issues](https://github.com/MAS-W-415/MineCombat/issues) 中跟踪。
 
 ## 为什么做这个项目
@@ -131,9 +133,9 @@ MineStudio 官方配置默认需要多张 GPU。单卡配置见
 
 ## 研究问题
 
-- **H1**：从 VPT 1x 做 PPO，能否提升僵尸胜率并降低掉血？
-- **H2**：僵尸预训练策略迁移到骷髅，是否比直接从 VPT 微调更省样本？
-- **H3**：在 flat policy 足够强之后，高层 Harness 是否能提升末影龙长程任务的胜率？
+- **RQ1**：从 VPT 1x 做 PPO，能否提升僵尸胜率并降低掉血？
+- **RQ2**：僵尸预训练策略迁移到骷髅，是否比直接从 VPT 微调更省样本？
+- **RQ3**：在 flat policy 足够强之后，高层 Harness 是否能提升末影龙长程任务的胜率？
 
 第一版保留 **flat VPT + PPO** 作为对照组。Harness 推迟到僵尸阶段稳定之后再加入，避免无法区分收益来源。
 

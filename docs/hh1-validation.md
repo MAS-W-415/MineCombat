@@ -1,4 +1,4 @@
-# H1 Tactical Conditioning — GPU Validation
+# HH1 Tactical Conditioning — GPU Validation
 
 Date: 2026-11-02  
 Training commit: `7d61ba0`  
@@ -8,7 +8,7 @@ Scope: engineering and conditioning validation, not a performance claim
 
 ## Result
 
-The H1 training chain works on the real Minecraft / Ray / PPO stack:
+The HH1 training chain works on the real Minecraft / Ray / PPO stack:
 
 - Conditioned VPT loads and trains.
 - `tactic_ids` reach the model through rollout and PPO batches.
@@ -175,7 +175,7 @@ Artifacts:
 
 - [ ] Video review for repeatable behavioral differences.
 - [ ] Reward-hacking check for the auxiliary terms.
-- [ ] Decision on whether H1 is strong enough to start H2.
+- [ ] Decision on whether HH1 is strong enough to start HH2.
 - [ ] Longer training before claiming tactical behavior; 10k is a diagnostic.
 
 ## Notes
@@ -187,4 +187,4 @@ Artifacts:
   in longer runs; a single 10k smoke is not enough to judge stability.
 - The 50-seed comparison uses a 10k checkpoint. The differences are small and
   the win rate is still zero; do not describe this as a successful tactical
-  policy or as H2 readiness.
+  policy or as HH2 readiness.

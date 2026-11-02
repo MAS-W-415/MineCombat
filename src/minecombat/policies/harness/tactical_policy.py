@@ -114,7 +114,7 @@ class HighLevelTacticalPolicy(nn.Module):
     ) -> tuple[TacticalDecision, HighLevelDecisionInfo]:
         """Choose a tactic using the learned Actor."""
 
-        # The initial H2 model is feedforward.
+        # The initial HH2 model is feedforward.
         # Risk-aware decisions are reserved for H3.
         del risk, memory
 

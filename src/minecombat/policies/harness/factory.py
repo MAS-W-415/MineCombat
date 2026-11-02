@@ -12,7 +12,7 @@ from .runtime import HarnessRuntime
 
 
 class FixedTacticalPolicy:
-    """Temporary high-level policy for H1 integration.
+    """Temporary high-level policy for HH1 integration.
 
     It always selects the same tactical condition.
     This is NOT a learned tactical policy.

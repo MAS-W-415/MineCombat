@@ -1,7 +1,7 @@
 # MineCombat: Hierarchical Combat Harness Architecture
 
-> Version: 1.0
-> Status: Design baseline — H0 implementation in progress
+> Version: 1.1
+> Status: HH0–HH2 implemented; HH1 validated at 10k, HH2 GPU validation pending
 > Date: 2026-10-31
 
 ## 1. Project Objective
@@ -169,7 +169,7 @@ mouse commands.
 
 ### 5.2 Output
 
-The H0 prototype represents tactical conditions as:
+The HH0 prototype represents tactical conditions as:
 
     TacticalDecision(
         tactic_id: int,
@@ -228,9 +228,9 @@ The Decision Gate decides whether to:
 - Retain the current tactical condition
 - Request an updated tactical condition
 
-### 7.2 H0 Baseline
+### 7.2 HH0 Baseline
 
-H0 uses a deterministic fixed-interval gate.
+HH0 uses a deterministic fixed-interval gate.
 
 Example:
 
@@ -320,9 +320,9 @@ action, next_low_memory = low_policy.get_action(
 )
 ```
 
-H0 defines this interface.
+HH0 defines this interface.
 
-H1 must implement the actual neural-network conditioning.
+HH1 must implement the actual neural-network conditioning.
 
 ## 9. Reinforcement Learning Strategy
 
@@ -427,7 +427,7 @@ Minecraft environment callbacks.
 
 ## 12. Development Roadmap
 
-### H0: Hierarchical Interfaces and Runtime
+### HH0: Hierarchical Interfaces and Runtime
 
 Deliverables:
 
@@ -447,7 +447,7 @@ Acceptance:
 - Episode memory resets correctly.
 - No GPU or Minecraft runtime is required.
 
-### H1: Conditioned VPT
+### HH1: Conditioned VPT
 
 Deliverables:
 
@@ -462,7 +462,7 @@ Acceptance:
 - The conditioned network supports gradient-based learning.
 - Existing flat VPT inference remains available.
 
-### H2: High-Level Tactical RL
+### HH2: High-Level Tactical RL
 
 Deliverables:
 
@@ -471,7 +471,7 @@ Deliverables:
 - High-level reward aggregation
 - Initial high-level training experiment
 
-### H3: Risk-Aware Harness
+### HH3: Risk-Aware Harness
 
 Deliverables:
 
@@ -479,7 +479,7 @@ Deliverables:
 - Learned or risk-triggered Decision Gate
 - Comparison against fixed-interval scheduling
 
-### H4: External Advisor Integration
+### HH4: External Advisor Integration
 
 Deliverables:
 
