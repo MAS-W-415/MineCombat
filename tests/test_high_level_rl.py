@@ -9,22 +9,22 @@ from minecombat.policies.harness import (
     FixedIntervalGate,
     HarnessRuntime,
 )
-from minecombat.policies.harness.tactical_rollout import (
-    TacticalTransition,
-)
-from minecombat.policies.harness.tactical_policy import (
-    HighLevelTacticalPolicy,
-)
-from minecombat.policies.harness.visual_features import (
-    VisualGridFeatureAdapter,
-)
-from minecombat.policies.harness.high_level_session import (
-    HighLevelRolloutSession,
-)
 from minecombat.policies.harness.high_level_ppo import (
     HighLevelPPOConfig,
     compute_smdp_gae,
     update_high_level_ppo,
+)
+from minecombat.policies.harness.high_level_session import (
+    HighLevelRolloutSession,
+)
+from minecombat.policies.harness.tactical_policy import (
+    HighLevelTacticalPolicy,
+)
+from minecombat.policies.harness.tactical_rollout import (
+    TacticalTransition,
+)
+from minecombat.policies.harness.visual_features import (
+    VisualGridFeatureAdapter,
 )
 
 

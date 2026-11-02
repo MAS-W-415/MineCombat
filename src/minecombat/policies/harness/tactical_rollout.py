@@ -7,7 +7,7 @@ import math
 from dataclasses import dataclass
 from typing import Any
 
-from .contracts import HarnessState, TacticalDecision
+from .contracts import HarnessState
 
 
 @dataclass(frozen=True)
