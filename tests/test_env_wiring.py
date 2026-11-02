@@ -6,6 +6,7 @@ import sys
 from types import ModuleType
 
 from minecombat.envs.callbacks import (
+    ActionMaskCallback,
     ArenaResetCallback,
     CombatEpisodeCallback,
     CombatRewardCallback,
@@ -102,3 +103,15 @@ def test_factory_uses_zombie_count_for_success_goal(monkeypatch):
     assert spawn_callback.config.count == 3
     assert episode_callback.required_kills == 3
     assert episode_callback.max_episode_steps == 200
+
+def test_factory_adds_inventory_mask(monkeypatch):
+    install_fake_minestudio(monkeypatch)
+
+    env = make_zombie_env(
+        {
+            "action_mask": {"mask_inventory": True},
+        }
+    )
+
+    registered = env.kwargs["callbacks"]
+    assert isinstance(registered[2], ActionMaskCallback)

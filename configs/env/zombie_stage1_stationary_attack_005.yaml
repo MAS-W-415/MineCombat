@@ -1,0 +1,6 @@
+# Attack-shaping probe: stronger attack bonus.
+
+base: zombie_stage1_stationary_attack.yaml
+
+reward:
+  attack: 0.05

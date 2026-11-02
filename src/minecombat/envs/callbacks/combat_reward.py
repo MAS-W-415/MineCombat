@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from typing import Any
 
 import numpy as np
@@ -44,6 +44,19 @@ class CombatRewardConfig:
             )
 
 
+@dataclass(frozen=True)
+class RewardBreakdown:
+    """Per-step weighted reward components."""
+
+    kill: float
+    damage_dealt: float
+    damage_taken: float
+    death: float
+    attack: float
+    time: float
+    total: float
+
+
 class CombatRewardCalculator:
     """Stateful reward calculator independent of MineStudio."""
 
@@ -65,12 +78,12 @@ class CombatRewardCalculator:
         self.tracker.reset(info)
         self._attack_cooldown = 0
 
-    def compute(
+    def compute_with_breakdown(
         self,
         info: dict[str, Any],
         attack_pressed: bool = False,
-    ) -> float:
-        """Calculate reward for one environment step."""
+    ) -> tuple[float, RewardBreakdown]:
+        """Calculate reward and its per-term breakdown."""
 
         cfg = self.config
 
@@ -85,14 +98,20 @@ class CombatRewardCalculator:
         elif self._attack_cooldown > 0:
             self._attack_cooldown -= 1
 
-        # 3. Calculate combat reward.
+        # 3. Calculate weighted components.
+        kill_reward = cfg.kill * stats.kills
+        damage_reward = cfg.damage_dealt * stats.damage_dealt
+        hp_penalty = -cfg.damage_taken * stats.hp_lost
+        death_penalty = cfg.death * stats.death
+        time_penalty = -cfg.time
+
         reward = (
-            cfg.kill * stats.kills
-            + cfg.damage_dealt * stats.damage_dealt
-            - cfg.damage_taken * stats.hp_lost
-            + cfg.death * stats.death
+            kill_reward
+            + damage_reward
+            + hp_penalty
+            + death_penalty
             + attack_bonus
-            - cfg.time
+            + time_penalty
         )
 
         # 4. Clip reward to the configured range.
@@ -101,7 +120,29 @@ class CombatRewardCalculator:
                 np.clip(reward, cfg.clip_min, cfg.clip_max)
             )
 
-        return float(reward)
+        breakdown = RewardBreakdown(
+            kill=kill_reward,
+            damage_dealt=damage_reward,
+            damage_taken=hp_penalty,
+            death=death_penalty,
+            attack=attack_bonus,
+            time=time_penalty,
+            total=float(reward),
+        )
+
+        return float(reward), breakdown
+
+    def compute(
+        self,
+        info: dict[str, Any],
+        attack_pressed: bool = False,
+    ) -> float:
+        """Calculate reward for one environment step."""
+
+        return self.compute_with_breakdown(
+            info,
+            attack_pressed=attack_pressed,
+        )[0]
 
 
 class CombatRewardCallback(MinecraftCallback):
@@ -139,9 +180,12 @@ class CombatRewardCallback(MinecraftCallback):
         truncated,
         info,
     ):
-        reward = self.calculator.compute(
-            info,
-            attack_pressed=self._attack_pressed,
+        reward, breakdown = (
+            self.calculator.compute_with_breakdown(
+                info,
+                attack_pressed=self._attack_pressed,
+            )
         )
+        info["reward_breakdown"] = asdict(breakdown)
 
         return obs, reward, terminated, truncated, info

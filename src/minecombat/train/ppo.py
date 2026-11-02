@@ -75,6 +75,12 @@ def main() -> None:
         default=None,
     )
     parser.add_argument(
+        "--entropy-coef",
+        type=float,
+        default=None,
+        help="Override train_config.entropy_bonus_coef.",
+    )
+    parser.add_argument(
         "--smoke",
         action="store_true",
         help="Use a tiny single-iteration profile for pipeline validation.",
@@ -113,6 +119,9 @@ def main() -> None:
         value = getattr(args, name)
         if value is not None and value < 1:
             parser.error(f"--{name.replace('_', '-')} must be positive")
+
+    if args.entropy_coef is not None and args.entropy_coef < 0:
+        parser.error("--entropy-coef must be non-negative")
 
     if args.tactical_rewards:
         if not args.conditioned:
@@ -193,6 +202,8 @@ def main() -> None:
         )
     if args.wandb_mode is not None:
         cfg.logger_config.mode = args.wandb_mode
+    if args.entropy_coef is not None:
+        cfg.train_config.entropy_bonus_coef = args.entropy_coef
 
     OmegaConf.update(
         cfg,

@@ -1,0 +1,6 @@
+# Attack-shaping probe: mask inventory/GUI actions.
+
+base: zombie_stage1_stationary_attack.yaml
+
+action_mask:
+  mask_inventory: true
