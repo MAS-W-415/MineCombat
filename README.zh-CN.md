@@ -17,7 +17,8 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 
 - [M2 基线](docs/m2-baseline.md)：随机策略 0% 胜率 / 96% 死亡率；zero-shot VPT 2% 胜率 / 28% 死亡率。
 - [M3 PPO smoke](docs/m3-ppo-smoke.md)：10k steps、20 次 update、峰值显存 6.3 GiB。
-- [Dense damage](docs/m3-dense-damage.md)：10k 时首次出现非零伤害比（0.0897）。
+- [Dense damage](docs/m3-dense-damage.md)：10k 时首次出现非零伤害比（0.0090）。
+- [100k flat PPO](docs/m3-100k-eval.md)：0% 胜率、16% 死亡率、伤害比 0.0313；有微弱学习信号，但还不是可用策略。
 - [1M 运行手册](docs/1m-run.md)：下一台机器上的完整命令与前置检查。
 
 基线与 PPO 实验在 [Issues](https://github.com/MAS-W-415/MineCombat/issues) 中跟踪。

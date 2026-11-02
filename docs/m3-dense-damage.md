@@ -70,7 +70,7 @@ Evaluation on 50 seeds:
 | Timeout rate | 0.70 | 0.78 | 0.64 |
 | Mean HP lost | 11.58 | 10.84 | 10.92 |
 | Mean steps | 535.7 | 568.2 | 527.3 |
-| Damage ratio | 0.00* | 0.00* | 0.0897 |
+| Damage ratio | 0.00* | 0.00* | 0.0090 |
 
 \* The first two evaluations predate the observation fix, so their damage ratio
 is zero by construction.

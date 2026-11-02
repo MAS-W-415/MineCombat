@@ -11,6 +11,6 @@
   "mean_hp_lost_on_win": null,
   "mean_time_to_kill": null,
   "mean_steps": 536.26,
-  "mean_reward": -2.865859999999959,
-  "damage_ratio": 0.6511627906976745
+  "mean_reward": -2.8658599999999597,
+  "damage_ratio": 0.06511627906976744
 }
