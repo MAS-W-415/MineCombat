@@ -28,8 +28,19 @@ class CombatRewardConfig:
     damage_dealt: float = 0.01
     damage_taken: float = 0.2
     time: float = 0.001
+    # Optional attack-attempt shaping for action discovery.
+    attack: float = 0.0
+    attack_cooldown_steps: int = 10
     clip_min: float = -10.0
     clip_max: float = 20.0
+
+    def __post_init__(self) -> None:
+        if self.attack < 0:
+            raise ValueError("attack reward must be non-negative")
+        if self.attack_cooldown_steps < 1:
+            raise ValueError(
+                "attack_cooldown_steps must be positive"
+            )
 
 
 class CombatRewardCalculator:
@@ -69,8 +80,13 @@ class CombatRewardCalculator:
         )
 
         self._dead = self.prev_hp <= 0.0
+        self._attack_cooldown = 0
 
-    def compute(self, info: dict[str, Any]) -> float:
+    def compute(
+        self,
+        info: dict[str, Any],
+        attack_pressed: bool = False,
+    ) -> float:
         """Calculate reward for one environment step."""
 
         cfg = self.config
@@ -116,22 +132,31 @@ class CombatRewardCalculator:
             death = 1.0
             self._dead = True
 
-        # 4. Calculate combat reward.
+        # 4. Reward attack attempts, with a cooldown to avoid spam.
+        attack_bonus = 0.0
+        if attack_pressed and self._attack_cooldown == 0:
+            attack_bonus = cfg.attack
+            self._attack_cooldown = cfg.attack_cooldown_steps
+        elif self._attack_cooldown > 0:
+            self._attack_cooldown -= 1
+
+        # 5. Calculate combat reward.
         reward = (
             cfg.kill * kills
             + cfg.damage_dealt * damage_dealt
             - cfg.damage_taken * hp_lost
             + cfg.death * death
+            + attack_bonus
             - cfg.time
         )
 
-        # 5. Clip reward to the configured range.
+        # 6. Clip reward to the configured range.
         if cfg.clip_min is not None and cfg.clip_max is not None:
             reward = float(
                 np.clip(reward, cfg.clip_min, cfg.clip_max)
             )
 
-        # 6. Update numeric snapshots for the next step.
+        # 7. Update numeric snapshots for the next step.
         self.prev_hp = hp
         self.prev_damage = damage_total
         self.prev_kills = kills_total
@@ -151,9 +176,18 @@ class CombatRewardCallback(MinecraftCallback):
             config = CombatRewardConfig(**config)
 
         self.calculator = CombatRewardCalculator(config)
+        self._attack_pressed = False
+
+    def before_step(self, sim, action):
+        self._attack_pressed = (
+            float(scalar(action.get("attack", 0), default=0.0))
+            > 0.5
+        )
+        return action
 
     def after_reset(self, sim, obs, info):
         self.calculator.reset(info)
+        self._attack_pressed = False
         return obs, info
 
     def after_step(
@@ -165,6 +199,9 @@ class CombatRewardCallback(MinecraftCallback):
         truncated,
         info,
     ):
-        reward = self.calculator.compute(info)
+        reward = self.calculator.compute(
+            info,
+            attack_pressed=self._attack_pressed,
+        )
 
         return obs, reward, terminated, truncated, info

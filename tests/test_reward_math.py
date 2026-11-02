@@ -2,7 +2,11 @@ from __future__ import annotations
 
 import pytest
 
-from minecombat.envs.callbacks.combat_reward import CombatRewardCalculator, CombatRewardConfig
+from minecombat.envs.callbacks.combat_reward import (
+    CombatRewardCalculator,
+    CombatRewardCallback,
+    CombatRewardConfig,
+)
 
 
 def info(hp: float = 20.0, damage: float = 0.0, kills: float = 0.0):
@@ -57,6 +61,56 @@ def test_scalar_event_fallback() -> None:
     calc = CombatRewardCalculator()
     calc.reset({"health": 20.0, "damage_dealt": 0.0})
     reward = calc.compute({"health": 20.0, "damage_dealt": 5.0})
+    assert reward == pytest.approx(0.05 - 0.001)
+
+
+def test_attack_bonus_with_cooldown() -> None:
+    calc = CombatRewardCalculator(
+        CombatRewardConfig(
+            attack=0.05,
+            attack_cooldown_steps=2,
+        )
+    )
+    calc.reset(info())
+
+    assert calc.compute(
+        info(), attack_pressed=True
+    ) == pytest.approx(0.05 - 0.001)
+
+    # Cooldown active: no second bonus.
+    assert calc.compute(
+        info(), attack_pressed=True
+    ) == pytest.approx(-0.001)
+
+    # Cooldown expires.
+    assert calc.compute(
+        info(), attack_pressed=False
+    ) == pytest.approx(-0.001)
+
+    # A new attack can be rewarded again.
+    assert calc.compute(
+        info(), attack_pressed=True
+    ) == pytest.approx(0.05 - 0.001)
+
+
+def test_callback_detects_attack_action() -> None:
+    callback = CombatRewardCallback(
+        CombatRewardConfig(attack=0.05)
+    )
+    callback.after_reset(None, {}, info())
+
+    action = {"attack": 1}
+    assert callback.before_step(None, action) is action
+
+    _, reward, _, _, _ = callback.after_step(
+        None,
+        {},
+        0.0,
+        False,
+        False,
+        info(),
+    )
+
     assert reward == pytest.approx(0.05 - 0.001)
 
 
