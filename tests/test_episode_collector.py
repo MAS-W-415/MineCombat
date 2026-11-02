@@ -2,19 +2,19 @@
 import numpy as np
 import torch
 
-from minecombat.policies.harness.runtime import HarnessRuntime
+from minecombat.policies.harness.episode_collector import (
+    collect_episode,
+)
 from minecombat.policies.harness.gate import FixedIntervalGate
-from minecombat.policies.harness.visual_features import (
-    VisualGridFeatureAdapter,
-)
-from minecombat.policies.harness.tactical_policy import (
-    HighLevelTacticalPolicy,
-)
 from minecombat.policies.harness.high_level_session import (
     HighLevelRolloutSession,
 )
-from minecombat.policies.harness.episode_collector import (
-    collect_episode,
+from minecombat.policies.harness.runtime import HarnessRuntime
+from minecombat.policies.harness.tactical_policy import (
+    HighLevelTacticalPolicy,
+)
+from minecombat.policies.harness.visual_features import (
+    VisualGridFeatureAdapter,
 )
 
 

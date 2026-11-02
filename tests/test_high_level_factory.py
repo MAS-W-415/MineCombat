@@ -9,8 +9,8 @@ from torch import nn
 from minecombat.policies.harness import (
     FixedIntervalGate,
     HarnessRuntime,
+    high_level_factory,
 )
-from minecombat.policies.harness import high_level_factory
 from minecombat.policies.harness.factory import (
     FixedTacticalPolicy,
 )

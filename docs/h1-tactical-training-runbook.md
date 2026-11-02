@@ -3,7 +3,7 @@
 **Project:** MineCombat
 **Branch:** `feat/tactical-rewards`
 **Starting Commit:** `39af1eb`
-**Status:** Pending GPU Validation
+**Status:** Engineering + 10k validation complete (see `docs/h1-validation.md`); longer behavioral run pending
 **Owner:** GPU Training & Evaluation
 **Scope:** H1 Conditioned VPT with Tactic-Specific Rewards
 

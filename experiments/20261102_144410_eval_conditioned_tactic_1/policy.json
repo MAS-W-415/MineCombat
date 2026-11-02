@@ -1,0 +1,9 @@
+{
+  "tactic_id": 1,
+  "num_tactics": 2,
+  "checkpoint": "/home/mas/programme/MineCombat/experiments/h1_tactical_10k/checkpoints/2026-11-02_14-08-52/20/model.ckpt",
+  "model": "CraftJarvis/MineStudio_VPT.foundation_model_1x",
+  "seed_start": 0,
+  "episodes": 50,
+  "deterministic": true
+}

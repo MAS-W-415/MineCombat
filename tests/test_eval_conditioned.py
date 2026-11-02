@@ -10,7 +10,6 @@ from pathlib import Path
 import minecombat.envs as env_module
 from minecombat.policies.harness import factory
 
-
 ROOT = Path(__file__).resolve().parents[1]
 EVAL_SCRIPT = ROOT / "scripts" / "eval_conditioned.py"
 

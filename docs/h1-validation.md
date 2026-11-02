@@ -1,7 +1,8 @@
 # H1 Tactical Conditioning — GPU Validation
 
 Date: 2026-11-02  
-Commit: `7d61ba0`  
+Training commit: `7d61ba0`  
+Evaluation commit: `2e858eb` (includes `aa5d140`, the conditioned eval CLI)  
 Hardware: RTX 4060 Laptop 8 GB, 31 GB system RAM, JDK 8  
 Scope: engineering and conditioning validation, not a performance claim
 
@@ -16,8 +17,9 @@ The H1 training chain works on the real Minecraft / Ray / PPO stack:
 - Checkpoints save with the conditioner parameters.
 - Both tactic IDs are sampled across episodes.
 
-Behavioral validation is **not** complete: there is no tactic-aware evaluation
-script yet, so no 50-seed aggressive-vs-defensive comparison exists.
+A 50-seed aggressive-vs-defensive comparison is now included. It shows a small
+but directionally consistent behavioral difference; it is not a win-rate
+improvement. Video review and reward-hacking analysis are still pending.
 
 ## 512-step smoke
 
@@ -125,6 +127,38 @@ python scripts/diagnose_h1.py \
 The script exits nonzero if the conditioning is ignored or any metric is
 non-finite.
 
+## 50-seed behavioral evaluation
+
+Command:
+
+```bash
+python scripts/eval_conditioned.py \
+  --checkpoint experiments/h1_tactical_10k/checkpoints/2026-11-02_14-08-52/20/model.ckpt \
+  --num-tactics 2 --tactic-ids 0 1 \
+  --episodes 50 --seed-start 0 --max-steps 600 --deterministic
+```
+
+| Metric | Aggressive (0) | Defensive (1) |
+|---|---:|---:|
+| Win rate | 0.00 | 0.00 |
+| Death rate | 0.36 | 0.32 |
+| Timeout rate | 0.64 | 0.68 |
+| Stuck rate | 0.60 | 0.66 |
+| Mean HP lost | 12.04 | 11.24 |
+| Mean steps | 536.26 | 534.62 |
+| Mean reward | -2.87 | -2.72 |
+| Damage ratio | 0.6512 | 0.5480 |
+
+Aggressive deals more damage; defensive takes less damage and dies less often.
+The direction matches the intended tactics, but the effect is small and both
+conditions still have a 0% win rate after 10k steps. This is evidence of
+conditioning sensitivity, not evidence of tactical success.
+
+Artifacts:
+
+- `experiments/20261102_143711_eval_conditioned_tactic_0/`
+- `experiments/20261102_144410_eval_conditioned_tactic_1/`
+
 ## What passed
 
 - [x] Conditioned VPT training chain
@@ -134,15 +168,15 @@ non-finite.
 - [x] Conditioner parameters trained and finite
 - [x] Action distribution changes with tactic ID
 - [x] Checkpoint save / load
+- [x] Tactic-aware evaluation CLI
+- [x] 50-seed aggressive vs defensive comparison
 
 ## What remains
 
-- [ ] Tactic-aware evaluation script that loads `ConditionedVPTPolicy` with a
-      fixed `tactic_id`.
-- [ ] 50-seed aggressive vs defensive comparison.
 - [ ] Video review for repeatable behavioral differences.
 - [ ] Reward-hacking check for the auxiliary terms.
 - [ ] Decision on whether H1 is strong enough to start H2.
+- [ ] Longer training before claiming tactical behavior; 10k is a diagnostic.
 
 ## Notes
 
@@ -151,5 +185,6 @@ non-finite.
   environment issue, not a code issue.
 - The `too high kl` warnings are logged but do not stop training. Monitor them
   in longer runs; a single 10k smoke is not enough to judge stability.
-- The H1 runbook's behavioral section requires evaluation support that does not
-  exist yet. Do not claim behavioral validation from this report.
+- The 50-seed comparison uses a 10k checkpoint. The differences are small and
+  the win rate is still zero; do not describe this as a successful tactical
+  policy or as H2 readiness.
