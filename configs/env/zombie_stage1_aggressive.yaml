@@ -1,0 +1,62 @@
+# Stage 1: Single-zombie combat
+
+seed: 42
+
+# Observation and action interfaces
+obs_size: [128, 128]
+render_size: [640, 360]
+action_type: agent
+
+# Maximum episode length, measured in environment steps
+max_episode_steps: 600
+
+preferred_spawn_biome: plains
+
+# Flat arena around the player. This removes terrain variance from stage 1.
+arena:
+  build_platform: true
+  platform_radius: 12
+  night_vision: true
+
+# Minecraft world settings
+world:
+  biome: plains
+  random_tp_range: 50
+  time: midnight
+  weather: clear
+  difficulty: normal
+  natural_regeneration: false
+  do_mob_spawning: false
+  do_daylight_cycle: false
+
+# Initial player setup
+player:
+  commands:
+    - "/give @p minecraft:stone_sword 1"
+
+# Zombie spawn configuration
+zombie:
+  mob: zombie
+  count: 1
+  min_distance: 4.0
+  max_distance: 10.0
+  spawn_height: 2.0
+  randomize_player_yaw: true
+  persistence_required: true
+
+# Reward coefficients
+#
+# R1: aggression-oriented reward. The baseline reward made passive
+# timeout the cheapest behavior (damage taken 0.2/HP vs damage dealt
+# 0.1/HP, with a very small time penalty). R1 increases the value of
+# engagement while keeping death costly.
+reward:
+  target_mob: zombie
+  kill: 20.0
+  death: -10.0
+  # damage_dealt is in tenths of a HP. 0.02 gives 0.2 per HP.
+  damage_dealt: 0.02
+  damage_taken: 0.05
+  time: 0.002
+  clip_min: -20.0
+  clip_max: 40.0

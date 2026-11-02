@@ -55,6 +55,11 @@ def main() -> None:
     parser.add_argument("--batch-size", type=int, default=None)
     parser.add_argument("--save-path", default=None)
     parser.add_argument("--name", default=None)
+    parser.add_argument(
+        "--env-config",
+        default=None,
+        help="Override cfg.env.config, e.g. an alternate reward profile.",
+    )
     parser.add_argument("--save-interval", type=int, default=None)
     parser.add_argument("--keep-interval", type=int, default=None)
     parser.add_argument(
@@ -127,6 +132,14 @@ def main() -> None:
     env_config = Path(str(cfg.env.config))
     if not env_config.is_absolute():
         cfg.env.config = str(root / env_config)
+
+    if args.env_config is not None:
+        env_config = Path(args.env_config)
+        if not env_config.is_absolute():
+            env_config = root / env_config
+        if not env_config.is_file():
+            parser.error(f"Environment config not found: {env_config}")
+        cfg.env.config = str(env_config)
 
     if args.smoke:
         cfg.train_config.num_iterations = 1
