@@ -81,7 +81,7 @@ training.
 | M0 environment | complete |
 | M1 zombie arena | complete |
 | M2 baselines | complete |
-| RQ1 flat PPO | in progress; 52% win on easy front spawn, 16% at ±30°, 10% on random spawn |
+| RQ1 flat PPO | in progress; 44% easy, 34% at ±30°, 48% mixed distance, 4% random |
 | Stage-1 gate | not passed |
 | HH1 conditioned VPT | 10k engineering validation; tactics weak, 0% win |
 | HH2 high-level PPO | implemented; GPU validation pending |
@@ -89,11 +89,12 @@ training.
 
 ## Immediate next steps
 
-1. Test the joint mixed-distance (3–7) + ±30° curriculum at 100k.
-2. If angle transfer is still weak, move to the 1M host with multiple
-   environments instead of stacking more 100k variants.
-3. Pass the stage-1 gate on the random-spawn task.
-4. Only then resume HH1/HH2 experiments as extensions.
+1. Widen the joint curriculum from ±30° to ±60°, then ±90° and ±180°,
+   confirming every stage on 50 seeds.
+2. Measure random spawn with 50 seeds at every stage; 20 seeds are triage only.
+3. Move the 1M consolidation run to the 24 GB / 64 GB host once the angle
+   curriculum shows a stable random-spawn trend.
+4. Pass the stage-1 gate on the random-spawn task, then resume HH1/HH2.
 
 ## Non-goals
 
