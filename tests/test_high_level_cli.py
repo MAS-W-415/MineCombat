@@ -8,11 +8,9 @@ from types import SimpleNamespace
 import pytest
 import torch
 
-from minecombat.train import high_level as cli
-from minecombat.envs import zombie_arena
 import minecombat.envs as env_module
-from minecombat.policies.harness import high_level_factory
-from minecombat.policies.harness import high_level_trainer
+from minecombat.policies.harness import high_level_factory, high_level_trainer
+from minecombat.train import high_level as cli
 
 
 def test_dry_run(monkeypatch, capsys):

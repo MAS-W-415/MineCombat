@@ -7,7 +7,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[3]
 
 
@@ -108,6 +107,7 @@ def main() -> None:
 
     # Heavy dependencies are only imported for real training.
     import random
+
     import numpy as np
     import torch
 
@@ -115,15 +115,15 @@ def main() -> None:
     from minecombat.policies.harness.high_level_factory import (
         build_high_level_training_harness,
     )
+    from minecombat.policies.harness.high_level_ppo import (
+        HighLevelPPOConfig,
+    )
     from minecombat.policies.harness.high_level_session import (
         HighLevelRolloutSession,
     )
     from minecombat.policies.harness.high_level_trainer import (
         HighLevelTrainConfig,
         train_high_level,
-    )
-    from minecombat.policies.harness.high_level_ppo import (
-        HighLevelPPOConfig,
     )
 
     random.seed(args.seed)

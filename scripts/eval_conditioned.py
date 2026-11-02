@@ -12,9 +12,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minecombat.eval import evaluate, summarize
-from minecombat.policies.vpt import DEFAULT_MODEL
-from minecombat.utils import RunLog
+from minecombat.eval import evaluate, summarize  # noqa: E402
+from minecombat.policies.vpt import DEFAULT_MODEL  # noqa: E402
+from minecombat.utils import RunLog  # noqa: E402
 
 
 def main():
