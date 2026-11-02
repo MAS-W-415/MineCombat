@@ -1,0 +1,7 @@
+# Easy AI + inventory mask with a farther front spawn.
+
+base: zombie_stage1_easy_mask.yaml
+
+zombie:
+  min_distance: 5.0
+  max_distance: 7.0

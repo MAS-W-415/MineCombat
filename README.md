@@ -26,6 +26,7 @@ Key results:
 - [Attack-shaped stationary run](docs/m3-100k-stationary-attack.md): 7/50 episodes dealt damage (up from 0/50), but still 0 kills.
 - [Phase 1 probes](docs/m3-phase1-probes.md): inventory masking produced the first repeatable kills; 8% win, 0 deaths on the stationary task.
 - [100k mask warm-start](docs/m3-mask-warm-100k.md): 22% win on stationary, 30% win against a front AI zombie; random spawn still 0%.
+- [100k easy-AI warm-start](docs/m3-easy-mask-warm-100k.md): still 30% win but 58% deaths; the easy curriculum plateaued and defense probes are next.
 - [1M runbook](docs/1m-run.md): exact command and preflight for the next host.
 
 Terminology: see [docs/glossary.md](docs/glossary.md) for the `M`, `RQ`, and `HH` naming rules. The single control-plus-extension roadmap is in [docs/unified-roadmap.md](docs/unified-roadmap.md). Shared training preflight is in [docs/training-common.md](docs/training-common.md).

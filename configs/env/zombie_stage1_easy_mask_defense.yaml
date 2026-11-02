@@ -1,0 +1,6 @@
+# Easy AI + inventory mask + stronger HP-loss penalty.
+
+base: zombie_stage1_easy_mask.yaml
+
+reward:
+  damage_taken: 0.3
