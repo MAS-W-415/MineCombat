@@ -18,14 +18,62 @@ from .callbacks import (
 )
 
 
-def load_config(path: str | Path) -> dict[str, Any]:
-    """Load environment configuration from YAML."""
+def _deep_merge(
+    base: Mapping[str, Any],
+    overlay: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Merge nested mappings; overlay values win."""
 
-    with Path(path).expanduser().open(
-        "r",
-        encoding="utf-8",
-    ) as handle:
-        return yaml.safe_load(handle) or {}
+    result = dict(base)
+
+    for key, value in overlay.items():
+        if key == "base":
+            continue
+
+        current = result.get(key)
+        if isinstance(current, Mapping) and isinstance(value, Mapping):
+            result[key] = _deep_merge(current, value)
+        else:
+            result[key] = value
+
+    return result
+
+
+def load_config(
+    path: str | Path,
+    _seen: set[Path] | None = None,
+) -> dict[str, Any]:
+    """Load an environment YAML, applying an optional ``base`` overlay.
+
+    A variant config can contain::
+
+        base: zombie_stage1.yaml
+        zombie:
+          min_distance: 3.0
+
+    The base is resolved relative to the variant file. Nested mappings are
+    merged recursively; lists and scalars are replaced.
+    """
+
+    config_path = Path(path).expanduser().resolve()
+    seen = set() if _seen is None else _seen
+
+    if config_path in seen:
+        raise ValueError(
+            f"Circular environment config base: {config_path}"
+        )
+
+    with config_path.open("r", encoding="utf-8") as handle:
+        data = yaml.safe_load(handle) or {}
+
+    base_name = data.pop("base", None)
+    if not base_name:
+        return data
+
+    base_path = (config_path.parent / str(base_name)).resolve()
+    base = load_config(base_path, seen | {config_path})
+
+    return _deep_merge(base, data)
 
 
 def make_zombie_env(
