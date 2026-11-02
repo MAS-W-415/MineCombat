@@ -67,16 +67,8 @@ def test_training_generator_loads_warm_start(monkeypatch, tmp_path):
             assert repo_id == "fake/model"
             return fake
 
-    class FakeUtils:
-        @staticmethod
-        def get_compute_device():
-            return "cpu"
-
     monkeypatch.setattr(models, "VPTPolicy", FakeVPTPolicy)
-    monkeypatch.setattr(
-        "minestudio.utils.get_compute_device",
-        FakeUtils.get_compute_device,
-    )
+    monkeypatch.setattr(torch.cuda, "is_available", lambda: False)
     checkpoint = tmp_path / "model.ckpt"
     torch.save({"weight": torch.ones(1)}, checkpoint)
 

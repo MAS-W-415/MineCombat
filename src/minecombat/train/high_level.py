@@ -5,16 +5,8 @@ from __future__ import annotations
 
 import argparse
 import json
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3]
-
-
-def resolve_path(value: str) -> Path:
-    path = Path(value).expanduser()
-    if not path.is_absolute():
-        path = ROOT / path
-    return path.resolve()
+from .common import resolve_path, seed_everything
 
 
 def main() -> None:
@@ -26,6 +18,7 @@ def main() -> None:
         "--hh1-checkpoint",
         "--h1-checkpoint",
         dest="h1_checkpoint",
+        metavar="HH1_CHECKPOINT",
         required=True,
         help=(
             "Checkpoint of the trained HH1 Conditioned VPT "
@@ -111,9 +104,6 @@ def main() -> None:
         )
 
     # Heavy dependencies are only imported for real training.
-    import random
-
-    import numpy as np
     import torch
 
     from minecombat.envs import make_zombie_env
@@ -131,9 +121,7 @@ def main() -> None:
         train_high_level,
     )
 
-    random.seed(args.seed)
-    np.random.seed(args.seed)
-    torch.manual_seed(args.seed)
+    seed_everything(args.seed)
 
     # 1. Load frozen HH1 and construct trainable HH2.
     harness = build_high_level_training_harness(

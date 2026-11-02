@@ -5,47 +5,37 @@ from __future__ import annotations
 DEFAULT_MODEL = "CraftJarvis/MineStudio_VPT.foundation_model_1x"
 
 
-def load_vpt_policy(
-    repo_id: str = DEFAULT_MODEL,
-    device: str | None = None,
-    checkpoint: str | None = None,
-):
-    """Load a pretrained VPT policy for inference.
-
-    Parameters
-    ----------
-    repo_id:
-        Hugging Face model repository.
-    device:
-        PyTorch device, such as "cpu" or "cuda".
-        None or "auto" selects CUDA when available,
-        otherwise CPU.
-    checkpoint:
-        Optional PPO ``model.ckpt`` to load on top of the
-        pretrained weights.
-    """
-
-    # Lazy imports: only load heavy dependencies when needed.
+def _resolve_device(device: str | None):
     import torch
-    from minestudio.models import VPTPolicy
 
-    # Resolve the inference device.
     if device is None or device == "auto":
-        device = (
-            "cuda"
-            if torch.cuda.is_available()
-            else "cpu"
-        )
+        return "cuda" if torch.cuda.is_available() else "cpu"
 
-    # Fail before downloading weights if CUDA is requested
-    # but no compatible GPU is available.
     if device == "cuda" and not torch.cuda.is_available():
         raise RuntimeError(
             "CUDA was requested, but torch.cuda.is_available() "
             "is False."
         )
 
-    # Construct the model and load pretrained parameters.
+    return device
+
+
+def load_vpt_model(
+    repo_id: str = DEFAULT_MODEL,
+    device: str | None = None,
+    checkpoint: str | None = None,
+    *,
+    eval_mode: bool = False,
+):
+    """Load VPT weights, optionally warm-started from a checkpoint.
+
+    Shared by evaluation and training. ``eval_mode=True`` disables training
+    behavior; ``eval_mode=False`` leaves the model in training mode.
+    """
+
+    import torch
+    from minestudio.models import VPTPolicy
+
     policy = VPTPolicy.from_pretrained(repo_id)
 
     if checkpoint is not None:
@@ -54,10 +44,24 @@ def load_vpt_policy(
             state = state["model"]
         policy.load_state_dict(state, strict=True)
 
-    # Move model parameters to the selected device.
-    policy = policy.to(device)
+    policy = policy.to(_resolve_device(device))
 
-    # Disable training-specific behavior during evaluation.
-    policy.eval()
+    if eval_mode:
+        policy.eval()
 
     return policy
+
+
+def load_vpt_policy(
+    repo_id: str = DEFAULT_MODEL,
+    device: str | None = None,
+    checkpoint: str | None = None,
+):
+    """Load a pretrained VPT policy for inference."""
+
+    return load_vpt_model(
+        repo_id=repo_id,
+        device=device,
+        checkpoint=checkpoint,
+        eval_mode=True,
+    )
