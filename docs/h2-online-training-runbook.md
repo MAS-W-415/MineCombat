@@ -1,10 +1,10 @@
 # MineCombat H2 — High-Level PPO GPU Training & Acceptance Runbook
 
-**Project:** MineCombat  
-**Branch:** `feat/h2-online-training`  
-**Status:** Local Mock Tests Completed / GPU Validation Pending  
-**Training Target:** H2 High-Level Tactical Actor-Critic  
-**Low-Level Model:** Frozen H1 Conditioned VPT  
+**Project:** MineCombat
+**Branch:** `feat/h2-online-training`
+**Status:** Local Mock Tests Completed / GPU Validation Pending
+**Training Target:** H2 High-Level Tactical Actor-Critic
+**Low-Level Model:** Frozen H1 Conditioned VPT
 **Environment:** MineStudio Zombie Arena — Stage 1
 
 ---
