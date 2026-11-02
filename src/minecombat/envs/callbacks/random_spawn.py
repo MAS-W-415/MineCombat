@@ -22,6 +22,10 @@ class ZombieSpawnConfig:
     spawn_height: float = 2.0
     randomize_player_yaw: bool = True
     persistence_required: bool = True
+    # Optional curriculum controls. ``spawn_angle_deg=90`` places the
+    # zombie at +Z, which is directly in front of a player at yaw 0.
+    spawn_angle_deg: float | None = None
+    player_yaw: float | None = None
 
 
 class RandomZombieSpawnCallback(MinecraftCallback):
@@ -39,14 +43,21 @@ class RandomZombieSpawnCallback(MinecraftCallback):
         rng = sim.np_random
         commands: list[str] = []
 
-        if cfg.randomize_player_yaw:
+        if cfg.player_yaw is not None:
+            commands.append(
+                f"/tp @p ~ ~ ~ {float(cfg.player_yaw):.2f} 0.0"
+            )
+        elif cfg.randomize_player_yaw:
             yaw = float(rng.uniform(-180.0, 180.0))
             commands.append(f"/tp @p ~ ~ ~ {yaw:.2f} 0.0")
 
         nbt = "{PersistenceRequired:1b}" if cfg.persistence_required else ""
         spawns: list[dict[str, float | str]] = []
         for _ in range(int(cfg.count)):
-            angle = float(rng.uniform(0.0, 2.0 * math.pi))
+            if cfg.spawn_angle_deg is not None:
+                angle = math.radians(float(cfg.spawn_angle_deg))
+            else:
+                angle = float(rng.uniform(0.0, 2.0 * math.pi))
             distance = float(rng.uniform(cfg.min_distance, cfg.max_distance))
             x = math.cos(angle) * distance
             z = math.sin(angle) * distance
