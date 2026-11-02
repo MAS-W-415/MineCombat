@@ -26,7 +26,7 @@ Key results:
 - [Attack-shaped stationary run](docs/m3-100k-stationary-attack.md): 7/50 episodes dealt damage (up from 0/50), but still 0 kills; 300k or stronger exploration is next.
 - [1M runbook](docs/1m-run.md): exact command and preflight for the next host.
 
-Terminology: see [docs/glossary.md](docs/glossary.md) for the `M`, `RQ`, and `HH` naming rules. The single control-plus-extension roadmap is in [docs/unified-roadmap.md](docs/unified-roadmap.md).
+Terminology: see [docs/glossary.md](docs/glossary.md) for the `M`, `RQ`, and `HH` naming rules. The single control-plus-extension roadmap is in [docs/unified-roadmap.md](docs/unified-roadmap.md). Shared training preflight is in [docs/training-common.md](docs/training-common.md).
 
 The first baseline and PPO runs are tracked in [Issues](https://github.com/MAS-W-415/MineCombat/issues).
 
@@ -97,7 +97,7 @@ source .venv/bin/activate
 python scripts/smoke_test.py --config configs/env/zombie_stage1.yaml --steps 100
 
 # Baseline evaluation
-python scripts/eval_baseline.py --policy random --episodes 5
+python scripts/eval.py --policy random --episodes 5
 ```
 
 For VPT inference, download the 1x checkpoint first:

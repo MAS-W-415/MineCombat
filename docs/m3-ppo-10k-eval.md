@@ -30,5 +30,5 @@ dense-damage follow-up is in `docs/m3-dense-damage.md`.
 ## Artifacts
 
 - `experiments/20261030_190258_eval_vpt_ckpt/`
-- `scripts/eval_baseline.py --checkpoint ...` loads a PPO `model.ckpt` on top of
-  the VPT 1x weights.
+- `scripts/eval.py --policy vpt --checkpoint ...` loads a PPO `model.ckpt` on
+  top of the VPT 1x weights.

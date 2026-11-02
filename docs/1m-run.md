@@ -23,19 +23,10 @@ Do **not** use `--smoke` for the 1M run; it overrides the batch counts to 2.
 
 ## Preflight
 
+Run the shared preflight in [training-common.md](training-common.md) first
+(JDK 8, engine patches, dependencies, Ray). Then check the 1M config:
+
 ```bash
-export HF_ENDPOINT=https://hf-mirror.com
-source .venv/bin/activate
-
-# JDK 8 is required by the Minecraft engine.
-export JAVA_HOME="$HOME/.local/opt/jdk8/usr/lib/jvm/java-8-openjdk-amd64"
-export PATH="$JAVA_HOME/bin:$PATH"
-
-# Engine patches: Malmo launch race and left-click lock.
-python scripts/patch_minestudio.py
-python scripts/patch_minestudio_engine.py
-
-# Check the resolved config without starting Ray.
 PYTHONPATH=src python -m minecombat.train.ppo \
   --config configs/ppo/zombie_vpt1x.yaml \
   --num-iterations 20 \
@@ -81,15 +72,16 @@ recorded every 2 iterations (`record_video_interval: 2`).
 
 ## Evaluation
 
-Evaluate each checkpoint on the same 50 seeds as the M2 baseline:
+Evaluate each checkpoint on the same 50 seeds as the M2 baseline. See the
+shared protocol in [training-common.md](training-common.md#evaluation-protocol).
 
 ```bash
-python scripts/eval_baseline.py \
+python scripts/eval.py \
   --policy vpt \
   --checkpoint experiments/ppo_1m/checkpoints/<timestamp>/10/model.ckpt \
   --episodes 50 --seed-start 0 --max-steps 600 --deterministic
 
-python scripts/eval_baseline.py \
+python scripts/eval.py \
   --policy vpt \
   --checkpoint experiments/ppo_1m/checkpoints/<timestamp>/20/model.ckpt \
   --episodes 50 --seed-start 0 --max-steps 600 --deterministic
@@ -107,14 +99,9 @@ gate needs at least 50% win rate on the 50 seeds (#11).
 
 ## Cleanup
 
-```bash
-bash scripts/stop_ray.sh
-pgrep -f '[m]cprec-6.13.jar' | xargs -r kill -9
-nvidia-smi
-```
-
-Check for orphaned Java processes after every crashed run; they keep rendering
-at 100% CPU and hold GPU memory.
+Use the shared cleanup checklist in
+[training-common.md](training-common.md#cleanup). Check for orphaned Java
+processes after every run; they keep rendering at 100% CPU and hold GPU memory.
 
 ## Known limitations
 

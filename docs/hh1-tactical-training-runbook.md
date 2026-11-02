@@ -103,96 +103,13 @@ r_training = r_base + r_aux
 
 ---
 
-## 3. Hardware and Environment Requirements
+## 3. Common Preflight and HH1 Config
 
-建议使用 Linux CUDA 服务器。
+Run the shared preflight in [training-common.md](training-common.md) first. It
+covers hardware, JDK 8, the Hugging Face mirror, engine patches, Ray, tests,
+simulator smoke, damage validation, checkpoints, and cleanup.
 
-推荐配置：
-
-- NVIDIA RTX 4090 或其他约 24 GB 显存的 GPU
-- 64 GB 或更多系统 RAM
-- Python 3.10
-- JDK 8
-- 可运行的 CUDA PyTorch 环境
-- MineStudio、Ray、Gymnasium 等项目依赖
-
-以上是推荐配置，不代表其他配置一定不可运行。
-
-### 3.1 Checkout Code
-
-```bash
-git fetch origin
-git switch --track origin/feat/tactical-rewards
-git rev-parse --short HEAD
-git status -sb
-```
-
-如果本地已经存在该分支：
-
-```bash
-git switch feat/tactical-rewards
-git pull --ff-only
-```
-
-确认工作区干净，且代码包含提交 `39af1eb`。
-
-### 3.2 Activate Environment
-
-```bash
-source .venv/bin/activate
-
-python --version
-nvidia-smi
-java -version
-```
-
-检查 GPU、Python 和 JDK 版本。
-
-如需切换到项目要求的 JDK 8，使用服务器上的实际 JDK 8 安装路径设置 `JAVA_HOME`，不能直接复制其他机器的路径。
-
-### 3.3 Verify Python Dependencies
-
-```bash
-python - <<'PY'
-import torch
-import gymnasium
-import ray
-import minestudio
-
-print("PyTorch:", torch.__version__)
-print("CUDA available:", torch.cuda.is_available())
-print("Gymnasium:", gymnasium.__version__)
-print("Ray:", ray.__version__)
-print("Dependencies OK")
-PY
-```
-
-验收标准：
-
-- 所有模块均可导入。
-- `torch.cuda.is_available()` 为 `True`。
-- PyTorch 能识别实际 GPU。
-
-### 3.4 Run Regression Tests
-
-```bash
-PYTHONPATH=src python -m pytest \
-  tests/test_tactic_rewards.py \
-  tests/test_tactical_reward_wrapper.py \
-  tests/test_harness_runtime.py \
-  tests/test_high_level_rl.py \
-  -q
-```
-
-当前预期：
-
-```text
-11 passed
-```
-
-如果测试失败，不要立即开始长训练。
-
-### 3.5 Verify Training Configuration
+Then check the HH1 config:
 
 ```bash
 PYTHONPATH=src python -m minecombat.train.ppo \
@@ -203,7 +120,7 @@ PYTHONPATH=src python -m minecombat.train.ppo \
   --dry-run
 ```
 
-确认输出包含：
+Confirm the output contains:
 
 ```yaml
 harness:
@@ -214,47 +131,14 @@ harness:
   tactical_rewards: true
 ```
 
-注意：`--dry-run` 只检查参数解析和配置生成，不会启动环境，也不能证明 PPO 训练已经正常运行。
-
----
+`--dry-run` only checks argument parsing and config generation; it does not
+start Minecraft or prove that PPO training works.
 
 ## 4. Environment Preflight
 
-在正式训练前，先单独检查 Minecraft 环境。
-
-### 4.1 Basic Simulator Smoke Test
-
-```bash
-python scripts/smoke_test.py \
-  --config configs/env/zombie_stage1.yaml \
-  --steps 100
-```
-
-检查：
-
-- Minecraft 能正常启动。
-- 环境可以 Reset。
-- 观察包含 RGB 图像。
-- `env.step()` 正常执行。
-- Reward 没有出现 NaN / Inf。
-- Episode 终止和截断标志正确。
-
-### 4.2 Damage Signal Validation
-
-```bash
-python scripts/test_melee.py
-```
-
-项目此前出现过 `custom.damage_dealt` 未正确读取的问题，因此必须确认：
-
-- 对僵尸造成伤害后，伤害计数增加。
-- 击杀事件能正确记录。
-- Reward 中的伤害项非零。
-- 多个 Episode 之间不会重复计算累计伤害。
-
-只有确认基础奖励正常，才允许测试战术辅助奖励。
-
----
+The simulator smoke test and damage-signal validation are in
+[training-common.md](training-common.md#preflight-checks). Run them before the
+HH1 GPU smoke test.
 
 ## 5. HH1 GPU Smoke Test
 
@@ -273,12 +157,9 @@ python scripts/test_melee.py
 
 ### 5.2 Start Ray
 
-```bash
-bash scripts/start_ray.sh
-ray status
-```
-
-若 Ray 无法正常启动，先检查 JDK、Ray 自定义资源及是否存在遗留进程。
+Use the shared Ray commands in
+[training-common.md](training-common.md#ray). Check that JDK 8, the custom
+resources, and any stale processes are handled there.
 
 ### 5.3 Run 512-Step Smoke Test
 
@@ -604,44 +485,22 @@ max_steps = 600
 
 可在发现有效差异后扩大评估样本，并采用多个训练种子复现。
 
-### 8.4 Important Implementation Limitation
+### 8.4 Evaluation Entry Point
 
-现有 `scripts/eval_baseline.py` 主要支持：
+The unified CLI now supports conditioned policies:
 
-```text
---policy random
---policy vpt
+```bash
+python scripts/eval.py \
+  --policy conditioned \
+  --checkpoint experiments/<hh1>/checkpoints/<timestamp>/<update>/model.ckpt \
+  --num-tactics 2 --tactic-ids 0 1 \
+  --episodes 50 --seed-start 0 --max-steps 600 --deterministic
 ```
 
-它还没有完整支持：
-
-- 加载 Conditioned VPT Checkpoint。
-- 指定 `tactic_id`。
-- 在评估中保持战术条件不变。
-- 独立记录不同战术的行为指标。
-
-因此不能直接使用原有 Flat VPT Checkpoint 加载方式评估 Conditioned VPT。
-
-在正式战术评估前，需要实现并测试一个专用入口，例如：
-
-```text
-scripts/eval_conditioned.py
-```
-
-建议支持的接口：
-
-```text
---checkpoint
---num-tactics
---tactic-id
---episodes
---seed-start
---max-steps
---deterministic
---output-dir
-```
-
-**以上只是待实现接口约定，当前不能视为已经可运行的命令。**
+The runner holds one tactic fixed per episode, reuses the same low-level
+weights, and writes a separate run directory per tactic. The older
+`eval_baseline.py` and `eval_conditioned.py` scripts remain as compatibility
+wrappers.
 
 ### 8.5 Behavioral Metrics
 
