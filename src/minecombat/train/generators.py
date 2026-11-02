@@ -11,8 +11,16 @@ def env_generator(config_path: str):
     return make_zombie_env(config_path)
 
 
-def policy_generator(repo_id: str):
-    """Original flat VPT policy."""
+def policy_generator(
+    repo_id: str,
+    checkpoint: str | None = None,
+):
+    """Original flat VPT policy, optionally warm-started.
+
+    ``checkpoint`` loads a previous flat PPO ``model.ckpt`` on top of the
+    pretrained VPT weights. This is a warm start, not a full resume: the
+    optimizer and iteration counter start fresh.
+    """
     from minestudio.models import VPTPolicy
     from minestudio.utils import get_compute_device
 
@@ -20,9 +28,17 @@ def policy_generator(repo_id: str):
 
     patch_scaled_mse_head()
 
-    return VPTPolicy.from_pretrained(repo_id).to(
-        get_compute_device()
-    )
+    policy = VPTPolicy.from_pretrained(repo_id)
+
+    if checkpoint is not None:
+        import torch
+
+        state = torch.load(checkpoint, map_location="cpu")
+        if isinstance(state, dict) and "model" in state:
+            state = state["model"]
+        policy.load_state_dict(state, strict=True)
+
+    return policy.to(get_compute_device())
 
 
 

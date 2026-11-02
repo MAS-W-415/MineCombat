@@ -8,6 +8,7 @@ torch = pytest.importorskip("torch")
 models = pytest.importorskip("minestudio.models")
 
 from minecombat.policies.vpt import load_vpt_policy  # noqa: E402
+from minecombat.train.generators import policy_generator  # noqa: E402
 
 
 class FakePolicy:
@@ -55,3 +56,36 @@ def test_checkpoint_is_loaded(monkeypatch, tmp_path):
     assert fake.strict is True
     assert fake.device == "cpu"
     assert fake.eval_called is True
+
+
+def test_training_generator_loads_warm_start(monkeypatch, tmp_path):
+    fake = FakePolicy()
+
+    class FakeVPTPolicy:
+        @staticmethod
+        def from_pretrained(repo_id):
+            assert repo_id == "fake/model"
+            return fake
+
+    class FakeUtils:
+        @staticmethod
+        def get_compute_device():
+            return "cpu"
+
+    monkeypatch.setattr(models, "VPTPolicy", FakeVPTPolicy)
+    monkeypatch.setattr(
+        "minestudio.utils.get_compute_device",
+        FakeUtils.get_compute_device,
+    )
+    checkpoint = tmp_path / "model.ckpt"
+    torch.save({"weight": torch.ones(1)}, checkpoint)
+
+    policy = policy_generator(
+        "fake/model",
+        str(checkpoint),
+    )
+
+    assert policy is fake
+    assert fake.loaded["weight"].item() == 1.0
+    assert fake.strict is True
+    assert fake.device == "cpu"

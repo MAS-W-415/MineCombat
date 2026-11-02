@@ -60,6 +60,11 @@ def main() -> None:
         default=None,
         help="Override cfg.env.config, e.g. an alternate reward profile.",
     )
+    parser.add_argument(
+        "--init-checkpoint",
+        default=None,
+        help="Warm-start flat PPO from a previous model.ckpt.",
+    )
     parser.add_argument("--save-interval", type=int, default=None)
     parser.add_argument("--keep-interval", type=int, default=None)
     parser.add_argument(
@@ -141,6 +146,22 @@ def main() -> None:
             parser.error(f"Environment config not found: {env_config}")
         cfg.env.config = str(env_config)
 
+    init_checkpoint = None
+    if args.init_checkpoint is not None:
+        if args.conditioned:
+            parser.error(
+                "--init-checkpoint is only supported for flat training"
+            )
+
+        checkpoint_path = Path(args.init_checkpoint)
+        if not checkpoint_path.is_absolute():
+            checkpoint_path = root / checkpoint_path
+        if not checkpoint_path.is_file():
+            parser.error(
+                f"Initial checkpoint not found: {checkpoint_path}"
+            )
+        init_checkpoint = str(checkpoint_path)
+
     if args.smoke:
         cfg.train_config.num_iterations = 1
         cfg.train_config.batches_per_iteration = 2
@@ -185,6 +206,7 @@ def main() -> None:
             "tactic_id": args.tactic_id,
             "sample_tactic_per_episode": args.sample_tactic_per_episode,
             "tactical_rewards": args.tactical_rewards,
+            "init_checkpoint": init_checkpoint,
         },
         force_add=True,
     )
@@ -233,6 +255,7 @@ def main() -> None:
         policy_gen = partial(
             policy_generator,
             cfg.model.repo_id,
+            init_checkpoint,
         )
     online_cfg = build_online_config(cfg)
     whole_config = OmegaConf.to_yaml(cfg)
