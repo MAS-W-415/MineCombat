@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 import random
 
 import numpy as np
@@ -18,6 +19,28 @@ FINAL_OUTCOMES = {
     "timeout",
     "external_done",
 }
+
+
+def _spawn_geometry(
+    info: dict,
+) -> tuple[float | None, float | None]:
+    """Return (distance, angle in degrees) for the first spawned mob."""
+
+    spawns = info.get("spawn_debug")
+    if not isinstance(spawns, list) or not spawns:
+        return None, None
+
+    first = spawns[0]
+    if not isinstance(first, dict):
+        return None, None
+
+    distance = first.get("distance")
+    angle = first.get("angle")
+
+    return (
+        float(distance) if distance is not None else None,
+        math.degrees(float(angle)) if angle is not None else None,
+    )
 
 
 def seed_env(env, seed: int) -> None:
@@ -128,6 +151,8 @@ def evaluate(
         seed_env(env, seed)
 
         obs, info = env.reset()
+
+        spawn_distance, spawn_angle = _spawn_geometry(info)
 
         # Initial state snapshots.
         initial_hp = scalar(
@@ -262,6 +287,8 @@ def evaluate(
             time_to_kill=kill_step,
             reward=total_reward,
             outcome=outcome,
+            spawn_distance=spawn_distance,
+            spawn_angle=spawn_angle,
         )
 
         records.append(record)

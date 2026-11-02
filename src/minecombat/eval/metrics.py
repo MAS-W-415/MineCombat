@@ -25,6 +25,9 @@ class EpisodeRecord:
 
     # Appended with a default for backward compatibility.
     outcome: str = "unknown"
+    # Spawn geometry helps diagnose distance/angle composition failures.
+    spawn_distance: float | None = None
+    spawn_angle: float | None = None
 
 
 def summarize(

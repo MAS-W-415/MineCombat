@@ -158,6 +158,21 @@ Report win rate, death rate, timeout/stuck rate, mean HP lost, mean steps, and
 damage ratio. Damage `damage_dealt` is normalized to HP in the evaluation
 runner; Minecraft stores it in tenths of a HP internally.
 
+### Variance warning
+
+Minecraft's mob AI is not reset between episodes by the fast reset path. The
+same checkpoint, config, and seeds can differ by 10+ percentage points across
+repeated evaluations (observed range 10–24% on the combined task). Spawn
+distance and angle are deterministic and are now recorded in `episodes.csv`.
+
+For any claim or gate measurement:
+
+- run three independent 50-seed evaluations and report the mean and range;
+- use 100+ seeds for the final gate;
+- label 20-seed runs as screens, never as results.
+
+See `docs/m3-evaluation-variance.md` for the reproduction.
+
 ## Cleanup
 
 After every run, crashed or successful:

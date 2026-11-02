@@ -1,0 +1,10 @@
+# Easy AI + inventory mask with a 3-7 block distance curriculum.
+#
+# Bridges the close (3-4) and far (5-7) tasks before restoring a fully random
+# spawn. The zombie still spawns in front of the player.
+
+base: zombie_stage1_easy_mask.yaml
+
+zombie:
+  min_distance: 3.0
+  max_distance: 7.0

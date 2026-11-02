@@ -29,7 +29,8 @@ Key results:
 - [100k easy-AI warm-start](docs/m3-easy-mask-warm-100k.md): still 30% win but 58% deaths; the easy curriculum plateaued and defense probes are next.
 - [Defense probes](docs/m3-defense-probes.md): far-spawn training reached 52% win / 40% deaths on the easy task; ±30° spawn angles are now the bottleneck, not distance.
 - [Angle curriculum](docs/m3-angle-curriculum.md): 100k on ±30° only reached 16%; a joint mixed-distance + angle run is next.
-- [Mixed + angle curriculum](docs/m3-mixed-angle-curriculum.md): joint 100k reached 34% at ±30° and 48% on mixed distance; widening to ±60° raised easy to 58% but collapsed the ±60° target to 8%, so camera entropy is the next probe.
+- [Mixed + angle curriculum](docs/m3-mixed-angle-curriculum.md): joint 100k reached 34% at ±30° and 48% on mixed distance; widening to ±60° raised easy to 58% but collapsed the ±60° target to 8%. Camera entropy did not help; this is an off-screen search problem, so the gate definition is the next decision.
+- [Evaluation variance](docs/m3-evaluation-variance.md): the same checkpoint and seeds produced 10–24% on the combined task because mob AI is not reset between episodes; 3×50-seed runs are now required for claims.
 - [1M runbook](docs/1m-run.md): exact command and preflight for the next host.
 
 Terminology: see [docs/glossary.md](docs/glossary.md) for the `M`, `RQ`, and `HH` naming rules. The single control-plus-extension roadmap is in [docs/unified-roadmap.md](docs/unified-roadmap.md). Shared training preflight is in [docs/training-common.md](docs/training-common.md).
