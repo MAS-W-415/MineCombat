@@ -1,0 +1,16 @@
+{
+  "episodes": 20,
+  "win_rate": 0.1,
+  "death_rate": 0.8,
+  "timeout_rate": 0.1,
+  "external_done_rate": 0.0,
+  "eval_limit_rate": 0.0,
+  "stuck_rate": 0.05,
+  "mean_hp_lost": 17.7,
+  "mean_damage_taken": 17.7,
+  "mean_hp_lost_on_win": 15.0,
+  "mean_time_to_kill": 365,
+  "mean_steps": 324.95,
+  "mean_reward": -2.3219499999999855,
+  "damage_ratio": 0.30677966101694915
+}

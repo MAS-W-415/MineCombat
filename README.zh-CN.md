@@ -26,6 +26,7 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 - [Phase 1 探针](docs/m3-phase1-probes.md)：屏蔽背包动作后首次出现可复现击杀；静止靶 8% 胜率、0 死亡。
 - [100k mask warm-start](docs/m3-mask-warm-100k.md)：静止靶 22% 胜率，正前方 AI 僵尸 30% 胜率；随机刷新仍是 0%。
 - [100k easy-AI warm-start](docs/m3-easy-mask-warm-100k.md)：胜率仍 30%，但死亡率升到 58%；简单课程进入平台期，下一步做防御探针。
+- [防御探针](docs/m3-defense-probes.md)：拉远刷新训练后在 easy 任务上达到 52% 胜率 / 40% 死亡；当前瓶颈是 ±30° 角度，而不是距离。
 - [1M 运行手册](docs/1m-run.md)：下一台机器上的完整命令与前置检查。
 
 术语说明见 [docs/glossary.md](docs/glossary.md)：`M` 是里程碑，`RQ` 是研究问题，`HH` 是 Harness 阶段。统一路线见 [docs/unified-roadmap.md](docs/unified-roadmap.md)：flat PPO 是对照组，Harness 是同一路线上的扩展。公共训练预检见 [docs/training-common.md](docs/training-common.md)。
