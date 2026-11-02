@@ -9,6 +9,9 @@ import numpy as np
 from ..envs.callbacks._info import event_count, scalar
 from .metrics import EpisodeRecord
 
+# Minecraft's damage_dealt statistic is stored in tenths of a HP.
+DAMAGE_STAT_UNITS_PER_HP = 10.0
+
 FINAL_OUTCOMES = {
     "success",
     "death",
@@ -253,7 +256,9 @@ def evaluate(
             timeout=timeout,
             steps=steps,
             hp_lost=total_damage_taken,
-            damage_dealt=total_damage_dealt,
+            damage_dealt=(
+                total_damage_dealt / DAMAGE_STAT_UNITS_PER_HP
+            ),
             time_to_kill=kill_step,
             reward=total_reward,
             outcome=outcome,

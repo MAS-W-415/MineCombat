@@ -8,7 +8,7 @@ Result:
 ```text
 win_rate=0.00 death_rate=0.36 timeout_rate=0.64 stuck_rate=0.62
 mean_hp_lost=10.92 mean_steps=527.28 mean_reward=-2.70
-damage_ratio=0.0897
+damage_ratio=0.0090
 ```
 
 This is the first run with a nonzero damage ratio. The policy attacks more often
@@ -24,7 +24,7 @@ Comparison:
 | Timeout rate | 0.70 | 0.78 | 0.64 |
 | Mean HP lost | 11.58 | 10.84 | 10.92 |
 | Mean steps | 535.7 | 568.2 | 527.3 |
-| Damage ratio | 0.00* | 0.00* | 0.0897 |
+| Damage ratio | 0.00* | 0.00* | 0.0090 |
 
 \* The first two evaluations predate the `custom.damage_dealt` observation fix,
 so their damage ratio is zero by construction, not because the policies never

@@ -60,20 +60,20 @@ def test_success_and_cumulative_damage():
                 {
                     "info": make_info(
                         health=14,
-                        damage=4,
+                        damage=40,
                     ),
                 },
                 {
                     "info": make_info(
                         health=20,
-                        damage=4,
+                        damage=40,
                     ),
                 },
                 {
                     "info": make_info(
                         health=17,
                         kills=1,
-                        damage=8,
+                        damage=80,
                         outcome="success",
                     ),
                     "reward": 10.0,

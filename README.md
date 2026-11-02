@@ -18,7 +18,8 @@ Key results:
 
 - [M2 baselines](docs/m2-baseline.md): random 0% win / 96% death; zero-shot VPT 2% win / 28% death.
 - [M3 PPO smoke](docs/m3-ppo-smoke.md): 10k steps, 20 updates, 6.3 GiB peak GPU memory.
-- [Dense damage](docs/m3-dense-damage.md): first nonzero damage ratio (0.0897) at 10k.
+- [Dense damage](docs/m3-dense-damage.md): first nonzero damage ratio (0.0090) at 10k.
+- [100k flat PPO](docs/m3-100k-eval.md): 0% win, 16% death, damage ratio 0.0313; weak signal, not yet a usable policy.
 - [1M runbook](docs/1m-run.md): exact command and preflight for the next host.
 
 The first baseline and PPO runs are tracked in [Issues](https://github.com/MAS-W-415/MineCombat/issues).

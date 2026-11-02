@@ -147,7 +147,7 @@ python scripts/eval_conditioned.py \
 | Mean HP lost | 12.04 | 11.24 |
 | Mean steps | 536.26 | 534.62 |
 | Mean reward | -2.87 | -2.72 |
-| Damage ratio | 0.6512 | 0.5480 |
+| Damage ratio | 0.0651 | 0.0548 |
 
 Aggressive deals more damage; defensive takes less damage and dies less often.
 The direction matches the intended tactics, but the effect is small and both
