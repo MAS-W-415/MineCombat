@@ -70,7 +70,9 @@ training.
 - One experiment issue per run.
 - One owner per run.
 - One GPU queue: no simultaneous long runs on the local GPU.
-- Fixed 50-seed evaluation, same seeds across variants.
+- Fixed evaluation task and seeds; **3×50-seed runs for any claim**, 20-seed
+  screens are triage only. Minecraft mob AI is not reset between episodes, so
+  repeated runs of the same checkpoint differ by up to ~14 points.
 - Report: metrics JSON, per-episode CSV, checkpoint path, git commit, notes.
 - PRs link the experiment issue and include the result, not only the code.
 
@@ -81,20 +83,22 @@ training.
 | M0 environment | complete |
 | M1 zombie arena | complete |
 | M2 baselines | complete |
-| RQ1 flat PPO | in progress; 58% easy, 34% at ±30°, 45% mixed distance, 4% random |
-| Stage-1 gate | not passed |
+| RQ1 flat PPO | in progress; visible combat is learnable, but full 360° search is unsolved |
+| Stage-1 gate | not passed; evaluation variance is being re-baselined |
 | HH1 conditioned VPT | 10k engineering validation; tactics weak, 0% win |
 | HH2 high-level PPO | implemented; GPU validation pending |
 | RQ2/RQ3 | not started |
 
 ## Immediate next steps
 
-1. Run the camera-entropy A/B on the ±60° curriculum; the ±60° target collapsed
-   to 8% because off-screen targets require search, not just aiming.
-2. If camera entropy does not help, move the joint ±30° curriculum to the
-   24 GB / 64 GB host for a 1M consolidation run.
-3. Measure random spawn with 50 seeds at every stage; 20 seeds are triage only.
-4. Pass the stage-1 gate on the random-spawn task, then resume HH1/HH2.
+1. Re-baseline the joint checkpoint and the best alternative checkpoints with
+   3×50-seed runs on the combined and random tasks.
+2. Decide the Stage-1 gate using those intervals: visible combat (±30°, distance
+   3–7) versus full 360° search. Off-screen spawns never enter the view without
+   an active turn, and camera entropy did not solve this.
+3. For visible combat, run 1M on the joint curriculum on the 24 GB / 64 GB host.
+4. For full search, add a search mechanism (scan-at-reset, auto-face curriculum,
+   or a relative-direction observation for HH).
 
 ## Non-goals
 

@@ -130,6 +130,11 @@ Run the same checkpoint on all four task levels:
 Record win rate, death rate, timeout rate, mean HP lost, and time-to-kill. The
 gate needs at least 50% win rate on the random-spawn task (#11).
 
+**Run three independent 50-seed evaluations per task and report the mean and
+range.** Minecraft mob AI is not reset between episodes, so a single run can
+differ by 10+ points; 20-seed screens are triage only. See
+`docs/m3-evaluation-variance.md`.
+
 ## Artifacts to link in #10
 
 - W&B run URL

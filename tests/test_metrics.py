@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import math
+
 import pytest
 
 from minecombat.eval.metrics import EpisodeRecord, summarize, to_csv
+from minecombat.eval.rollout import _spawn_geometry
 
 
 def record(**overrides):
@@ -47,5 +50,31 @@ def test_empty_summary_raises() -> None:
 def test_csv_roundtrip(tmp_path) -> None:
     path = to_csv([record()], tmp_path / "episodes.csv")
     text = path.read_text(encoding="utf-8")
-    assert "seed,win,death,timeout,steps,hp_lost,damage_dealt,time_to_kill,reward" in text
-    assert "0,True,False,False,40,2.0,20.0,40,7.5" in text
+    assert (
+        "seed,win,death,timeout,steps,hp_lost,damage_dealt,"
+        "time_to_kill,reward,outcome,spawn_distance,spawn_angle"
+    ) in text
+    assert "0,True,False,False,40,2.0,20.0,40,7.5,unknown,," in text
+
+
+def test_csv_includes_spawn_geometry(tmp_path) -> None:
+    path = to_csv(
+        [record(spawn_distance=5.5, spawn_angle=42.0)],
+        tmp_path / "episodes.csv",
+    )
+    text = path.read_text(encoding="utf-8")
+    assert "5.5,42.0" in text
+
+
+def test_spawn_geometry_reads_first_spawn() -> None:
+    info = {
+        "spawn_debug": [
+            {"distance": 5.5, "angle": math.pi / 2.0},
+        ]
+    }
+
+    assert _spawn_geometry(info) == (5.5, 90.0)
+
+
+def test_spawn_geometry_is_optional() -> None:
+    assert _spawn_geometry({}) == (None, None)
