@@ -1,3 +1,4 @@
+import re
 from types import SimpleNamespace
 
 import numpy as np
@@ -45,3 +46,31 @@ def test_spawn_is_reproducible():
     callback.after_reset(sim2, {}, {})
     print(sim1.env.commands)
     assert sim1.env.commands == sim2.env.commands
+
+
+def test_fixed_front_spawn():
+    sim = make_sim()
+    config = ZombieSpawnConfig(
+        count=1,
+        min_distance=3.0,
+        max_distance=4.0,
+        spawn_angle_deg=90.0,
+        player_yaw=0.0,
+    )
+
+    callback = RandomZombieSpawnCallback(config)
+    callback.after_reset(sim, {}, {})
+
+    assert sim.env.commands[0] == "/tp @p ~ ~ ~ 0.00 0.0"
+
+    match = re.search(
+        r"~(-?\d+\.\d+) ~2\.000 ~(-?\d+\.\d+)",
+        sim.env.commands[1],
+    )
+    assert match is not None
+
+    x = float(match.group(1))
+    z = float(match.group(2))
+
+    assert abs(x) < 1e-6
+    assert 3.0 <= z <= 4.0
