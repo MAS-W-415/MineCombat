@@ -81,7 +81,7 @@ training.
 | M0 environment | complete |
 | M1 zombie arena | complete |
 | M2 baselines | complete |
-| RQ1 flat PPO | in progress; 52% win on easy front spawn, 0% on random spawn |
+| RQ1 flat PPO | in progress; 52% win on easy front spawn, 16% at ±30°, 10% on random spawn |
 | Stage-1 gate | not passed |
 | HH1 conditioned VPT | 10k engineering validation; tactics weak, 0% win |
 | HH2 high-level PPO | implemented; GPU validation pending |
@@ -89,9 +89,9 @@ training.
 
 ## Immediate next steps
 
-1. Zero-shot test the far-spawn checkpoint on angle jitter and random spawn.
-2. Train the distance + angle curriculum: easy front -> far -> mixed distance
-   -> ±30° -> ±60° -> 360°.
+1. Test the joint mixed-distance (3–7) + ±30° curriculum at 100k.
+2. If angle transfer is still weak, move to the 1M host with multiple
+   environments instead of stacking more 100k variants.
 3. Pass the stage-1 gate on the random-spawn task.
 4. Only then resume HH1/HH2 experiments as extensions.
 
