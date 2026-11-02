@@ -1,5 +1,5 @@
 
-"""Command-line entry point for H2 high-level PPO training."""
+"""Command-line entry point for HH2 high-level PPO training."""
 
 from __future__ import annotations
 
@@ -19,13 +19,18 @@ def resolve_path(value: str) -> Path:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Train the H2 tactical Actor-Critic."
+        description="Train the HH2 tactical Actor-Critic."
     )
 
     parser.add_argument(
+        "--hh1-checkpoint",
         "--h1-checkpoint",
+        dest="h1_checkpoint",
         required=True,
-        help="Checkpoint of the trained H1 Conditioned VPT.",
+        help=(
+            "Checkpoint of the trained HH1 Conditioned VPT "
+            "(legacy alias: --h1-checkpoint)."
+        ),
     )
     parser.add_argument(
         "--env-config",
@@ -62,7 +67,7 @@ def main() -> None:
 
     # Validate arguments before any expensive imports.
     if args.num_tactics != 2:
-        parser.error("Current H2 training requires 2 tactics")
+        parser.error("Current HH2 training requires 2 tactics")
 
     for name in (
         "interval_steps",
@@ -94,7 +99,7 @@ def main() -> None:
         return
 
     if not checkpoint.is_file():
-        parser.error(f"H1 checkpoint not found: {checkpoint}")
+        parser.error(f"HH1 checkpoint not found: {checkpoint}")
 
     if not env_config.is_file():
         parser.error(f"Environment config not found: {env_config}")
@@ -130,7 +135,7 @@ def main() -> None:
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
 
-    # 1. Load frozen H1 and construct trainable H2.
+    # 1. Load frozen HH1 and construct trainable HH2.
     harness = build_high_level_training_harness(
         conditioned_checkpoint=checkpoint,
         device=args.device,
@@ -142,14 +147,14 @@ def main() -> None:
 
     session = HighLevelRolloutSession(harness)
 
-    # Optimizer must contain H2 parameters only.
+    # Optimizer must contain HH2 parameters only.
     optimizer = torch.optim.Adam(
         harness.tactical_policy.parameters(),
         lr=args.learning_rate,
     )
 
     # 2. Build the original combat environment.
-    # Do not attach the H1 tactical reward wrapper.
+    # Do not attach the HH1 tactical reward wrapper.
     env = make_zombie_env(env_config)
 
     save_dir.mkdir(parents=True, exist_ok=True)
@@ -159,7 +164,7 @@ def main() -> None:
     )
 
     try:
-        # 3. Collect real episodes and update H2 PPO.
+        # 3. Collect real episodes and update HH2 PPO.
         train_high_level(
             env,
             session,
@@ -175,7 +180,7 @@ def main() -> None:
     finally:
         env.close()
 
-    print(f"H2 training complete: {save_dir}")
+    print(f"HH2 training complete: {save_dir}")
 
 
 if __name__ == "__main__":

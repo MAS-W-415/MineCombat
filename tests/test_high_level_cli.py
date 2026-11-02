@@ -1,5 +1,5 @@
 
-"""Tests for the H2 training command-line entry point."""
+"""Tests for the HH2 training command-line entry point."""
 
 import json
 import sys
@@ -121,7 +121,7 @@ def test_cli_connects_training_components(
         "argv",
         [
             "high_level",
-            "--h1-checkpoint", str(checkpoint),
+            "--hh1-checkpoint", str(checkpoint),
             "--env-config", str(config),
             "--save-dir", str(output),
             "--num-updates", "2",

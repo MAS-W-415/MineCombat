@@ -26,6 +26,8 @@ Key results:
 - [Attack-shaped stationary run](docs/m3-100k-stationary-attack.md): 7/50 episodes dealt damage (up from 0/50), but still 0 kills; 300k or stronger exploration is next.
 - [1M runbook](docs/1m-run.md): exact command and preflight for the next host.
 
+Terminology: see [docs/glossary.md](docs/glossary.md) for the `M`, `RQ`, and `HH` naming rules.
+
 The first baseline and PPO runs are tracked in [Issues](https://github.com/MAS-W-415/MineCombat/issues).
 
 ## Why this project
@@ -134,9 +136,9 @@ The official MineStudio configuration assumes multiple GPUs. Use
 
 ## Research questions
 
-- **H1:** PPO from VPT 1x improves zombie win rate and reduces damage taken versus zero-shot VPT.
-- **H2:** A zombie-pretrained policy transfers to skeletons more sample-efficiently than direct VPT fine-tuning.
-- **H3:** A high-level harness improves long-horizon boss performance once the flat policy is strong.
+- **RQ1:** PPO from VPT 1x improves zombie win rate and reduces damage taken versus zero-shot VPT.
+- **RQ2:** A zombie-pretrained policy transfers to skeletons more sample-efficiently than direct VPT fine-tuning.
+- **RQ3:** A high-level harness improves long-horizon boss performance once the flat policy is strong.
 
 The flat VPT + PPO policy is the control condition. The harness is intentionally deferred until the zombie stage is stable, so that any gain can be attributed to the hierarchy rather than to a stronger base policy.
 

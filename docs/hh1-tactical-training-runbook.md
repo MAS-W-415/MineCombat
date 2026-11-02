@@ -1,11 +1,11 @@
-# H1 Tactical Conditioning — GPU Training Runbook
+# HH1 Tactical Conditioning — GPU Training Runbook
 
 **Project:** MineCombat
 **Branch:** `feat/tactical-rewards`
 **Starting Commit:** `39af1eb`
-**Status:** Engineering + 10k validation complete (see `docs/h1-validation.md`); longer behavioral run pending
+**Status:** Engineering + 10k validation complete (see `docs/hh1-validation.md`); longer behavioral run pending
 **Owner:** GPU Training & Evaluation
-**Scope:** H1 Conditioned VPT with Tactic-Specific Rewards
+**Scope:** HH1 Conditioned VPT with Tactic-Specific Rewards
 
 ---
 
@@ -23,7 +23,7 @@
 
 **训练成功不等于条件化成功；条件化参数发生变化，也不等于模型学会了实际战术。**
 
-本阶段仅研究底层战术条件学习。H2 High-Level PPO 的真实环境训练不属于本手册的直接执行范围。
+本阶段仅研究底层战术条件学习。HH2 High-Level PPO 的真实环境训练不属于本手册的直接执行范围。
 
 ## 2. Current Architecture
 
@@ -256,7 +256,7 @@ python scripts/test_melee.py
 
 ---
 
-## 5. H1 GPU Smoke Test
+## 5. HH1 GPU Smoke Test
 
 ### 5.1 Purpose
 
@@ -496,7 +496,7 @@ tactic_id
 
 ## 7. Tactical Conditioning Validation
 
-这是 H1 最关键的验证步骤。
+这是 HH1 最关键的验证步骤。
 
 ### 7.1 Parameter-Level Check
 
@@ -898,21 +898,21 @@ checkpoint: "<actual path>"
 
 报告必须明确回答：
 
-1. H1 Conditioned PPO 训练链路是否正常？
+1. HH1 Conditioned PPO 训练链路是否正常？
 2. 战术条件是否影响动作分布？
 3. 两种战术是否产生可重复的执行差异？
 4. 是否有证据表明战术奖励机制优于仅使用随机战术编号？
-5. 是否具备进入 H2 高层 PPO 训练的条件？
+5. 是否具备进入 HH2 高层 PPO 训练的条件？
 
 如果答案是否定的，也应保留实验结果并说明失败原因。
 
 ---
 
-## 13. Handoff to H2 High-Level PPO
+## 13. Handoff to HH2 High-Level PPO
 
-H1 训练完成并不意味着可以直接运行 H2。
+HH1 训练完成并不意味着可以直接运行 HH2。
 
-进入 H2 之前，需要确认：
+进入 HH2 之前，需要确认：
 
 - Conditioned VPT Checkpoint 可加载。
 - 战术编号与高层输出空间一致。
@@ -923,7 +923,7 @@ H1 训练完成并不意味着可以直接运行 H2。
 - 高层训练期间底层 VPT 可以冻结。
 - Episode 结束和时间截断处理正确。
 
-H2 的目标是：
+HH2 的目标是：
 
 ```text
 Visual Features
@@ -947,9 +947,9 @@ Environment Reward
 High-Level SMDP PPO Update
 ```
 
-H2 将使用共同的真实战斗奖励，而不是简单将 H1 的战术辅助奖励作为高层优化目标。
+HH2 将使用共同的真实战斗奖励，而不是简单将 HH1 的战术辅助奖励作为高层优化目标。
 
-H2 的真实在线训练入口、模型同步与专用评估脚本需要另行集成和验证。
+HH2 的真实在线训练入口、模型同步与专用评估脚本需要另行集成和验证。
 
 ---
 
@@ -980,7 +980,7 @@ H2 的真实在线训练入口、模型同步与专用评估脚本需要另行�
 - [ ] 训练视频和异常案例已整理。
 - [ ] 实验结论已提交。
 
-**Exit Criterion:** H1 不仅能够完成训练，而且具备可复现的条件化行为评估结果，才能作为高层战术选择策略的可靠底层基础。
+**Exit Criterion:** HH1 不仅能够完成训练，而且具备可复现的条件化行为评估结果，才能作为高层战术选择策略的可靠底层基础。
 
 ---
 

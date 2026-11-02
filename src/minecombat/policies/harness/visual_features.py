@@ -1,5 +1,5 @@
 
-"""Lightweight observation-only visual features for H2."""
+"""Lightweight observation-only visual features for HH2."""
 
 from __future__ import annotations
 

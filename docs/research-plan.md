@@ -10,13 +10,13 @@ immediately.
 
 ## 2. Research questions
 
-### H1 — Can PPO from VPT 1x learn minimal-damage zombie combat?
+### RQ1 — Can PPO from VPT 1x learn minimal-damage zombie combat?
 
 Compare a pretrained VPT 1x policy with the same policy after PPO fine-tuning
 on the zombie arena. The primary metric is win rate; secondary metrics are HP
 lost per episode and time-to-kill.
 
-### H2 — Does zombie combat transfer to skeletons?
+### RQ2 — Does zombie combat transfer to skeletons?
 
 Fine-tune three conditions on the skeleton task:
 
@@ -27,7 +27,7 @@ Fine-tune three conditions on the skeleton task:
 If condition 2 is more sample-efficient than condition 1, the result supports
 skill transfer between melee and ranged enemies.
 
-### H3 — Does a high-level harness improve long-horizon boss performance?
+### RQ3 — Does a high-level harness improve long-horizon boss performance?
 
 Only after the flat policy is strong on stage 1–3. The harness is a separate
 decision layer; the flat policy remains the control condition. This ordering

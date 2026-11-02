@@ -131,7 +131,7 @@ def train_high_level(
         )
 
         print(
-            f"[H2] update={update_idx} "
+            f"[HH2] update={update_idx} "
             f"steps={total_env_steps} "
             f"transitions={metrics['num_transitions']} "
             f"loss={metrics['total_loss']:.4f}"
