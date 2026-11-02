@@ -81,7 +81,7 @@ training.
 | M0 environment | complete |
 | M1 zombie arena | complete |
 | M2 baselines | complete |
-| RQ1 flat PPO | in progress; 100k checkpoints still 0% win |
+| RQ1 flat PPO | in progress; 52% win on easy front spawn, 0% on random spawn |
 | Stage-1 gate | not passed |
 | HH1 conditioned VPT | 10k engineering validation; tactics weak, 0% win |
 | HH2 high-level PPO | implemented; GPU validation pending |
@@ -89,9 +89,9 @@ training.
 
 ## Immediate next steps
 
-1. Deduplicate the evaluation CLI so both lines use one metrics path.
-2. Warm-start flat PPO from the best checkpoint and run the curriculum chain:
-   stationary -> stationary + attack -> easy AI -> random spawn.
+1. Zero-shot test the far-spawn checkpoint on angle jitter and random spawn.
+2. Train the distance + angle curriculum: easy front -> far -> mixed distance
+   -> ±30° -> ±60° -> 360°.
 3. Pass the stage-1 gate on the random-spawn task.
 4. Only then resume HH1/HH2 experiments as extensions.
 

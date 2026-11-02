@@ -27,6 +27,7 @@ Key results:
 - [Phase 1 probes](docs/m3-phase1-probes.md): inventory masking produced the first repeatable kills; 8% win, 0 deaths on the stationary task.
 - [100k mask warm-start](docs/m3-mask-warm-100k.md): 22% win on stationary, 30% win against a front AI zombie; random spawn still 0%.
 - [100k easy-AI warm-start](docs/m3-easy-mask-warm-100k.md): still 30% win but 58% deaths; the easy curriculum plateaued and defense probes are next.
+- [Defense probes](docs/m3-defense-probes.md): far-spawn training reached 52% win / 40% deaths on the easy task; ±30° spawn angles are now the bottleneck, not distance.
 - [1M runbook](docs/1m-run.md): exact command and preflight for the next host.
 
 Terminology: see [docs/glossary.md](docs/glossary.md) for the `M`, `RQ`, and `HH` naming rules. The single control-plus-extension roadmap is in [docs/unified-roadmap.md](docs/unified-roadmap.md). Shared training preflight is in [docs/training-common.md](docs/training-common.md).
