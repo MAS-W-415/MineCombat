@@ -25,8 +25,12 @@ class ZombieSpawnConfig:
     no_ai: bool = False
     # Optional curriculum controls. ``spawn_angle_deg=90`` places the
     # zombie at +Z, which is directly in front of a player at yaw 0.
+    # ``spawn_angle_jitter_deg`` randomizes the angle around that base.
     spawn_angle_deg: float | None = None
+    spawn_angle_jitter_deg: float | None = None
     player_yaw: float | None = None
+    # Optional entity attributes, e.g. {"generic.movement_speed": 0.15}.
+    attributes: dict[str, float] | None = None
 
 
 class RandomZombieSpawnCallback(MinecraftCallback):
@@ -57,12 +61,26 @@ class RandomZombieSpawnCallback(MinecraftCallback):
             tags.append("NoAI:1b")
         if cfg.persistence_required:
             tags.append("PersistenceRequired:1b")
+        if cfg.attributes:
+            attributes = ",".join(
+                f'{{Name:"{name}",Base:{float(value)}d}}'
+                for name, value in cfg.attributes.items()
+            )
+            tags.append(f"Attributes:[{attributes}]")
         nbt = "{" + ",".join(tags) + "}" if tags else ""
 
         spawns: list[dict[str, float | str]] = []
         for _ in range(int(cfg.count)):
             if cfg.spawn_angle_deg is not None:
-                angle = math.radians(float(cfg.spawn_angle_deg))
+                angle_deg = float(cfg.spawn_angle_deg)
+                if cfg.spawn_angle_jitter_deg:
+                    angle_deg += float(
+                        rng.uniform(
+                            -cfg.spawn_angle_jitter_deg,
+                            cfg.spawn_angle_jitter_deg,
+                        )
+                    )
+                angle = math.radians(angle_deg)
             else:
                 angle = float(rng.uniform(0.0, 2.0 * math.pi))
             distance = float(rng.uniform(cfg.min_distance, cfg.max_distance))

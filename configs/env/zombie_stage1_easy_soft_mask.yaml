@@ -1,0 +1,11 @@
+# Easy AI + inventory mask + a weaker, slower zombie.
+#
+# Defense curriculum: the zombie moves at ~65% speed and deals 2 damage
+# instead of 3, giving the policy more time to learn spacing and retreat.
+
+base: zombie_stage1_easy_mask.yaml
+
+zombie:
+  attributes:
+    generic.movement_speed: 0.15
+    generic.attack_damage: 2.0

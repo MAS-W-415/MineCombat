@@ -1,0 +1,9 @@
+# Easy AI + inventory mask with +/-60 degree spawn jitter.
+#
+# Second step of the aim curriculum, between the +/-30 degree and the full
+# random-spawn task.
+
+base: zombie_stage1_easy_mask.yaml
+
+zombie:
+  spawn_angle_jitter_deg: 60.0

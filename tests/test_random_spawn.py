@@ -85,3 +85,46 @@ def test_fixed_front_spawn():
 
     assert abs(x) < 1e-6
     assert 3.0 <= z <= 4.0
+
+
+def test_entity_attributes_are_added_to_nbt():
+    sim = make_sim()
+    config = ZombieSpawnConfig(
+        count=1,
+        attributes={
+            "generic.movement_speed": 0.15,
+            "generic.attack_damage": 2.0,
+        },
+    )
+
+    callback = RandomZombieSpawnCallback(config)
+    callback.after_reset(sim, {}, {})
+
+    command = sim.env.commands[1]
+    assert (
+        'Attributes:[{Name:"generic.movement_speed",Base:0.15d},'
+        '{Name:"generic.attack_damage",Base:2.0d}]'
+    ) in command
+
+
+def test_spawn_angle_jitter_stays_in_range():
+    sim = make_sim()
+
+    config = ZombieSpawnConfig(
+        count=20,
+        min_distance=4.0,
+        max_distance=4.0,
+        spawn_angle_deg=90.0,
+        spawn_angle_jitter_deg=30.0,
+        player_yaw=0.0,
+    )
+
+    callback = RandomZombieSpawnCallback(config)
+    _, info = callback.after_reset(sim, {}, {})
+
+    angles = [spawn["angle"] for spawn in info["spawn_debug"]]
+    assert len(angles) == 20
+    for angle in angles:
+        # 90 +/- 30 degrees, converted to radians.
+        assert np.pi / 3.0 - 1e-9 <= angle <= 2.0 * np.pi / 3.0 + 1e-9
+    assert len(set(angles)) > 1
