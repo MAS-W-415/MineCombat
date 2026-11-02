@@ -48,6 +48,17 @@ def test_spawn_is_reproducible():
     assert sim1.env.commands == sim2.env.commands
 
 
+def test_no_ai_spawn_tag():
+    sim = make_sim()
+    config = ZombieSpawnConfig(count=1, no_ai=True)
+
+    callback = RandomZombieSpawnCallback(config)
+    callback.after_reset(sim, {}, {})
+
+    assert "NoAI:1b" in sim.env.commands[1]
+    assert "PersistenceRequired:1b" in sim.env.commands[1]
+
+
 def test_fixed_front_spawn():
     sim = make_sim()
     config = ZombieSpawnConfig(
