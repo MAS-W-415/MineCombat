@@ -64,6 +64,29 @@ def test_scalar_event_fallback() -> None:
     assert reward == pytest.approx(0.05 - 0.001)
 
 
+def test_reward_breakdown_components() -> None:
+    calc = CombatRewardCalculator(
+        CombatRewardConfig(
+            attack=0.05,
+            damage_dealt=0.01,
+            damage_taken=0.2,
+            time=0.001,
+        )
+    )
+    calc.reset(info())
+
+    reward, breakdown = calc.compute_with_breakdown(
+        info(hp=18.0, damage=4.0),
+        attack_pressed=True,
+    )
+
+    assert breakdown.damage_dealt == pytest.approx(0.04)
+    assert breakdown.damage_taken == pytest.approx(-0.4)
+    assert breakdown.attack == pytest.approx(0.05)
+    assert breakdown.time == pytest.approx(-0.001)
+    assert breakdown.total == pytest.approx(reward)
+
+
 def test_attack_bonus_with_cooldown() -> None:
     calc = CombatRewardCalculator(
         CombatRewardConfig(

@@ -9,6 +9,7 @@ from typing import Any
 import yaml
 
 from .callbacks import (
+    ActionMaskCallback,
     ArenaResetCallback,
     CombatEpisodeCallback,
     CombatRewardCallback,
@@ -102,6 +103,7 @@ def make_zombie_env(
     player = dict(cfg.get("player", {}))
     zombie = dict(cfg.get("zombie", {}))
     reward = dict(cfg.get("reward", {}))
+    action_mask = dict(cfg.get("action_mask", {}))
 
     # Lazy imports keep local unit tests lightweight.
     from minestudio.simulator import MinecraftSim
@@ -166,6 +168,9 @@ def make_zombie_env(
             ),
         ),
     ]
+
+    if action_mask.get("mask_inventory", False):
+        callbacks.insert(2, ActionMaskCallback(mask_inventory=True))
 
     # 4. Create the simulator.
     return MinecraftSim(

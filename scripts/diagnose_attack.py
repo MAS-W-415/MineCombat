@@ -52,6 +52,7 @@ def main() -> int:
     inventory_steps = 0
     total_steps = 0
     outcomes: list[str | None] = []
+    reward_sums: dict[str, float] = {}
 
     try:
         for _ in range(args.episodes):
@@ -86,6 +87,10 @@ def main() -> int:
                     counts[str(combo)] += 1
 
                 obs, reward, terminated, truncated, info = env.step(action)
+                breakdown = info.get("reward_breakdown")
+                if isinstance(breakdown, dict):
+                    for key, value in breakdown.items():
+                        reward_sums[key] = reward_sums.get(key, 0.0) + float(value)
                 if terminated or truncated:
                     break
 
@@ -104,6 +109,10 @@ def main() -> int:
         "inventory_steps": inventory_steps,
         "inventory_rate": inventory_steps / max(1, total_steps),
         "outcomes": outcomes,
+        "reward_sums": {
+            key: round(value, 4)
+            for key, value in reward_sums.items()
+        },
         "top_combinations": [
             {"combination": combo, "count": count}
             for combo, count in top
