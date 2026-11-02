@@ -11,6 +11,7 @@ from minecombat.policies.harness.rollout_conditioning import (
 from minecombat.policies.harness.tactical_reward_wrapper import (
     TacticalRewardWrapper,
 )
+from minecombat.train import generators
 
 
 class FakeCombatEnv(gym.Env):
@@ -135,9 +136,6 @@ def test_wrapper_resets_reward_history():
 
     finally:
         env.close()
-
-
-from minecombat.train import generators
 
 
 @pytest.mark.parametrize(

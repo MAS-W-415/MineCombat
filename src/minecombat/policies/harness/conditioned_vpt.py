@@ -8,8 +8,8 @@ tactical residual before the action and value heads.
 from __future__ import annotations
 
 import torch
-from torch import nn
 from minestudio.models import VPTPolicy
+from torch import nn
 
 from .contracts import TacticalDecision
 from .tactical_conditioning import TacticalFeatureAdapter

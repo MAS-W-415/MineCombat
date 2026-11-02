@@ -3,8 +3,8 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from dataclasses import dataclass
-from typing import Sequence
 
 import torch
 from torch.distributions import Categorical
