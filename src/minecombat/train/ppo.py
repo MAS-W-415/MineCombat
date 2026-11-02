@@ -78,7 +78,23 @@ def main() -> None:
         "--sample-tactic-per-episode",
         action="store_true",
     )
+    parser.add_argument(
+        "--tactical-rewards",
+        action="store_true",
+        help="Enable tactic-specific auxiliary rewards.",
+    )
     args = parser.parse_args()
+
+    if args.tactical_rewards:
+        if not args.conditioned:
+            parser.error(
+                "--tactical-rewards requires --conditioned"
+            )
+
+        if args.num_tactics != 2:
+            parser.error(
+                "--tactical-rewards requires --num-tactics 2"
+            )
 
     root = project_root()
     config_path = Path(args.config)
@@ -123,6 +139,7 @@ def main() -> None:
             "num_tactics": args.num_tactics,
             "tactic_id": args.tactic_id,
             "sample_tactic_per_episode": args.sample_tactic_per_episode,
+            "tactical_rewards": args.tactical_rewards,
         },
         force_add=True,
     )
@@ -153,6 +170,7 @@ def main() -> None:
             args.num_tactics,
             args.tactic_id,
             args.sample_tactic_per_episode,
+            args.tactical_rewards,
         )
 
         policy_gen = partial(
