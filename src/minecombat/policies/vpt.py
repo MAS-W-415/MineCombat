@@ -26,11 +26,14 @@ def load_vpt_model(
     checkpoint: str | None = None,
     *,
     eval_mode: bool = False,
+    camera_entropy_scale: float = 1.0,
 ):
     """Load VPT weights, optionally warm-started from a checkpoint.
 
     Shared by evaluation and training. ``eval_mode=True`` disables training
     behavior; ``eval_mode=False`` leaves the model in training mode.
+    ``camera_entropy_scale`` only affects the entropy used by PPO; it leaves
+    the checkpoint layout unchanged.
     """
 
     import torch
@@ -45,6 +48,14 @@ def load_vpt_model(
         policy.load_state_dict(state, strict=True)
 
     policy = policy.to(_resolve_device(device))
+
+    if camera_entropy_scale != 1.0:
+        from .vpt_entropy import apply_camera_entropy_scale
+
+        policy = apply_camera_entropy_scale(
+            policy,
+            camera_entropy_scale,
+        )
 
     if eval_mode:
         policy.eval()

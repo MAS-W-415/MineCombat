@@ -81,6 +81,15 @@ def main() -> None:
         help="Override train_config.entropy_bonus_coef.",
     )
     parser.add_argument(
+        "--camera-entropy-scale",
+        type=float,
+        default=1.0,
+        help=(
+            "Scale camera entropy relative to button entropy. "
+            "Requires --entropy-coef > 0 to have an effect."
+        ),
+    )
+    parser.add_argument(
         "--smoke",
         action="store_true",
         help="Use a tiny single-iteration profile for pipeline validation.",
@@ -122,6 +131,9 @@ def main() -> None:
 
     if args.entropy_coef is not None and args.entropy_coef < 0:
         parser.error("--entropy-coef must be non-negative")
+
+    if args.camera_entropy_scale <= 0:
+        parser.error("--camera-entropy-scale must be positive")
 
     if args.tactical_rewards:
         if not args.conditioned:
@@ -264,6 +276,7 @@ def main() -> None:
             policy_generator,
             cfg.model.repo_id,
             init_checkpoint,
+            args.camera_entropy_scale,
         )
     online_cfg = build_online_config(cfg)
     whole_config = OmegaConf.to_yaml(cfg)

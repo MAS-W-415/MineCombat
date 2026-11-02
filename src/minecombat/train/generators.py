@@ -14,6 +14,7 @@ def env_generator(config_path: str):
 def policy_generator(
     repo_id: str,
     checkpoint: str | None = None,
+    camera_entropy_scale: float = 1.0,
 ):
     """Original flat VPT policy, optionally warm-started.
 
@@ -30,6 +31,7 @@ def policy_generator(
     return load_vpt_model(
         repo_id=repo_id,
         checkpoint=checkpoint,
+        camera_entropy_scale=camera_entropy_scale,
     )
 
 
