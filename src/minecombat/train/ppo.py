@@ -55,6 +55,18 @@ def main() -> None:
     parser.add_argument("--batch-size", type=int, default=None)
     parser.add_argument("--save-path", default=None)
     parser.add_argument("--name", default=None)
+    parser.add_argument("--save-interval", type=int, default=None)
+    parser.add_argument("--keep-interval", type=int, default=None)
+    parser.add_argument(
+        "--record-video-interval",
+        type=int,
+        default=None,
+    )
+    parser.add_argument(
+        "--wandb-mode",
+        choices=["online", "offline", "disabled"],
+        default=None,
+    )
     parser.add_argument(
         "--smoke",
         action="store_true",
@@ -85,6 +97,15 @@ def main() -> None:
         help="Enable tactic-specific auxiliary rewards.",
     )
     args = parser.parse_args()
+
+    for name in (
+        "save_interval",
+        "keep_interval",
+        "record_video_interval",
+    ):
+        value = getattr(args, name)
+        if value is not None and value < 1:
+            parser.error(f"--{name.replace('_', '-')} must be positive")
 
     if args.tactical_rewards:
         if not args.conditioned:
@@ -131,6 +152,16 @@ def main() -> None:
         cfg.train_config.save_path = args.save_path
     if args.name is not None:
         cfg.logger_config.name = args.name
+    if args.save_interval is not None:
+        cfg.train_config.save_interval = args.save_interval
+    if args.keep_interval is not None:
+        cfg.train_config.keep_interval = args.keep_interval
+    if args.record_video_interval is not None:
+        cfg.train_config.record_video_interval = (
+            args.record_video_interval
+        )
+    if args.wandb_mode is not None:
+        cfg.logger_config.mode = args.wandb_mode
 
     OmegaConf.update(
         cfg,
