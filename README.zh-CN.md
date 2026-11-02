@@ -25,7 +25,7 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 - [静止靶 + 攻击奖励](docs/m3-100k-stationary-attack.md)：有伤害的局数从 0/50 升到 7/50，但仍 0 击杀；下一步是 300k 或更强探索。
 - [1M 运行手册](docs/1m-run.md)：下一台机器上的完整命令与前置检查。
 
-术语说明见 [docs/glossary.md](docs/glossary.md)：`M` 是里程碑，`RQ` 是研究问题，`HH` 是 Harness 阶段。统一路线见 [docs/unified-roadmap.md](docs/unified-roadmap.md)：flat PPO 是对照组，Harness 是同一路线上的扩展。
+术语说明见 [docs/glossary.md](docs/glossary.md)：`M` 是里程碑，`RQ` 是研究问题，`HH` 是 Harness 阶段。统一路线见 [docs/unified-roadmap.md](docs/unified-roadmap.md)：flat PPO 是对照组，Harness 是同一路线上的扩展。公共训练预检见 [docs/training-common.md](docs/training-common.md)。
 
 基线与 PPO 实验在 [Issues](https://github.com/MAS-W-415/MineCombat/issues) 中跟踪。
 
@@ -96,7 +96,7 @@ source .venv/bin/activate
 python scripts/smoke_test.py --config configs/env/zombie_stage1.yaml --steps 100
 
 # 基线评估
-python scripts/eval_baseline.py --policy random --episodes 5
+python scripts/eval.py --policy random --episodes 5
 ```
 
 VPT 推理需要先下载 1x checkpoint：

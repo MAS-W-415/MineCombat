@@ -132,7 +132,8 @@ non-finite.
 Command:
 
 ```bash
-python scripts/eval_conditioned.py \
+python scripts/eval.py \
+  --policy conditioned \
   --checkpoint experiments/h1_tactical_10k/checkpoints/2026-11-02_14-08-52/20/model.ckpt \
   --num-tactics 2 --tactic-ids 0 1 \
   --episodes 50 --seed-start 0 --max-steps 600 --deterministic

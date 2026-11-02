@@ -111,127 +111,27 @@ HH2 Actor-Critic Checkpoint
 
 ---
 
-## 3. Prerequisites
+## 3. Common Preflight
 
-### 3.1 Hardware
+Run the shared preflight in [training-common.md](training-common.md) first. It
+covers hardware, software, JDK 8, the Hugging Face mirror, engine patches, Ray,
+tests, checkpoints, evaluation, and cleanup.
 
-推荐环境：
-
-- Linux x86-64
-- NVIDIA GPU，优先 RTX 4090 24 GB
-- 64 GB 或更多系统 RAM
-- 足够的磁盘空间保存模型和日志
-
-24 GB 显存是推荐配置，不保证一定不会 OOM。实际峰值显存必须通过 GPU Smoke Test 测量。
-
-### 3.2 Software
-
-需要安装：
-
-- Python 3.10
-- 与 GPU 匹配的 CUDA/PyTorch
-- JDK 8
-- MineStudio
-- Gymnasium
-- MineCombat 项目依赖
-
-HH2 单环境同步训练不需要独立启动 Ray 服务。
-
-### 3.3 HH1 Checkpoint Requirement
-
-HH2 训练必须基于真实 HH1 Checkpoint。
-
-Checkpoint 应满足：
-
-- Conditioned VPT 使用 2 个战术编号。
-- 包含完整模型权重。
-- 可以恢复 `ConditionedVPTPolicy`。
-- HH1 已完成真实 GPU Smoke Test。
-- 不存在严重的战术条件传递错误。
-
-如果 HH1 尚未形成可区分的行为，可以进行 HH2 工程 Smoke Test，但不能据此评价高层战术学习效果。
-
----
+HH2 does not need Ray for its single-environment trainer, but the shared
+environment and engine checks still apply.
 
 ## 4. Source Code Preflight
 
-### 4.1 Checkout Branch
-
-首次拉取分支：
+Checkout the repository, activate `.venv`, and run the shared checks:
 
 ```bash
-git fetch origin
-git switch --track origin/feat/h2-online-training
-```
-
-若分支已经存在：
-
-```bash
-git switch feat/h2-online-training
-git pull --ff-only
-```
-
-记录版本：
-
-```bash
-git rev-parse HEAD
 git status -sb
-```
-
-确认工作区没有未预期的代码修改。
-
-### 4.2 Activate Environment
-
-```bash
 source .venv/bin/activate
-
-python --version
-java -version
-nvidia-smi
+pytest -q
+ruff check .
 ```
 
-如果服务器使用 Conda，应激活实际项目环境，而非照搬 `.venv` 路径。
-
-### 4.3 Verify PyTorch
-
-```bash
-python - <<'PY'
-import torch
-
-print("PyTorch:", torch.__version__)
-print("CUDA available:", torch.cuda.is_available())
-
-if torch.cuda.is_available():
-    print("GPU:", torch.cuda.get_device_name(0))
-    print("CUDA:", torch.version.cuda)
-PY
-```
-
-必须确认 CUDA 可用。
-
-### 4.4 Run Local Regression Tests
-
-```bash
-PYTHONPATH=src python -m pytest \
-  tests/test_high_level_cli.py \
-  tests/test_high_level_factory.py \
-  tests/test_high_level_trainer.py \
-  tests/test_episode_collector.py \
-  tests/test_high_level_rl.py \
-  -v
-```
-
-当前相关测试预期为 9 项通过。
-
-然后执行：
-
-```bash
-PYTHONPATH=src python -m pytest tests/ -q
-```
-
-如果完整测试失败，需要区分依赖缺失、环境问题和代码回归。
-
----
+The HH1 checkpoint requirement is covered in section 5.
 
 ## 5. HH1 Checkpoint Preflight
 
@@ -872,7 +772,7 @@ HH2 训练运行成功后，需要回答：
 
 ### 13.2 Current Limitation
 
-`eval_conditioned.py` 是 HH1 固定战术评估入口，**不是完整的 HH2 高层策略评估入口**。
+`scripts/eval.py --policy conditioned` 是 HH1 固定战术评估入口，**不是完整的 HH2 高层策略评估入口**。旧的 `eval_conditioned.py` 仅作为兼容 wrapper。
 
 目前尚未提供一个能够同时加载：
 

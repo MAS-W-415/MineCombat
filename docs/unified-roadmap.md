@@ -45,6 +45,7 @@ Both lines use:
 | Evaluation runner and metrics | `minecombat.eval`, canonical CLI `scripts/eval.py` |
 | Policy loading and warm-start | `minecombat.policies.vpt`, `minecombat.train.generators` |
 | Ray/W&B launcher | `minecombat.train.ppo`, `minecombat.train.high_level` |
+| Common training preflight | `docs/training-common.md` |
 
 A change to the shared core must be validated against both entry points, even if
 only one line currently runs experiments. `scripts/eval_baseline.py` and

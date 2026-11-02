@@ -227,7 +227,7 @@ python scripts/smoke_test.py --config configs/env/zombie_stage1.yaml --steps 100
 python scripts/smoke_test.py --policy vpt --steps 600
 
 # Baseline evaluation
-python scripts/eval_baseline.py --policy random --episodes 5
+python scripts/eval.py --policy random --episodes 5
 ```
 
 Record the following numbers in the M0 issue:
