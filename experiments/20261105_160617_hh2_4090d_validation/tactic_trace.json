@@ -1,0 +1,14 @@
+{
+  "primitive_steps": 45,
+  "interval_steps": 20,
+  "decision_events": [
+    {"environment_step": 1, "tactic_id": 0},
+    {"environment_step": 21, "tactic_id": 1},
+    {"environment_step": 41, "tactic_id": 1}
+  ],
+  "low_level_calls_checked": 45,
+  "conditioner_resolve_calls_checked": 45,
+  "observed_tactic_ids": [0, 1],
+  "interval_timing_valid": true,
+  "tactic_propagation_valid": true
+}

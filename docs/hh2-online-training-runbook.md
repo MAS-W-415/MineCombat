@@ -2,7 +2,7 @@
 
 **Project:** MineCombat
 **Branch:** `feat/h2-online-training`
-**Status:** Local Mock Tests Completed / GPU Validation Pending
+**Status:** RTX 4090D L1 and Targeted L2 Data-Flow Validation Completed
 **Training Target:** HH2 High-Level Tactical Actor-Critic
 **Low-Level Model:** Frozen HH1 Conditioned VPT
 **Environment:** MineStudio Zombie Arena — Stage 1
@@ -1080,4 +1080,4 @@ GPU 验收后，按优先级推进：
 - `configs/env/zombie_stage1.yaml`
 - `docs/hh1-tactical-training-runbook.md`
 
-**Document Status:** Ready for HH2 GPU Engineering Handoff. Real GPU validation results are pending.
+**Document Status:** HH2 L1 and targeted L2 data-flow validation completed. See `docs/hh2-4090d-validation.md`; multi-update stability and L3 behavioral evaluation remain pending.

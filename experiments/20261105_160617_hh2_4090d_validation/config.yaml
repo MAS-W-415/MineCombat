@@ -1,0 +1,19 @@
+experiment: hh2_4090d_validation
+date: 2026-11-05
+git_commit: 6094156f7f87eb74848de4b9c05fc13cc7ad9982
+hardware:
+  gpu: NVIDIA GeForce RTX 4090 D
+  gpu_memory_mib: 24564
+hh1_checkpoint: experiments/h1_tactical_10k_4090d/checkpoints/2026-11-05_07-53-46/20/model.ckpt
+hh1_checkpoint_sha256: 02d397d2621527c3ef479293ff728982216382c27c32b361cad917264993490f
+environment_config: configs/env/zombie_stage1.yaml
+num_tactics: 2
+interval_steps: 20
+grid_size: 8
+hidden_dim: 128
+num_updates: 1
+episodes_per_update: 1
+max_steps: 100
+learning_rate: 0.0003
+seed: 42
+device: cuda

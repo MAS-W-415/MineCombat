@@ -1,0 +1,16 @@
+{
+  "update": 1,
+  "total_episodes": 1,
+  "total_env_steps": 100,
+  "num_transitions": 5,
+  "mean_episode_reward": -0.10000000000000007,
+  "total_loss": -0.1707926243543625,
+  "policy_loss": -0.1662801206111908,
+  "value_loss": 0.004590000491589308,
+  "entropy": 0.6807505488395691,
+  "grad_norm": 0.8353970050811768,
+  "peak_gpu_memory_mib": 758,
+  "optimizer_max_step": 4,
+  "all_policy_tensors_finite": true,
+  "checkpoint_sha256": "97da067379dcf04dead03595103dc4f888759120b52418ac58c7b2449eff5eb2"
+}

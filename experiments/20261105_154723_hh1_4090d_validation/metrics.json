@@ -1,0 +1,25 @@
+{
+  "smoke": {
+    "environment_steps": 512,
+    "ppo_updates": 1,
+    "peak_gpu_memory_mib": 5629
+  },
+  "diagnostic": {
+    "environment_steps": 10240,
+    "ppo_updates": 20,
+    "end_to_end_seconds": 754,
+    "peak_gpu_memory_mib": 6019,
+    "too_high_kl_warnings": 6,
+    "cuda_oom_count": 0,
+    "nan_inf_count": 0,
+    "worker_crash_count": 0
+  },
+  "conditioner": {
+    "embedding_norm": 0.9017165303230286,
+    "projection_norm": 0.12372597306966782,
+    "projection_nonzero_values": 1048576,
+    "all_tensors_finite": true
+  },
+  "real_reset_tactic_ids": [1, 1, 1, 0, 0, 0, 0, 0, 0, 1],
+  "checkpoint_sha256": "02d397d2621527c3ef479293ff728982216382c27c32b361cad917264993490f"
+}

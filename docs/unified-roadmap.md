@@ -86,7 +86,7 @@ training.
 | RQ1 flat PPO | in progress; visible combat is learnable, but full 360° search is unsolved |
 | Stage-1 gate | not passed; evaluation variance is being re-baselined |
 | HH1 conditioned VPT | 10k engineering validation; tactics weak, 0% win |
-| HH2 high-level PPO | implemented; GPU validation pending |
+| HH2 high-level PPO | L1 and targeted L2 data flow validated; multi-update stability and L3 pending |
 | RQ2/RQ3 | not started |
 
 ## Immediate next steps

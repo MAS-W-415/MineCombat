@@ -36,7 +36,7 @@ These are implementation stages in `docs/harness-architecture.md`.
 |---|---|---|
 | `HH0` | Harness interfaces and runtime | Implemented |
 | `HH1` | Conditioned VPT with tactical IDs | 10k validation complete; behavior weak |
-| `HH2` | High-level tactical PPO | Implemented; GPU validation pending |
+| `HH2` | High-level tactical PPO | L1 and targeted L2 data flow validated; multi-update stability and L3 pending |
 | `HH3` | Risk-aware harness | Not started |
 | `HH4` | External advisor (Jev) | Not started |
 
