@@ -1,7 +1,7 @@
 # MineCombat: Hierarchical Combat Harness Architecture
 
 > Version: 1.1
-> Status: HH0–HH2 implemented; HH1 validated at 10k, HH2 GPU validation pending
+> Status: HH0–HH2 implemented; HH1 validated at 10k, HH2 L1 and targeted L2 data flow validated on GPU
 > Date: 2026-10-31
 
 ## 1. Project Objective

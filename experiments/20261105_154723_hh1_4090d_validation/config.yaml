@@ -1,0 +1,29 @@
+experiment: hh1_4090d_validation
+date: 2026-11-05
+git_commit: 6094156f7f87eb74848de4b9c05fc13cc7ad9982
+hardware:
+  gpu: NVIDIA GeForce RTX 4090 D
+  gpu_memory_mib: 24564
+software:
+  python: 3.10.22
+  pytorch: 2.5.1+cu124
+  minestudio: 1.1.6
+  java: 8
+environment_config: configs/env/zombie_stage1.yaml
+ppo_config: configs/ppo/zombie_vpt1x.yaml
+harness:
+  conditioned: true
+  num_tactics: 2
+  sample_tactic_per_episode: true
+  tactical_rewards: true
+smoke:
+  num_iterations: 1
+  batches_per_iteration: 2
+  fragment_length: 256
+  num_envs: 1
+diagnostic:
+  num_iterations: 20
+  batches_per_iteration: 2
+  fragment_length: 256
+  num_envs: 1
+checkpoint: experiments/h1_tactical_10k_4090d/checkpoints/2026-11-05_07-53-46/20/model.ckpt
