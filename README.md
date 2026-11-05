@@ -9,10 +9,11 @@ MineCombat is a research project built on [MineStudio](https://github.com/CraftJ
 ## Status
 
 `M0 — environment bring-up`, `M1 — zombie arena`, and `M2 — baselines` are
-complete. `M3 — first PPO` is in progress: the single-GPU pipeline, 10k smoke,
-dense damage signal, and 50-seed checkpoint evaluation work. The 1M-step run is
-blocked on a 24 GB GPU / 64 GB RAM host; the local RTX 4060 runs one environment
-at ~45 steps/s.
+complete. `M3 — first PPO` is in progress: flat PPO learns visible combat
+(34% at ±30°, 48% on mixed-distance front spawn) but only 16% on the combined
+distance + angle task and 10% on random spawn (3×50 runs). HH1/HH2 passed
+engineering validation on an RTX 4090D; behavioral work stays paused until the
+flat Stage-1 gate. The 1M run is ready for a 24 GB GPU / 64 GB RAM host.
 
 Key results:
 
@@ -31,7 +32,9 @@ Key results:
 - [Angle curriculum](docs/m3-angle-curriculum.md): 100k on ±30° only reached 16%; a joint mixed-distance + angle run is next.
 - [Mixed + angle curriculum](docs/m3-mixed-angle-curriculum.md): joint 100k reached 34% at ±30° and 48% on mixed distance; widening to ±60° raised easy to 58% but collapsed the ±60° target to 8%. Camera entropy did not help; this is an off-screen search problem, so the gate definition is the next decision.
 - [Evaluation variance](docs/m3-evaluation-variance.md): the same checkpoint and seeds produced 10–24% on the combined task because mob AI is not reset between episodes; 3×50-seed runs are now required for claims.
-- [1M runbook](docs/1m-run.md): exact command and preflight for the next host.
+- [Stage-1 re-baseline](docs/m3-gate-rebaseline.md): 3×50 means are 16% (10–22%) on the combined task and 10% (8–14%) on random spawn; the gate is not passed.
+- [HH1/HH2 4090D validation](docs/hh1-4090d-validation.md): engineering chain validated on a 24 GB GPU; no behavioral-effectiveness claim.
+- [1M runbook](docs/1m-run.md) and [4090D handoff](docs/1m-4090d-handoff.md): exact commands and preflight for the next host.
 
 Terminology: see [docs/glossary.md](docs/glossary.md) for the `M`, `RQ`, and `HH` naming rules. The single control-plus-extension roadmap is in [docs/unified-roadmap.md](docs/unified-roadmap.md). Shared training preflight is in [docs/training-common.md](docs/training-common.md).
 

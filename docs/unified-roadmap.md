@@ -83,22 +83,22 @@ training.
 | M0 environment | complete |
 | M1 zombie arena | complete |
 | M2 baselines | complete |
-| RQ1 flat PPO | in progress; visible combat is learnable, but full 360° search is unsolved |
-| Stage-1 gate | not passed; evaluation variance is being re-baselined |
+| RQ1 flat PPO | in progress; 3×50 combined 16%, random 10%; visible combat is learnable but composition and search are weak |
+| Stage-1 gate | not passed; the 1M combined run is the next test |
 | HH1 conditioned VPT | 10k engineering validation; tactics weak, 0% win |
 | HH2 high-level PPO | L1 and targeted L2 data flow validated; multi-update stability and L3 pending |
 | RQ2/RQ3 | not started |
 
 ## Immediate next steps
 
-1. Re-baseline the joint checkpoint and the best alternative checkpoints with
-   3×50-seed runs on the combined and random tasks.
-2. Decide the Stage-1 gate using those intervals: visible combat (±30°, distance
-   3–7) versus full 360° search. Off-screen spawns never enter the view without
-   an active turn, and camera entropy did not solve this.
-3. For visible combat, run 1M on the joint curriculum on the 24 GB / 64 GB host.
-4. For full search, add a search mechanism (scan-at-reset, auto-face curriculum,
-   or a relative-direction observation for HH).
+1. Run the 1M combined curriculum on the 4090D (24 GB / 60 GB / 24 h):
+   `configs/env/zombie_stage1_easy_mixed_angle30_mask.yaml`, 20 iterations,
+   save every 5, then 3×50 evaluation. See `docs/1m-4090d-handoff.md`.
+2. If the 1M combined task stays below ~30%, change the curriculum or task
+   definition; do not start another long run on the same setup.
+3. Keep 360° search as Stage-1b. Camera entropy did not help; scan-at-reset,
+   auto-face, or a relative-direction observation are the options.
+4. Keep HH1/HH2 behavioral work paused until the flat gate passes.
 
 ## Non-goals
 

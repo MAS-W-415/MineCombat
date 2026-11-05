@@ -9,9 +9,10 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 ## 当前状态
 
 `M0 — 环境打通`、`M1 — 僵尸竞技场`、`M2 — 基线与指标` 已完成。
-`M3 — 首次 PPO` 进行中：单卡训练链路、10k smoke、dense damage 信号和
-50-seed checkpoint 评估都已跑通。1M 长跑需要 24 GB GPU / 64 GB RAM 的机器；
-本地 RTX 4060 单环境约 45 steps/s。
+`M3 — 首次 PPO` 进行中：flat PPO 已学会可见战斗（±30° 34%、混合距离正面
+48%），但组合任务只有 16%、全随机只有 10%（均为 3×50 局）。HH1/HH2 已在
+RTX 4090D 上完成工程验证；行为实验仍等 flat Stage-1 gate。1M 运行已准备好，
+等待 24 GB GPU / 64 GB RAM 主机。
 
 主要结果：
 
@@ -30,7 +31,9 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 - [角度课程](docs/m3-angle-curriculum.md)：100k 的 ±30° 训练只到 16% 胜率；下一步是混合距离 + 角度的联合课程。
 - [混合距离 + 角度课程](docs/m3-mixed-angle-curriculum.md)：联合 100k 在 ±30° 到 34%、混合距离到 48%；扩到 ±60° 后 easy 升到 58%，但 ±60° 目标崩到 8%。相机熵无效，问题是无方向线索的搜索；下一步需要确定 gate 定义。
 - [评测方差](docs/m3-evaluation-variance.md)：同一 checkpoint、同一 seeds 在组合任务上三次跑出 10%–24%，因为僵尸 AI 跨局没有重置；以后关键结论必须 3×50 局。
-- [1M 运行手册](docs/1m-run.md)：下一台机器上的完整命令与前置检查。
+- [Stage-1 重基线](docs/m3-gate-rebaseline.md)：3×50 均值组合任务 16%（10–22%）、全随机 10%（8–14%）；gate 未通过。
+- [HH1/HH2 4090D 验证](docs/hh1-4090d-validation.md)：24 GB GPU 上完成工程链验证；不声称行为效果。
+- [1M 运行手册](docs/1m-run.md) 和 [4090D handoff](docs/1m-4090d-handoff.md)：下一台机器上的完整命令与前置检查。
 
 术语说明见 [docs/glossary.md](docs/glossary.md)：`M` 是里程碑，`RQ` 是研究问题，`HH` 是 Harness 阶段。统一路线见 [docs/unified-roadmap.md](docs/unified-roadmap.md)：flat PPO 是对照组，Harness 是同一路线上的扩展。公共训练预检见 [docs/training-common.md](docs/training-common.md)。
 
