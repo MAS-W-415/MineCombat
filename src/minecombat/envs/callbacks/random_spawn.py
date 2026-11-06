@@ -29,6 +29,9 @@ class ZombieSpawnConfig:
     spawn_angle_deg: float | None = None
     spawn_angle_jitter_deg: float | None = None
     player_yaw: float | None = None
+    # Face the player toward the first spawned mob after reset. This is a
+    # diagnostic/curriculum aid for separating search from combat.
+    face_spawn: bool = False
     # Optional entity attributes, e.g. {"generic.movement_speed": 0.15}.
     attributes: dict[str, float] | None = None
 
@@ -98,6 +101,13 @@ class RandomZombieSpawnCallback(MinecraftCallback):
             commands.append(
                 f"/execute as @p at @p run summon minecraft:{cfg.mob} "
                 f"~{x:.3f} ~{cfg.spawn_height:.3f} ~{z:.3f} {nbt}".rstrip()
+            )
+
+        if cfg.face_spawn and spawns:
+            target_yaw = math.degrees(float(spawns[0]["angle"])) - 90.0
+            target_yaw = (target_yaw + 180.0) % 360.0 - 180.0
+            commands.append(
+                f"/tp @p ~ ~ ~ {target_yaw:.2f} 0.0"
             )
 
         if not commands:

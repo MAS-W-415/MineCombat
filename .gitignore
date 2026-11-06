@@ -43,3 +43,4 @@ recordings/
 # Large run logs and offline W&B data
 experiments/**/train.log
 experiments/wandb_offline_*/
+experiments/**/resources.log

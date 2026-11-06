@@ -101,6 +101,14 @@ def test_curriculum_overlays_match_dataclass() -> None:
     assert jittered_zombie.spawn_angle_deg == 90.0
     assert jittered_zombie.spawn_angle_jitter_deg == 30.0
 
+    face = load_config(
+        "configs/env/zombie_stage1_random_face.yaml"
+    )
+    faced_zombie = ZombieSpawnConfig(**face["zombie"])
+    assert faced_zombie.face_spawn is True
+    assert faced_zombie.min_distance == 4.0
+    assert faced_zombie.max_distance == 10.0
+
 
 def test_circular_base_raises(tmp_path) -> None:
     (tmp_path / "a.yaml").write_text(
