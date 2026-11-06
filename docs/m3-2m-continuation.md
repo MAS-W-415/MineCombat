@@ -97,6 +97,18 @@ For visible-combat work (including a future HH1 initialization), the 2M
 checkpoint is the strongest flat policy. The Stage-1 gate is therefore recorded
 as **Stage-1a passed, Stage-1b open**, not as a single full-random pass.
 
+## Next (paused 2026-11-06)
+
+A `face_spawn` diagnostic was added to separate search from combat: random
+distance + 360° spawn, but the player faces the first zombie at reset. The local
+50-seed `random_face` vs `random` comparison was stopped before completion; it
+is the first thing to resume.
+
+- If `random_face` is much higher than `random`, Stage-1b is mainly a search
+  problem; use scan-at-reset or an auto-face curriculum.
+- If `random_face` is still low, combat under random distance/orientation is
+  also weak; adjust the curriculum before another long run.
+
 ## Artifacts
 
 - Training logs: `experiments/flat_1m_cont_mixed_angle30_4090d/`

@@ -128,3 +128,21 @@ def test_spawn_angle_jitter_stays_in_range():
         # 90 +/- 30 degrees, converted to radians.
         assert np.pi / 3.0 - 1e-9 <= angle <= 2.0 * np.pi / 3.0 + 1e-9
     assert len(set(angles)) > 1
+
+
+def test_face_spawn_points_player_at_first_zombie():
+    sim = make_sim()
+
+    config = ZombieSpawnConfig(
+        count=1,
+        min_distance=4.0,
+        max_distance=4.0,
+        spawn_angle_deg=0.0,
+        randomize_player_yaw=False,
+        face_spawn=True,
+    )
+
+    callback = RandomZombieSpawnCallback(config)
+    callback.after_reset(sim, {}, {})
+
+    assert "/tp @p ~ ~ ~ -90.00 0.0" in sim.env.commands
