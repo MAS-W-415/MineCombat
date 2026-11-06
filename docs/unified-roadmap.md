@@ -83,21 +83,23 @@ training.
 | M0 environment | complete |
 | M1 zombie arena | complete |
 | M2 baselines | complete |
-| RQ1 flat PPO | in progress; 1M: 72% easy, 52% ±30°, 40.7% combined, 22.7% random |
-| Stage-1 gate | not passed; case B, 1M continuation running |
+| RQ1 flat PPO | in progress; 2M: 90% easy, 64% ±30°, 62% combined, 10% random |
+| Stage-1 gate | Stage-1a visible combat passed; Stage-1b 360° search open |
 | HH1 conditioned VPT | 10k engineering validation; tactics weak, 0% win |
 | HH2 high-level PPO | L1 and targeted L2 data flow validated; multi-update stability and L3 pending |
 | RQ2/RQ3 | not started |
 
 ## Immediate next steps
 
-1. Finish the 1M continuation (2.048M total) with `--keep-interval 5` and
-   `--wandb-mode offline`; evaluate 1.25M/1.5M/1.75M/2M checkpoints.
-2. If the combined mean crosses 50% and random keeps improving, move toward the
-   Stage-1 gate. If it plateaus below 50%, analyze camera tracking and consider
-   a curriculum/observation change instead of another long run.
-3. Keep 360° search as Stage-1b unless random reaches a stable useful level.
-4. Keep HH1/HH2 behavioral work paused until the flat gate passes.
+1. Freeze the 2M checkpoint as the best **visible-combat** flat policy; do not
+   continue the same ±30° curriculum expecting random to improve.
+2. For **Stage-1b search**, start from the 1M checkpoint (22.7% random) and add
+   a search mechanism: scan-at-reset, auto-face curriculum, or a
+   relative-direction observation for HH.
+3. Ask the team to accept the Stage-1a/1b split. If accepted, initialize HH1
+   from the 2M visible-combat checkpoint and keep HH2 behavioral work gated on
+   Stage-1b.
+4. Keep 3×50 evaluation for all gate claims; 20-seed runs are triage only.
 
 ## Non-goals
 

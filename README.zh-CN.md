@@ -9,9 +9,10 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 ## 当前状态
 
 `M0 — 环境打通`、`M1 — 僵尸竞技场`、`M2 — 基线与指标` 已完成。
-`M3 — 首次 PPO` 进行中：1M flat PPO checkpoint 在 easy 正面 72%、±30° 52%、
-组合距离+角度 40.7%、全随机 22.7%（均为 3×50 局）。HH1/HH2 已在 RTX 4090D
-上完成工程验证；行为实验仍等 flat Stage-1 gate。
+`M3 — 首次 PPO` 进行中：2M flat PPO 在 easy 正面 90%、±30° 64%、组合
+距离+角度 **62%**（3×50）；但全随机降到 10%。因此阶段拆成
+**Stage-1a 可见战斗（已通过）** 和 **Stage-1b 360° 搜索（未通过）**。
+HH1/HH2 已在 RTX 4090D 上完成工程验证；行为实验等团队确认拆分 gate 后再继续。
 
 主要结果：
 
@@ -32,6 +33,7 @@ MineCombat 是一个基于 [MineStudio](https://github.com/CraftJarvis/MineStudi
 - [评测方差](docs/m3-evaluation-variance.md)：同一 checkpoint、同一 seeds 在组合任务上三次跑出 10%–24%，因为僵尸 AI 跨局没有重置；以后关键结论必须 3×50 局。
 - [Stage-1 重基线](docs/m3-gate-rebaseline.md)：3×50 均值组合任务 16%（10–22%）、全随机 10%（8–14%）；gate 未通过。
 - [1M flat PPO](docs/m3-1m-flat-ppo.md)：easy 72%、±30° 52%、组合 40.7%（32–52%）、random 22.7%（20–26%）；属于情况 B，1M continuation 正在跑。
+- [2M continuation](docs/m3-2m-continuation.md)：easy 90%、±30° 64%、组合 **62%**（58–62%）、random **10%**；可见战斗 gate 通过，360° 搜索退化。
 - [HH1/HH2 4090D 验证](docs/hh1-4090d-validation.md)：24 GB GPU 上完成工程链验证；不声称行为效果。
 - [1M 运行手册](docs/1m-run.md) 和 [4090D handoff](docs/1m-4090d-handoff.md)：下一台机器上的完整命令与前置检查。
 

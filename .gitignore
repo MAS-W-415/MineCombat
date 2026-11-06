@@ -39,3 +39,7 @@ recordings/
 .DS_Store
 .idea/
 .vscode/
+
+# Large run logs and offline W&B data
+experiments/**/train.log
+experiments/wandb_offline_*/
