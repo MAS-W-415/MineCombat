@@ -41,6 +41,12 @@ experiments/flat_100k_mixed_angle30_mask_warm/checkpoints/2026-11-03_03-25-05/2/
 Transfer it with `scp`/`rsync`, or upload it to a private Hugging Face repo and
 download it on the host. Preserve the filename `model.ckpt`.
 
+SHA256:
+
+```text
+22b845c9ee010b4b7a4457d382ef0ab56094ca507483d6fb65a5cbc9c6e2e1e3
+```
+
 ## Preflight
 
 ```bash
