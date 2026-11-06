@@ -1,0 +1,72 @@
+[
+  {
+    "seed": 0,
+    "steps": 247,
+    "reward": -2.207,
+    "outcome": "death",
+    "video": "/home/u2024210916/MineCombat/experiments/eval_1m_4090d/videos/episode_000.mp4"
+  },
+  {
+    "seed": 1,
+    "steps": 291,
+    "reward": -2.831,
+    "outcome": "death",
+    "video": "/home/u2024210916/MineCombat/experiments/eval_1m_4090d/videos/episode_001.mp4"
+  },
+  {
+    "seed": 2,
+    "steps": 189,
+    "reward": -3.789,
+    "outcome": "death",
+    "video": "/home/u2024210916/MineCombat/experiments/eval_1m_4090d/videos/episode_002.mp4"
+  },
+  {
+    "seed": 3,
+    "steps": 275,
+    "reward": -2.655,
+    "outcome": "death",
+    "video": "/home/u2024210916/MineCombat/experiments/eval_1m_4090d/videos/episode_003.mp4"
+  },
+  {
+    "seed": 4,
+    "steps": 215,
+    "reward": 8.775,
+    "outcome": "success",
+    "video": "/home/u2024210916/MineCombat/experiments/eval_1m_4090d/videos/episode_004.mp4"
+  },
+  {
+    "seed": 5,
+    "steps": 347,
+    "reward": -2.097,
+    "outcome": "death",
+    "video": "/home/u2024210916/MineCombat/experiments/eval_1m_4090d/videos/episode_005.mp4"
+  },
+  {
+    "seed": 6,
+    "steps": 240,
+    "reward": 8.15,
+    "outcome": "success",
+    "video": "/home/u2024210916/MineCombat/experiments/eval_1m_4090d/videos/episode_006.mp4"
+  },
+  {
+    "seed": 7,
+    "steps": 373,
+    "reward": 8.017,
+    "outcome": "success",
+    "video": "/home/u2024210916/MineCombat/experiments/eval_1m_4090d/videos/episode_007.mp4"
+  },
+  {
+    "seed": 8,
+    "steps": 199,
+    "reward": 9.401,
+    "outcome": "success",
+    "video": "/home/u2024210916/MineCombat/experiments/eval_1m_4090d/videos/episode_008.mp4"
+  },
+  {
+    "seed": 9,
+    "steps": 195,
+    "reward": -3.795,
+    "outcome": "death",
+    "video": "/home/u2024210916/MineCombat/experiments/eval_1m_4090d/videos/episode_009.mp4"
+  }
+]

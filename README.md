@@ -9,10 +9,12 @@ MineCombat is a research project built on [MineStudio](https://github.com/CraftJ
 ## Status
 
 `M0 — environment bring-up`, `M1 — zombie arena`, and `M2 — baselines` are
-complete. `M3 — first PPO` is in progress: the 1M flat PPO checkpoint reaches
-72% on easy front, 52% at ±30°, 40.7% on the combined distance + angle task,
-and 22.7% on random spawn (3×50 runs). HH1/HH2 passed engineering validation on
-an RTX 4090D; behavioral work stays paused until the flat Stage-1 gate.
+complete. `M3 — first PPO` is in progress: the 2M flat PPO checkpoint reaches
+90% on easy front, 64% at ±30°, and 62% on the combined distance + angle task
+(3×50). Full random spawn fell to 10%, so the stage is now split into
+**Stage-1a visible combat (passed)** and **Stage-1b 360° search (open)**.
+HH1/HH2 passed engineering validation on an RTX 4090D; behavioral work stays
+paused until the team accepts the split gate.
 
 Key results:
 
@@ -33,6 +35,7 @@ Key results:
 - [Evaluation variance](docs/m3-evaluation-variance.md): the same checkpoint and seeds produced 10–24% on the combined task because mob AI is not reset between episodes; 3×50-seed runs are now required for claims.
 - [Stage-1 re-baseline](docs/m3-gate-rebaseline.md): 3×50 means are 16% (10–22%) on the combined task and 10% (8–14%) on random spawn; the gate is not passed.
 - [1M flat PPO](docs/m3-1m-flat-ppo.md): 72% easy, 52% at ±30°, 40.7% combined (range 32–52%), 22.7% random (range 20–26%); case B, a 1M continuation is running.
+- [2M continuation](docs/m3-2m-continuation.md): 90% easy, 64% ±30°, **62% combined** (58–62%), **10% random**; visible-combat gate passes, 360° search regresses.
 - [HH1/HH2 4090D validation](docs/hh1-4090d-validation.md): engineering chain validated on a 24 GB GPU; no behavioral-effectiveness claim.
 - [1M runbook](docs/1m-run.md) and [4090D handoff](docs/1m-4090d-handoff.md): exact commands and preflight for the next host.
 
