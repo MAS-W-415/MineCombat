@@ -1,0 +1,5 @@
+{
+  "policy": "vpt",
+  "model": "CraftJarvis/MineStudio_VPT.foundation_model_1x",
+  "checkpoint": "/home/u2024210916/MineCombat/experiments/flat_1m_mixed_angle30_4090d/checkpoints/2026-11-06_08-05-32/20/model.ckpt"
+}

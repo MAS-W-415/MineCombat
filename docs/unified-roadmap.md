@@ -83,21 +83,20 @@ training.
 | M0 environment | complete |
 | M1 zombie arena | complete |
 | M2 baselines | complete |
-| RQ1 flat PPO | in progress; 3×50 combined 16%, random 10%; visible combat is learnable but composition and search are weak |
-| Stage-1 gate | not passed; the 1M combined run is the next test |
+| RQ1 flat PPO | in progress; 1M: 72% easy, 52% ±30°, 40.7% combined, 22.7% random |
+| Stage-1 gate | not passed; case B, 1M continuation running |
 | HH1 conditioned VPT | 10k engineering validation; tactics weak, 0% win |
 | HH2 high-level PPO | L1 and targeted L2 data flow validated; multi-update stability and L3 pending |
 | RQ2/RQ3 | not started |
 
 ## Immediate next steps
 
-1. Run the 1M combined curriculum on the 4090D (24 GB / 60 GB / 24 h):
-   `configs/env/zombie_stage1_easy_mixed_angle30_mask.yaml`, 20 iterations,
-   save every 5, then 3×50 evaluation. See `docs/1m-4090d-handoff.md`.
-2. If the 1M combined task stays below ~30%, change the curriculum or task
-   definition; do not start another long run on the same setup.
-3. Keep 360° search as Stage-1b. Camera entropy did not help; scan-at-reset,
-   auto-face, or a relative-direction observation are the options.
+1. Finish the 1M continuation (2.048M total) with `--keep-interval 5` and
+   `--wandb-mode offline`; evaluate 1.25M/1.5M/1.75M/2M checkpoints.
+2. If the combined mean crosses 50% and random keeps improving, move toward the
+   Stage-1 gate. If it plateaus below 50%, analyze camera tracking and consider
+   a curriculum/observation change instead of another long run.
+3. Keep 360° search as Stage-1b unless random reaches a stable useful level.
 4. Keep HH1/HH2 behavioral work paused until the flat gate passes.
 
 ## Non-goals

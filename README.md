@@ -9,11 +9,10 @@ MineCombat is a research project built on [MineStudio](https://github.com/CraftJ
 ## Status
 
 `M0 — environment bring-up`, `M1 — zombie arena`, and `M2 — baselines` are
-complete. `M3 — first PPO` is in progress: flat PPO learns visible combat
-(34% at ±30°, 48% on mixed-distance front spawn) but only 16% on the combined
-distance + angle task and 10% on random spawn (3×50 runs). HH1/HH2 passed
-engineering validation on an RTX 4090D; behavioral work stays paused until the
-flat Stage-1 gate. The 1M run is ready for a 24 GB GPU / 64 GB RAM host.
+complete. `M3 — first PPO` is in progress: the 1M flat PPO checkpoint reaches
+72% on easy front, 52% at ±30°, 40.7% on the combined distance + angle task,
+and 22.7% on random spawn (3×50 runs). HH1/HH2 passed engineering validation on
+an RTX 4090D; behavioral work stays paused until the flat Stage-1 gate.
 
 Key results:
 
@@ -33,6 +32,7 @@ Key results:
 - [Mixed + angle curriculum](docs/m3-mixed-angle-curriculum.md): joint 100k reached 34% at ±30° and 48% on mixed distance; widening to ±60° raised easy to 58% but collapsed the ±60° target to 8%. Camera entropy did not help; this is an off-screen search problem, so the gate definition is the next decision.
 - [Evaluation variance](docs/m3-evaluation-variance.md): the same checkpoint and seeds produced 10–24% on the combined task because mob AI is not reset between episodes; 3×50-seed runs are now required for claims.
 - [Stage-1 re-baseline](docs/m3-gate-rebaseline.md): 3×50 means are 16% (10–22%) on the combined task and 10% (8–14%) on random spawn; the gate is not passed.
+- [1M flat PPO](docs/m3-1m-flat-ppo.md): 72% easy, 52% at ±30°, 40.7% combined (range 32–52%), 22.7% random (range 20–26%); case B, a 1M continuation is running.
 - [HH1/HH2 4090D validation](docs/hh1-4090d-validation.md): engineering chain validated on a 24 GB GPU; no behavioral-effectiveness claim.
 - [1M runbook](docs/1m-run.md) and [4090D handoff](docs/1m-4090d-handoff.md): exact commands and preflight for the next host.
 
