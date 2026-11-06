@@ -1,0 +1,401 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/u2024210916/MineCombat/src/minecombat/policies/vpt.py:45: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(checkpoint, map_location="cpu")
+Loading VPT model: CraftJarvis/MineStudio_VPT.foundation_model_1x, device=auto, checkpoint=/home/u2024210916/MineCombat/experiments/flat_1m_mixed_angle30_4090d/checkpoints/2026-11-06_08-05-32/20/model.ckpt
+Evaluating policy=vpt, episodes=50
+INFO: Starting Minecraft process with device: cpu
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:26:33] [Render thread/WARN]: ERROR : Couldn't load Narrator library : Unable to load library 'fliteWrapper': Can't obtain InputStream for linux-x86-64/libfliteWrapper.so
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:26:34] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: java.lang.RuntimeException: Failed to parse into SignedJWT: null
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:26:35] [Worker-Main-12/ERROR]: Using missing texture, unable to load minecraft:optifine/ctm/default/empty.png : java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:26:36] [Render thread/ERROR]: Error starting SoundSystem. Turning off sounds & music
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.lang.IllegalStateException: Failed to open OpenAL device
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:26:36] [Render thread/WARN]: [OptiFine] Missing CTM sprite: minecraft:optifine/ctm/default/empty
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:26:42] [Render thread/WARN]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:26:42] [Render thread/WARN]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:26:42] [Render thread/WARN]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:26:42] [Render thread/WARN]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:26:42] [Render thread/WARN]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:27:10] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:28:21] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:28:51] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:29:05] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:29:37] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:29:50] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:30:03] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:30:20] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:30:36] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:31:07] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:31:28] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:32:22] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:32:46] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:33:16] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:33:31] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:33:48] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:34:46] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:35:14] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:35:28] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:35:35] [Render thread/WARN]: Tried to load a DUMMY block entity @ Mutable{x=-2299, y=73, z=-4367} but found not block entity block Block{minecraft:air} at location
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:35:35] [Render thread/WARN]: Tried to load a block entity for block Block{minecraft:air} but failed at location Mutable{x=-2299, y=73, z=-4367}
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:35:35] [Render thread/WARN]: Tried to load a DUMMY block entity @ Mutable{x=-2299, y=73, z=-4359} but found not block entity block Block{minecraft:air} at location
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:35:35] [Render thread/WARN]: Tried to load a block entity for block Block{minecraft:air} but failed at location Mutable{x=-2299, y=73, z=-4359}
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:37:20] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:37:40] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:37:58] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:38:31] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:38:56] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:39:41] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:39:58] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:40:12] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:40:53] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:41:12] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+WARNING:minestudio.simulator.minerl.env.malmo.instance.b9f86a:[10:41:26] [Render thread/WARN]: Failed to load texture: minecraft:optifine/ctm/default/empty.png
+ERROR:minestudio.simulator.minerl.env.malmo.instance.b9f86a:java.io.FileNotFoundException: minecraft:optifine/ctm/default/empty.png
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+ArenaResetCallback()
+CommandsCallback(commands=['/give @p minecraft:stone_sword 1'])
+ActionMaskCallback()
+RandomZombieSpawnCallback()
+CombatRewardCallback()
+CombatEpisodeCallback()
+{
+  "episodes": 50,
+  "win_rate": 0.38,
+  "death_rate": 0.58,
+  "timeout_rate": 0.04,
+  "external_done_rate": 0.0,
+  "eval_limit_rate": 0.0,
+  "stuck_rate": 0.02,
+  "mean_hp_lost": 14.46,
+  "mean_damage_taken": 14.46,
+  "mean_hp_lost_on_win": 10.263157894736842,
+  "mean_time_to_kill": 223.31578947368422,
+  "mean_steps": 276.24,
+  "mean_reward": 1.6803600000000105,
+  "damage_ratio": 0.7251728907330565
+}
+Saved results to: /home/u2024210916/MineCombat/experiments/eval_1m_4090d/20261106_104142_eval_vpt_ckpt
