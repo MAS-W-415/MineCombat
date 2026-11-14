@@ -34,6 +34,7 @@ HH1/HH2 已在 RTX 4090D 上完成工程验证；行为实验等团队确认拆�
 - [Stage-1 重基线](docs/m3-gate-rebaseline.md)：3×50 均值组合任务 16%（10–22%）、全随机 10%（8–14%）；gate 未通过。
 - [1M flat PPO](docs/m3-1m-flat-ppo.md)：easy 72%、±30° 52%、组合 40.7%（32–52%）、random 22.7%（20–26%）；属于情况 B，1M continuation 正在跑。
 - [2M continuation](docs/m3-2m-continuation.md)：easy 90%、±30° 64%、组合 **62%**（58–62%）、random **10%**；可见战斗 gate 通过，360° 搜索退化。
+- [Face 课程探针](docs/m3-face-curriculum-probe.md)：100k face 辅助训练把 `random_face` 从 36% 提到 52%，但无 face 的 random 仍是 10%；搜索必须单独处理。
 - [HH1/HH2 4090D 验证](docs/hh1-4090d-validation.md)：24 GB GPU 上完成工程链验证；不声称行为效果。
 - [1M 运行手册](docs/1m-run.md) 和 [4090D handoff](docs/1m-4090d-handoff.md)：下一台机器上的完整命令与前置检查。
 
