@@ -37,6 +37,7 @@ Key results:
 - [1M flat PPO](docs/m3-1m-flat-ppo.md): 72% easy, 52% at ±30°, 40.7% combined (range 32–52%), 22.7% random (range 20–26%); case B, a 1M continuation is running.
 - [2M continuation](docs/m3-2m-continuation.md): 90% easy, 64% ±30°, **62% combined** (58–62%), **10% random**; visible-combat gate passes, 360° search regresses.
 - [Face-curriculum probe](docs/m3-face-curriculum-probe.md): 100k face-assisted training lifts `random_face` from 36% to 52%, but unassisted random stays at 10%; search must be handled explicitly.
+- [Scan-at-reset probe](docs/m3-scan-at-reset.md): a fixed 360° reset scan produced 0% wins and 54% timeouts; rejected. Search needs a cue/observation or an auto-face/split-gate decision.
 - [HH1/HH2 4090D validation](docs/hh1-4090d-validation.md): engineering chain validated on a 24 GB GPU; no behavioral-effectiveness claim.
 - [1M runbook](docs/1m-run.md) and [4090D handoff](docs/1m-4090d-handoff.md): exact commands and preflight for the next host.
 

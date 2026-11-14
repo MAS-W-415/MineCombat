@@ -109,6 +109,12 @@ def test_curriculum_overlays_match_dataclass() -> None:
     assert faced_zombie.min_distance == 4.0
     assert faced_zombie.max_distance == 10.0
 
+    scan = load_config(
+        "configs/env/zombie_stage1_random_scan.yaml"
+    )
+    assert scan["assist"]["scan_at_reset_steps"] == 36
+    assert scan["assist"]["scan_yaw_per_step"] == 10.0
+
 
 def test_circular_base_raises(tmp_path) -> None:
     (tmp_path / "a.yaml").write_text(

@@ -11,6 +11,7 @@ from minecombat.envs.callbacks import (
     CombatEpisodeCallback,
     CombatRewardCallback,
     RandomZombieSpawnCallback,
+    ScanAtResetCallback,
 )
 from minecombat.envs.zombie_arena import make_zombie_env
 
@@ -115,3 +116,20 @@ def test_factory_adds_inventory_mask(monkeypatch):
 
     registered = env.kwargs["callbacks"]
     assert isinstance(registered[2], ActionMaskCallback)
+
+
+def test_factory_adds_scan_at_reset(monkeypatch):
+    install_fake_minestudio(monkeypatch)
+
+    env = make_zombie_env(
+        {
+            "assist": {
+                "scan_at_reset_steps": 36,
+                "scan_yaw_per_step": 10.0,
+            },
+        }
+    )
+
+    registered = env.kwargs["callbacks"]
+    assert isinstance(registered[2], ScanAtResetCallback)
+    assert registered[2].steps == 36
