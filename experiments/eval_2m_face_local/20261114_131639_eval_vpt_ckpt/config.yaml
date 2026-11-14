@@ -1,0 +1,10 @@
+# Random distance and 360-degree spawn, but face the zombie at reset.
+#
+# Diagnostic/curriculum aid: separates "can the policy fight when it can see the
+# target" from "can the policy search for an off-screen target". This is not the
+# final random-spawn task.
+
+base: zombie_stage1.yaml
+
+zombie:
+  face_spawn: true
