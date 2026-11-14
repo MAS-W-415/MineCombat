@@ -15,6 +15,7 @@ from .callbacks import (
     CombatRewardCallback,
     CombatRewardConfig,
     RandomZombieSpawnCallback,
+    ScanAtResetCallback,
     ZombieSpawnConfig,
 )
 
@@ -104,6 +105,7 @@ def make_zombie_env(
     zombie = dict(cfg.get("zombie", {}))
     reward = dict(cfg.get("reward", {}))
     action_mask = dict(cfg.get("action_mask", {}))
+    assist = dict(cfg.get("assist", {}))
 
     # Lazy imports keep local unit tests lightweight.
     from minestudio.simulator import MinecraftSim
@@ -171,6 +173,22 @@ def make_zombie_env(
 
     if action_mask.get("mask_inventory", False):
         callbacks.insert(2, ActionMaskCallback(mask_inventory=True))
+
+    insert_at = 3 if action_mask.get("mask_inventory", False) else 2
+    scan_steps = int(assist.get("scan_at_reset_steps", 0))
+    if scan_steps > 0:
+        callbacks.insert(
+            insert_at,
+            ScanAtResetCallback(
+                steps=scan_steps,
+                yaw_per_step=float(
+                    assist.get("scan_yaw_per_step", 10.0)
+                ),
+                pitch_per_step=float(
+                    assist.get("scan_pitch_per_step", 0.0)
+                ),
+            ),
+        )
 
     # 4. Create the simulator.
     return MinecraftSim(

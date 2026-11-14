@@ -12,6 +12,7 @@ from .combat_reward import (
 from .death_termination import DeathTerminationCallback
 from .kill_termination import KillTerminationCallback
 from .random_spawn import RandomZombieSpawnCallback, ZombieSpawnConfig
+from .scan_at_reset import ScanAtResetCallback
 
 __all__ = [
     "ActionMaskCallback",
@@ -24,5 +25,6 @@ __all__ = [
     "DeathTerminationCallback",
     "KillTerminationCallback",
     "RandomZombieSpawnCallback",
+    "ScanAtResetCallback",
     "ZombieSpawnConfig",
 ]

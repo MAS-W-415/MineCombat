@@ -93,9 +93,10 @@ training.
 
 1. Freeze the 2M checkpoint as the best **visible-combat** flat policy; do not
    continue the same ±30° curriculum expecting random to improve.
-2. For **Stage-1b search**, start from the 1M checkpoint (22.7% random) and add
-   a search mechanism: scan-at-reset, auto-face curriculum, or a
-   relative-direction observation for HH.
+2. For **Stage-1b search**, scan-at-reset was tested and rejected (0% win,
+   54% timeouts). Choose between an explicit auto-face/split-gate definition
+   and a relative-direction observation for HH. Do not run more random PPO
+   without one of these.
 3. Ask the team to accept the Stage-1a/1b split. If accepted, initialize HH1
    from the 2M visible-combat checkpoint and keep HH2 behavioral work gated on
    Stage-1b.

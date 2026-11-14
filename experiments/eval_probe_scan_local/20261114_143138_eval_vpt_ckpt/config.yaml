@@ -1,0 +1,11 @@
+# Random distance + 360-degree spawn with a reset-time camera scan.
+#
+# The camera turns 360 degrees over 36 steps (10 degrees/step), then the policy
+# takes over. This is a search aid without privileged knowledge of the zombie
+# position.
+
+base: zombie_stage1.yaml
+
+assist:
+  scan_at_reset_steps: 36
+  scan_yaw_per_step: 10.0
