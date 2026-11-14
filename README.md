@@ -36,6 +36,7 @@ Key results:
 - [Stage-1 re-baseline](docs/m3-gate-rebaseline.md): 3×50 means are 16% (10–22%) on the combined task and 10% (8–14%) on random spawn; the gate is not passed.
 - [1M flat PPO](docs/m3-1m-flat-ppo.md): 72% easy, 52% at ±30°, 40.7% combined (range 32–52%), 22.7% random (range 20–26%); case B, a 1M continuation is running.
 - [2M continuation](docs/m3-2m-continuation.md): 90% easy, 64% ±30°, **62% combined** (58–62%), **10% random**; visible-combat gate passes, 360° search regresses.
+- [Face-curriculum probe](docs/m3-face-curriculum-probe.md): 100k face-assisted training lifts `random_face` from 36% to 52%, but unassisted random stays at 10%; search must be handled explicitly.
 - [HH1/HH2 4090D validation](docs/hh1-4090d-validation.md): engineering chain validated on a 24 GB GPU; no behavioral-effectiveness claim.
 - [1M runbook](docs/1m-run.md) and [4090D handoff](docs/1m-4090d-handoff.md): exact commands and preflight for the next host.
 
