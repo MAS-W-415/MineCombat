@@ -1,0 +1,52 @@
+date_utc: 2026-11-16
+host: n1
+repo: /home/u2024210916/MineCombat
+branch: feat/closed-loop-search
+git_commit: 0539f3e64e21f44048ee7cde4f586520be89ab7c
+git_requirement: contains 0539f3e (current HEAD is 0539f3e)
+git_fetch_note: origin fetch attempt hit a transient GnuTLS error; the checked-out branch was already at the required commit.
+
+gpu: NVIDIA GeForce RTX 4090 D
+gpu_memory_mib: 24564
+gpu_driver: 595.84
+
+python: 3.10.22
+python_interpreter: /home/u2024210916/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/bin/python3.10
+detector_venv: /home/u2024210916/MineCombat/.venv-detector
+detector_env_note: separate venv for Ultralytics; torch 2.5.1+cu124 reused read-only from the main MineCombat .venv through a .pth path; main .venv was not modified.
+torch: 2.5.1+cu124
+cuda_version: 12.4
+cuda_available: true
+cuda_device: NVIDIA GeForce RTX 4090 D
+ultralytics: 8.4.215
+opencv: 4.8.0
+numpy: 1.26.4
+minestudio: 1.1.6
+java: OpenJDK 1.8.0_504
+
+model: mob_radar YOLO26 Nano / YOLO26n
+model_url: https://raw.githubusercontent.com/draco-tlw/mob-radar/main/runs/detect/mob_radar_v26n_dv5_sz1024_f11_lr1e-2_lrf1e-2_cos/weights/best.pt
+model_size_bytes_expected: 5432709
+model_size_bytes_actual: 5432709
+model_sha256: 653542fd3af2516f9edbc25725991753a5daecce4a6917ea6a8ae76aca70aa57
+model_format: PyTorch ZIP checkpoint
+model_task: detect
+model_classes: [creeper, skeleton, spider, zombie, enderman]
+model_parameters: 2505750
+model_gflops: 5.9
+
+audit_images: 80
+audit_face_images: 40
+audit_random_images: 40
+audit_positive_frames: 39
+audit_negative_frames: 41
+inference_imgsz_primary: 320
+inference_conf: 0.25
+detector_threshold: 0.5
+audit_primary_frame_recall: 0.5641025641025641
+audit_primary_false_positive_rate: 0.0
+audit_primary_correct_localization: 1.0
+audit_640_frame_recall: 0.4358974358974359
+audit_640_false_positive_rate: 0.0
+latency_320_mean_ms: 10.143752838484943
+latency_640_mean_ms: 9.867481491528451

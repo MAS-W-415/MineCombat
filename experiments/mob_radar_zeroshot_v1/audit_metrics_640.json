@@ -1,0 +1,14 @@
+{
+  "tag": "640",
+  "total_images": 80,
+  "positive_frames": 39,
+  "negative_frames": 41,
+  "tp": 17,
+  "fp": 0,
+  "fn": 22,
+  "tn": 41,
+  "frame_recall": 0.4358974358974359,
+  "false_positive_rate": 0.0,
+  "correct_localization": 1.0,
+  "predicted_positive_frames": 17
+}

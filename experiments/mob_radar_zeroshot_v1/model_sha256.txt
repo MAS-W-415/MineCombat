@@ -1,0 +1,1 @@
+653542fd3af2516f9edbc25725991753a5daecce4a6917ea6a8ae76aca70aa57  /eaas/default/groups/mine_/home/share/minecombat_results/mob_radar_zeroshot_v1/models/mob_radar_best.pt

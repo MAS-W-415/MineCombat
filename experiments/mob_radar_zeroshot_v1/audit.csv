@@ -1,0 +1,81 @@
+image,group,human_has_zombie,pred_has_zombie,box_correct,notes
+extra_seed_2000_step_00060.png,face,1,1,1,detected; box covers target
+extra_seed_2000_step_00120.png,face,1,1,1,detected; box covers target
+extra_seed_2001_step_00060.png,face,1,0,0,miss; small distant target
+extra_seed_2001_step_00180.png,face,0,0,0,no zombie visible; no prediction
+extra_seed_2002_step_00060.png,face,1,1,1,detected; box covers target
+extra_seed_2002_step_00180.png,face,1,1,1,detected; box covers target
+extra_seed_2003_step_00060.png,face,1,0,0,miss; target in front of stone structure
+extra_seed_2003_step_00180.png,face,0,0,0,no zombie visible; no prediction
+extra_seed_2004_step_00060.png,face,1,1,1,detected; box covers target
+extra_seed_2004_step_00180.png,face,1,1,1,detected; box covers target
+extra_seed_2005_step_00060.png,face,1,0,0,miss; small distant target
+extra_seed_2005_step_00180.png,face,1,1,1,detected; box covers target
+extra_seed_2006_step_00060.png,face,1,1,1,detected; box covers target
+extra_seed_2006_step_00180.png,face,0,0,0,no zombie visible; no prediction
+extra_seed_2007_step_00060.png,face,1,1,1,detected; box covers target
+extra_seed_2007_step_00180.png,face,1,0,0,miss; close target under sunset lighting
+extra_seed_2008_step_00060.png,face,1,1,1,detected; box covers target
+extra_seed_2008_step_00180.png,face,1,0,0,miss; target at right edge
+extra_seed_2009_step_00060.png,face,1,1,1,detected; box covers target
+extra_seed_2009_step_00180.png,face,1,1,1,detected; box covers target
+seed_2000_step_00000.png,face,0,0,0,no zombie visible; no prediction
+seed_2000_step_00130.png,face,1,0,0,"miss; very close zombie, upper body fills frame"
+seed_2001_step_00150.png,face,0,0,0,no zombie visible; no prediction
+seed_2001_step_00300.png,face,1,1,1,detected; partial target at top edge
+seed_2002_step_00110.png,face,1,0,0,miss; extreme close-up face/torso
+seed_2002_step_00210.png,face,1,1,1,detected; also low-confidence creeper 0.48
+seed_2003_step_00000.png,face,0,0,0,no zombie visible; no prediction
+seed_2003_step_00150.png,face,0,0,0,no zombie visible; no prediction
+seed_2004_step_00140.png,face,1,1,1,detected; also false skeleton 0.51
+seed_2004_step_00270.png,face,1,1,1,detected; box covers target
+seed_2005_step_00130.png,face,1,1,1,detected; box covers target
+seed_2005_step_00260.png,face,1,1,1,detected; box covers target
+seed_2006_step_00150.png,face,0,0,0,no zombie visible; no prediction
+seed_2006_step_00300.png,face,1,0,0,miss; close target partially at frame edge
+seed_2007_step_00110.png,face,1,0,0,miss; target at mid-distance
+seed_2007_step_00220.png,face,1,1,1,detected; box covers target
+seed_2008_step_00130.png,face,1,1,1,detected; box covers target
+seed_2008_step_00250.png,face,1,0,0,miss; target under sunset lighting
+seed_2009_step_00110.png,face,1,0,0,miss; target at distance
+seed_2009_step_00210.png,face,1,0,0,miss; target at mid-distance
+extra_seed_3000_step_00030.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3000_step_00170.png,random,1,0,0,miss; very close target torso
+extra_seed_3001_step_00030.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3001_step_00170.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3002_step_00030.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3002_step_00170.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3003_step_00030.png,random,1,0,0,miss; small distant target at top edge
+extra_seed_3003_step_00170.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3004_step_00030.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3004_step_00170.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3005_step_00030.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3005_step_00170.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3006_step_00030.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3006_step_00170.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3007_step_00030.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3007_step_00170.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3008_step_00030.png,random,1,0,0,miss; small distant target on hill
+extra_seed_3008_step_00170.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3009_step_00030.png,random,0,0,0,no zombie visible; no prediction
+extra_seed_3009_step_00170.png,random,0,0,0,no zombie visible; no prediction
+seed_3000_step_00140.png,random,1,1,1,detected; partial target at top edge
+seed_3000_step_00280.png,random,1,1,1,detected; box covers target
+seed_3001_step_00140.png,random,0,0,0,no zombie visible; no prediction
+seed_3001_step_00270.png,random,1,0,0,miss; zombie misclassified as creeper (conf 0.64)
+seed_3002_step_00000.png,random,0,0,0,no zombie visible; no prediction
+seed_3002_step_00300.png,random,0,0,0,no zombie visible; no prediction
+seed_3003_step_00000.png,random,0,0,0,no zombie visible; no prediction
+seed_3003_step_00150.png,random,0,0,0,no zombie visible; no prediction
+seed_3004_step_00000.png,random,0,0,0,no zombie visible; no prediction
+seed_3004_step_00150.png,random,0,0,0,no zombie visible; no prediction
+seed_3005_step_00000.png,random,0,0,0,no zombie visible; no prediction
+seed_3005_step_00150.png,random,0,0,0,no zombie visible; no prediction
+seed_3006_step_00000.png,random,0,0,0,no zombie visible; no prediction
+seed_3006_step_00300.png,random,0,0,0,no zombie visible; no prediction
+seed_3007_step_00000.png,random,0,0,0,no zombie visible; no prediction
+seed_3007_step_00150.png,random,0,0,0,no zombie visible; no prediction
+seed_3008_step_00000.png,random,0,0,0,no zombie visible; no prediction
+seed_3008_step_00300.png,random,1,0,0,miss; very close target fills frame
+seed_3009_step_00000.png,random,0,0,0,no zombie visible; no prediction
+seed_3009_step_00150.png,random,0,0,0,no zombie visible; no prediction

@@ -138,3 +138,9 @@ cover close engagement, death, no-target, and target-loss cases.
    Precision/Recall/mAP.
 5. Integrate the detector with `ClosedLoopSearchController` and re-run random
    spawn evaluation.
+
+A third-party Mob Radar YOLO26 Nano was also checked zero-shot on an 80-image
+audit set. It loaded and passed the MineCombat detector adapter, but reached
+only 56.4% frame recall at `imgsz=320` with 0% false positives. It is treated
+as a fine-tuning initialization, not a final detector. See
+`docs/m3-mob-radar-zeroshot.md`.
