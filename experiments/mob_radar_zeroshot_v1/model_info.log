@@ -1,0 +1,3 @@
+names {0: 'creeper', 1: 'skeleton', 2: 'spider', 3: 'zombie', 4: 'enderman'}
+task detect
+YOLO26n summary: 260 layers, 2,505,750 parameters, 0 gradients, 5.9 GFLOPs

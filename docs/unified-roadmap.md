@@ -86,6 +86,7 @@ training.
 | RQ1 flat PPO | in progress; 2M: 90% easy, 64% ±30°, 62% combined, 10% random |
 | Stage-1 gate | Stage-1a visible combat passed; Stage-1b 360° search open |
 | Closed-loop search engineering | camera calibration and 9-step VisualSearchPolicy integration accepted; 560-frame search dataset delivered; detector training pending |
+| Mob Radar zero-shot detector | YOLO26 Nano loads and integrates; 56.4% frame recall, 0% false positives on 80-image audit; case B, fine-tune needed |
 | HH1 conditioned VPT | 10k engineering validation; tactics weak, 0% win |
 | HH2 high-level PPO | L1 and targeted L2 data flow validated; multi-update stability and L3 pending |
 | RQ2/RQ3 | not started |
@@ -98,8 +99,10 @@ training.
    54% timeouts). Choose between an explicit auto-face/split-gate definition
    and a relative-direction observation for HH. Do not run more random PPO
    without one of these. The closed-loop engineering chain is now accepted and
-   the 560-frame search dataset is delivered; annotate the first batch and train
-   the Zombie detector before the 360° performance evaluation.
+   the 560-frame search dataset is delivered. A third-party Mob Radar zero-shot
+   detector was tested (56.4% frame recall at 320, 0% false positives); it is
+   usable only as a fine-tuning initialization. Annotate the first batch and
+   fine-tune the Zombie detector before the 360° performance evaluation.
 3. Ask the team to accept the Stage-1a/1b split. If accepted, initialize HH1
    from the 2M visible-combat checkpoint and keep HH2 behavioral work gated on
    Stage-1b.

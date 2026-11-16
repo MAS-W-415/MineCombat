@@ -1,0 +1,6 @@
+extra_seed_2000_step_00060.png center_x = 0.09498980641365051 confidence = 0.8824425339698792
+extra_seed_2000_step_00120.png center_x = 0.05297389626502991 confidence = 0.9045142531394958
+extra_seed_2001_step_00060.png center_x = None confidence = 0.0
+extra_seed_2001_step_00180.png center_x = None confidence = 0.0
+extra_seed_2002_step_00060.png center_x = -0.12908628582954407 confidence = 0.7877271175384521
+PASS: MineCombat detector adapter executed

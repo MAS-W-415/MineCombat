@@ -1,0 +1,1003 @@
+[
+  {
+    "group": "face",
+    "records": [
+      {
+        "image": "extra_seed_2000_step_00060.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.566183,
+            "y": 0.366135,
+            "w": 0.179277,
+            "h": 0.54944,
+            "conf": 0.404632
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.566183,
+            "y": 0.366135,
+            "w": 0.179277,
+            "h": 0.54944,
+            "conf": 0.404632
+          }
+        ],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.404632
+      },
+      {
+        "image": "extra_seed_2000_step_00120.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.547072,
+            "y": 0.378026,
+            "w": 0.19139,
+            "h": 0.577036,
+            "conf": 0.473315
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.547072,
+            "y": 0.378026,
+            "w": 0.19139,
+            "h": 0.577036,
+            "conf": 0.473315
+          }
+        ],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.473315
+      },
+      {
+        "image": "extra_seed_2001_step_00060.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_2001_step_00180.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_2002_step_00060.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.43131,
+            "y": 0.620705,
+            "w": 0.123489,
+            "h": 0.410541,
+            "conf": 0.501358
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.43131,
+            "y": 0.620705,
+            "w": 0.123489,
+            "h": 0.410541,
+            "conf": 0.501358
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.501358
+      },
+      {
+        "image": "extra_seed_2002_step_00180.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_2003_step_00060.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.354182,
+            "y": 0.494554,
+            "w": 0.0567202,
+            "h": 0.153341,
+            "conf": 0.880541
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.354182,
+            "y": 0.494554,
+            "w": 0.0567202,
+            "h": 0.153341,
+            "conf": 0.880541
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.880541
+      },
+      {
+        "image": "extra_seed_2003_step_00180.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_2004_step_00060.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.540188,
+            "y": 0.15704,
+            "w": 0.128809,
+            "h": 0.31408,
+            "conf": 0.881237
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.540188,
+            "y": 0.15704,
+            "w": 0.128809,
+            "h": 0.31408,
+            "conf": 0.881237
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.881237
+      },
+      {
+        "image": "extra_seed_2004_step_00180.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_2005_step_00060.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.503906,
+            "y": 0.384036,
+            "w": 0.05695,
+            "h": 0.157836,
+            "conf": 0.861811
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.503906,
+            "y": 0.384036,
+            "w": 0.05695,
+            "h": 0.157836,
+            "conf": 0.861811
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.861811
+      },
+      {
+        "image": "extra_seed_2005_step_00180.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.430461,
+            "y": 0.303921,
+            "w": 0.214315,
+            "h": 0.607842,
+            "conf": 0.752173
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.430461,
+            "y": 0.303921,
+            "w": 0.214315,
+            "h": 0.607842,
+            "conf": 0.752173
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.752173
+      },
+      {
+        "image": "extra_seed_2006_step_00060.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.784554,
+            "y": 0.290604,
+            "w": 0.111342,
+            "h": 0.303933,
+            "conf": 0.895573
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.784554,
+            "y": 0.290604,
+            "w": 0.111342,
+            "h": 0.303933,
+            "conf": 0.895573
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.895573
+      },
+      {
+        "image": "extra_seed_2006_step_00180.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_2007_step_00060.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.451494,
+            "y": 0.571623,
+            "w": 0.118761,
+            "h": 0.234205,
+            "conf": 0.878461
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.451494,
+            "y": 0.571623,
+            "w": 0.118761,
+            "h": 0.234205,
+            "conf": 0.878461
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.878461
+      },
+      {
+        "image": "extra_seed_2007_step_00180.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_2008_step_00060.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.417829,
+            "y": 0.470238,
+            "w": 0.134054,
+            "h": 0.370849,
+            "conf": 0.944458
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.417829,
+            "y": 0.470238,
+            "w": 0.134054,
+            "h": 0.370849,
+            "conf": 0.944458
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.944458
+      },
+      {
+        "image": "extra_seed_2008_step_00180.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.472018,
+            "y": 0.743531,
+            "w": 0.10393,
+            "h": 0.335792,
+            "conf": 0.903814
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.472018,
+            "y": 0.743531,
+            "w": 0.10393,
+            "h": 0.335792,
+            "conf": 0.903814
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.903814
+      },
+      {
+        "image": "extra_seed_2009_step_00060.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.805769,
+            "y": 0.585797,
+            "w": 0.10903,
+            "h": 0.280603,
+            "conf": 0.874966
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.805769,
+            "y": 0.585797,
+            "w": 0.10903,
+            "h": 0.280603,
+            "conf": 0.874966
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.874966
+      },
+      {
+        "image": "extra_seed_2009_step_00180.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_2000_step_00000.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_2000_step_00130.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_2001_step_00150.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_2001_step_00300.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.488464,
+            "y": 0.237744,
+            "w": 0.188755,
+            "h": 0.475488,
+            "conf": 0.820863
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.488464,
+            "y": 0.237744,
+            "w": 0.188755,
+            "h": 0.475488,
+            "conf": 0.820863
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.820863
+      },
+      {
+        "image": "seed_2002_step_00110.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_2002_step_00210.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.37102,
+            "y": 0.662288,
+            "w": 0.285707,
+            "h": 0.675425,
+            "conf": 0.899935
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.37102,
+            "y": 0.662288,
+            "w": 0.285707,
+            "h": 0.675425,
+            "conf": 0.899935
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.899935
+      },
+      {
+        "image": "seed_2003_step_00000.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_2003_step_00150.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_2004_step_00140.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.544668,
+            "y": 0.542147,
+            "w": 0.126749,
+            "h": 0.363336,
+            "conf": 0.691344
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.544668,
+            "y": 0.542147,
+            "w": 0.126749,
+            "h": 0.363336,
+            "conf": 0.691344
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.691344
+      },
+      {
+        "image": "seed_2004_step_00270.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_2005_step_00130.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.45735,
+            "y": 0.278768,
+            "w": 0.106188,
+            "h": 0.360737,
+            "conf": 0.876243
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.45735,
+            "y": 0.278768,
+            "w": 0.106188,
+            "h": 0.360737,
+            "conf": 0.876243
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.876243
+      },
+      {
+        "image": "seed_2005_step_00260.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_2006_step_00150.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_2006_step_00300.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_2007_step_00110.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_2007_step_00220.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_2008_step_00130.png",
+        "group": "face",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.410271,
+            "y": 0.598925,
+            "w": 0.136818,
+            "h": 0.372061,
+            "conf": 0.590425
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.410271,
+            "y": 0.598925,
+            "w": 0.136818,
+            "h": 0.372061,
+            "conf": 0.590425
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.590425
+      },
+      {
+        "image": "seed_2008_step_00250.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_2009_step_00110.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_2009_step_00210.png",
+        "group": "face",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      }
+    ]
+  },
+  {
+    "group": "random",
+    "records": [
+      {
+        "image": "extra_seed_3000_step_00030.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3000_step_00170.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3001_step_00030.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3001_step_00170.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3002_step_00030.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3002_step_00170.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3003_step_00030.png",
+        "group": "random",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.303205,
+            "y": 0.119865,
+            "w": 0.0784848,
+            "h": 0.239731,
+            "conf": 0.748533
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.303205,
+            "y": 0.119865,
+            "w": 0.0784848,
+            "h": 0.239731,
+            "conf": 0.748533
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.748533
+      },
+      {
+        "image": "extra_seed_3003_step_00170.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3004_step_00030.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3004_step_00170.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3005_step_00030.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3005_step_00170.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3006_step_00030.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3006_step_00170.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3007_step_00030.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3007_step_00170.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3008_step_00030.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3008_step_00170.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3009_step_00030.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "extra_seed_3009_step_00170.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3000_step_00140.png",
+        "group": "random",
+        "all_labels": [
+          {
+            "class": 3,
+            "x": 0.377545,
+            "y": 0.181364,
+            "w": 0.132711,
+            "h": 0.362728,
+            "conf": 0.896205
+          }
+        ],
+        "zombie_labels": [
+          {
+            "class": 3,
+            "x": 0.377545,
+            "y": 0.181364,
+            "w": 0.132711,
+            "h": 0.362728,
+            "conf": 0.896205
+          }
+        ],
+        "pred_has_zombie": true,
+        "max_zombie_conf": 0.896205
+      },
+      {
+        "image": "seed_3000_step_00280.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3001_step_00140.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3001_step_00270.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3002_step_00000.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3002_step_00300.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3003_step_00000.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3003_step_00150.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3004_step_00000.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3004_step_00150.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3005_step_00000.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3005_step_00150.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3006_step_00000.png",
+        "group": "random",
+        "all_labels": [
+          {
+            "class": 0,
+            "x": 0.487673,
+            "y": 0.23879,
+            "w": 0.0592923,
+            "h": 0.118041,
+            "conf": 0.835299
+          }
+        ],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3006_step_00300.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3007_step_00000.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3007_step_00150.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3008_step_00000.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3008_step_00300.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3009_step_00000.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      },
+      {
+        "image": "seed_3009_step_00150.png",
+        "group": "random",
+        "all_labels": [],
+        "zombie_labels": [],
+        "pred_has_zombie": false,
+        "max_zombie_conf": 0.0
+      }
+    ]
+  }
+]

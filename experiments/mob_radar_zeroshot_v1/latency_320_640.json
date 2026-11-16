@@ -1,0 +1,36 @@
+{
+  "320": {
+    "device": "cuda:0",
+    "input": "320x320",
+    "batch": 1,
+    "n": 160,
+    "method": "end-to-end model.predict + torch.cuda.synchronize; 10-image warmup; 2 passes over 80 images",
+    "mean_ms": 10.143752838484943,
+    "median_ms": 9.595049545168877,
+    "min_ms": 9.098181501030922,
+    "max_ms": 14.101820066571236,
+    "p95_ms": 12.73561455309391,
+    "per_image_speed": {
+      "preprocess": 0.47348998486995697,
+      "inference": 7.151944562792778,
+      "postprocess": 0.4255808889865875
+    }
+  },
+  "640": {
+    "device": "cuda:0",
+    "input": "640x640",
+    "batch": 1,
+    "n": 160,
+    "method": "end-to-end model.predict + torch.cuda.synchronize; 10-image warmup; 2 passes over 80 images",
+    "mean_ms": 9.867481491528451,
+    "median_ms": 9.732567705214024,
+    "min_ms": 9.395873174071312,
+    "max_ms": 12.99954392015934,
+    "p95_ms": 10.33308170735836,
+    "per_image_speed": {
+      "preprocess": 0.9663980454206467,
+      "inference": 6.918363273143768,
+      "postprocess": 0.4037730395793915
+    }
+  }
+}
