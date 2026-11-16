@@ -20,6 +20,16 @@ Each directory supplies `episodes.csv`, with optional `metrics.json`,
 `policy.json`, and `config.yaml` metadata. The script recomputes metrics from
 the episode rows and checks available saved metrics against them.
 
+Every episode with `win=True` must supply `time_to_kill`. A missing or blank
+value raises `SummaryError` with the CSV path and row location. Empty values
+remain valid for non-winning episodes and are preserved as missing values.
+
+When `policy.json` supplies a valid `max_steps` (a positive integer), every
+episode must have `steps <= max_steps`. An episode exceeding the limit raises
+`SummaryError` identifying the run directory, seed, actual steps, and limit.
+An absent or `null` limit remains unknown and skips this check. The tool uses
+only the limit recorded in that run's `policy.json` for this check.
+
 Runs in a group must have the same seed set and matching recorded identities
 when available: policy, model, checkpoint, tactic, sampling settings, source
 commit, and SHA-256 hash of the original `config.yaml` bytes. Conflicts are
@@ -39,13 +49,24 @@ their original artifacts to bypass the checks.
 
 ## Reading the output
 
+Markdown lists every identity field in `IDENTITY_FIELDS` order for each run.
+The order is `policy`, `model`, `checkpoint`, `checkpoint_sha256`,
+`model_revision`, `tactic_id`, `num_tactics`, `deterministic`, `max_steps`,
+`config_sha256`, and `git_commit`. Known values use JSON notation, including
+`false` for `deterministic=False` and `0` for `tactic_id=0`. Unknown fields
+display `unknown`. An explicit `"checkpoint": null` displays as
+`checkpoint: null`, while an absent checkpoint field displays as
+`checkpoint: unknown`.
+
 The report includes each run's metrics and an equal-weight macro mean and
 minimum–maximum range across runs. The range describes the observed runs.
 It is not a confidence interval. Three repetitions of seeds 0–49 represent
 150 episodes but only 50 unique seeds. Repeated seeds across runs are retained;
 duplicate seeds within a run and duplicate run directories are rejected.
-For optional metrics such as time-to-kill, a run with no defined value is
-excluded from that metric's mean; `runs_with_value` reports the denominator.
+For optional metrics, a run with no defined value is excluded from that
+metric's mean; `runs_with_value` reports the denominator. Time-to-kill is
+undefined for runs with no wins. Within a run with wins, its mean includes
+every winning episode, each of which must have a recorded kill time.
 
 - `zero_damage_death_rate` counts episodes with `death=True` and
   `damage_dealt=0`, divided by all episodes in that run.
@@ -66,6 +87,12 @@ First run the focused tests in the existing environment.
 ```bash
 pytest tests/test_summarize_evals.py
 ```
+
+Check that the regression cases cover partial missing kill times among wins,
+steps equal to and above a known limit, absent and `null` limits, and all
+Markdown identity fields and their values. Missing kill times and excessive
+steps should produce errors with input context. Non-winning empty kill times
+and unknown limits should remain valid.
 
 Summarize the three 2M combined-task runs.
 

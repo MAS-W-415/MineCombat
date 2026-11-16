@@ -152,6 +152,19 @@ def test_no_kill_time_is_unknown_not_zero(summarizer, tmp_path):
     assert result["metrics"]["mean_reward"] == -2.0
 
 
+@pytest.mark.parametrize("missing_time", ["", "  ", None])
+def test_partial_wins_missing_kill_time_are_rejected(summarizer, tmp_path, missing_time):
+    run = _write_run(tmp_path, "partial_kill_times", [
+        _row(0),
+        _row(1, time_to_kill=missing_time),
+    ])
+    with pytest.raises(summarizer.SummaryError) as error:
+        summarizer.summarize_runs([run], task="easy")
+    assert f"{run.resolve() / 'episodes.csv'}:3" in str(error.value)
+    assert "time_to_kill" in str(error.value)
+    assert "win" in str(error.value)
+
+
 def test_external_completion_does_not_need_a_win_death_or_timeout(summarizer, tmp_path):
     run = _write_run(tmp_path, "run", [
         _row(win="False", time_to_kill="", outcome="external_done"),
@@ -165,8 +178,10 @@ def test_external_completion_does_not_need_a_win_death_or_timeout(summarizer, tm
 @pytest.mark.parametrize("flag", ["win", "death", "timeout"])
 def test_external_completion_cannot_also_have_an_outcome_flag(summarizer, tmp_path, flag):
     values = {"win": "False", "time_to_kill": "", "outcome": "external_done", flag: "True"}
+    if flag == "win":
+        values["time_to_kill"] = 10
     run = _write_run(tmp_path, "run", [_row(**values)])
-    with pytest.raises(summarizer.SummaryError):
+    with pytest.raises(summarizer.SummaryError, match="external_done conflicts"):
         summarizer.summarize_runs([run], task="easy")
 
 
@@ -266,6 +281,49 @@ def test_valid_policy_metadata_types_are_accepted(summarizer, tmp_path):
     })
     report = summarizer.summarize_runs([run], task="easy")
     assert report["aggregate"]["episodes"] == 1
+
+
+def test_episode_steps_equal_to_known_limit_are_accepted(summarizer, tmp_path):
+    run = _write_run(tmp_path, "at_limit", [
+        _row(0),
+        _row(1, steps=600, time_to_kill=600),
+    ], policy={**POLICY, "max_steps": 600})
+    report = summarizer.summarize_runs([run], task="easy")
+    assert report["aggregate"]["episodes"] == 2
+    assert report["runs"][0]["metrics"]["mean_steps"] == 305
+
+
+def test_later_episode_exceeding_known_limit_is_rejected(summarizer, tmp_path):
+    run = _write_run(tmp_path, "over_limit", [
+        _row(0),
+        _row(7, steps=601, time_to_kill=601),
+    ], policy={**POLICY, "max_steps": 600})
+    with pytest.raises(summarizer.SummaryError) as error:
+        summarizer.summarize_runs([run], task="easy")
+    message = str(error.value)
+    assert str(run.resolve()) in message
+    assert "seed=7" in message
+    assert "steps=601" in message
+    assert "max_steps=600" in message
+
+
+@pytest.mark.parametrize("limit_metadata", [{}, {"max_steps": None}], ids=["missing", "null"])
+@pytest.mark.parametrize("known_first", [False, True])
+def test_unknown_step_limit_is_not_inferred(summarizer, tmp_path, limit_metadata, known_first):
+    config = CONFIG + "max_steps: 600\n"
+    unknown = _write_run(tmp_path, "unknown_limit", [
+        _row(0, steps=601, time_to_kill=601),
+    ], policy={**POLICY, **limit_metadata}, config=config)
+    known = _write_run(tmp_path, "known_limit", [_row(0)],
+                       policy={**POLICY, "max_steps": 600}, config=config)
+    paths = [known, unknown] if known_first else [unknown, known]
+    report = summarizer.summarize_runs(paths, task="easy")
+    result = next(run for run in report["runs"] if run["run_id"] == "unknown_limit")
+    assert result["metadata"]["max_steps"] is None
+    assert "max_steps" not in result["known_metadata_fields"]
+    assert result["metrics"]["mean_steps"] == 601
+    assert any("max_steps" in warning for warning in result["warnings"])
+    assert report["aggregate"]["episodes"] == 2
 
 
 @pytest.mark.parametrize("field", ["config_sha256", "git_commit"])
@@ -468,6 +526,54 @@ def test_cli_defaults_to_markdown(summarizer, tmp_path, capsys):
     assert status == 0
     assert "combined" in output
     assert "example_run" in output
+
+
+def test_markdown_shows_all_identity_fields_and_known_values(summarizer, tmp_path):
+    checkpoint_hash = "a" * 64
+    run = _write_run(tmp_path, "known_identity", [_row()], policy={
+        **POLICY, "checkpoint_sha256": checkpoint_hash, "model_revision": "revision-123",
+        "tactic_id": 0, "num_tactics": 2, "deterministic": False, "max_steps": 600,
+    })
+    report = summarizer.summarize_runs([run], task="easy")
+    output = summarizer.format_markdown(report)
+    identity_lines = [
+        line for line in output.splitlines()
+        if line.startswith("- ") and line[2:].split(": ", 1)[0] in summarizer.IDENTITY_FIELDS
+    ]
+    config_hash = hashlib.sha256(CONFIG.encode("utf-8")).hexdigest()
+    assert identity_lines == [
+        f'- policy: "{POLICY["policy"]}"',
+        f'- model: "{POLICY["model"]}"',
+        f'- checkpoint: "{POLICY["checkpoint"]}"',
+        f'- checkpoint_sha256: "{checkpoint_hash}"',
+        '- model_revision: "revision-123"',
+        '- tactic_id: 0',
+        '- num_tactics: 2',
+        '- deterministic: false',
+        '- max_steps: 600',
+        f'- config_sha256: "{config_hash}"',
+        '- git_commit: "578ad888"',
+    ]
+    assert [line[2:].split(": ", 1)[0] for line in identity_lines] == list(summarizer.IDENTITY_FIELDS)
+
+
+def test_markdown_shows_all_unknown_identity_fields(summarizer, tmp_path):
+    run = _write_run(tmp_path, "unknown_identity", [_row()], metadata=False)
+    report = summarizer.summarize_runs([run], task="easy")
+    lines = summarizer.format_markdown(report).splitlines()
+    for field in summarizer.IDENTITY_FIELDS:
+        assert lines.count(f"- {field}: unknown") == 1
+
+
+def test_markdown_distinguishes_explicit_null_checkpoint_from_unknown(summarizer, tmp_path):
+    run = _write_run(tmp_path, "no_checkpoint", [_row()], policy={
+        "checkpoint": None, "model_revision": None,
+    })
+    report = summarizer.summarize_runs([run], task="easy")
+    lines = summarizer.format_markdown(report).splitlines()
+    assert "- checkpoint: null" in lines
+    assert "- checkpoint: unknown" not in lines
+    assert "- model_revision: unknown" in lines
 
 
 def test_cli_reports_invalid_input_without_success_json(summarizer, tmp_path, capsys):

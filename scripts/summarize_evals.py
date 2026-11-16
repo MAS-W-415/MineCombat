@@ -88,6 +88,8 @@ def _read_episodes(path: Path) -> list[dict]:
                 _number(ttk, f"{location} time_to_kill", integer=True)
                 if ttk is not None and ttk.strip() else None
             )
+            if record["win"] and record["time_to_kill"] is None:
+                raise SummaryError(f"{location}: time_to_kill is required for a win")
             if record["time_to_kill"] is not None and (
                 not record["win"] or record["time_to_kill"] > record["steps"]
             ):
@@ -217,6 +219,14 @@ def _load_run(path: Path) -> tuple[dict, set[int]]:
     if policy is not None and "episodes" in policy:
         if _number(policy["episodes"], "policy.json episodes", integer=True) != len(records):
             raise SummaryError(f"{path}: policy.json episode count disagrees with CSV")
+    max_steps = metadata["max_steps"]
+    if max_steps is not None:
+        for record in records:
+            if record["steps"] > max_steps:
+                raise SummaryError(
+                    f"{path}: seed={record['seed']} steps={record['steps']} "
+                    f"exceeds max_steps={max_steps}"
+                )
     config_path = path / "config.yaml"
     if config_path.exists():
         config_hash = hashlib.sha256(config_path.read_bytes()).hexdigest()
@@ -339,7 +349,7 @@ def format_markdown(report: dict) -> str:
     lines.extend(["", "## Recorded identity and limitations", ""])
     for run in report["runs"]:
         lines.extend([f"### {_cell(run['run_id'])}", "", f"Directory: {_cell(run['path'])}", ""])
-        for key in ("policy", "model", "checkpoint", "config_sha256", "git_commit"):
+        for key in IDENTITY_FIELDS:
             value = (json.dumps(run["metadata"][key], ensure_ascii=False)
                      if key in run["known_metadata_fields"] else "unknown")
             lines.append(f"- {key}: {_cell(value)}")
