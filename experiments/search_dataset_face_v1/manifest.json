@@ -1,0 +1,72 @@
+[
+  {
+    "seed": 2000,
+    "steps": 139,
+    "reward": 10.651,
+    "outcome": "success",
+    "video": "experiments/search_dataset_face_v1/episode_2000.mp4"
+  },
+  {
+    "seed": 2001,
+    "steps": 300,
+    "reward": -2.67,
+    "outcome": "ongoing",
+    "video": "experiments/search_dataset_face_v1/episode_2001.mp4"
+  },
+  {
+    "seed": 2002,
+    "steps": 217,
+    "reward": -3.327,
+    "outcome": "death",
+    "video": "experiments/search_dataset_face_v1/episode_2002.mp4"
+  },
+  {
+    "seed": 2003,
+    "steps": 300,
+    "reward": -0.3,
+    "outcome": "ongoing",
+    "video": "experiments/search_dataset_face_v1/episode_2003.mp4"
+  },
+  {
+    "seed": 2004,
+    "steps": 279,
+    "reward": 8.731,
+    "outcome": "success",
+    "video": "experiments/search_dataset_face_v1/episode_2004.mp4"
+  },
+  {
+    "seed": 2005,
+    "steps": 267,
+    "reward": 9.323,
+    "outcome": "success",
+    "video": "experiments/search_dataset_face_v1/episode_2005.mp4"
+  },
+  {
+    "seed": 2006,
+    "steps": 300,
+    "reward": -2.1,
+    "outcome": "ongoing",
+    "video": "experiments/search_dataset_face_v1/episode_2006.mp4"
+  },
+  {
+    "seed": 2007,
+    "steps": 220,
+    "reward": -3.33,
+    "outcome": "death",
+    "video": "experiments/search_dataset_face_v1/episode_2007.mp4"
+  },
+  {
+    "seed": 2008,
+    "steps": 256,
+    "reward": 9.934,
+    "outcome": "success",
+    "video": "experiments/search_dataset_face_v1/episode_2008.mp4"
+  },
+  {
+    "seed": 2009,
+    "steps": 214,
+    "reward": 9.986,
+    "outcome": "success",
+    "video": "experiments/search_dataset_face_v1/episode_2009.mp4"
+  }
+]

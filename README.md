@@ -38,6 +38,7 @@ Key results:
 - [2M continuation](docs/m3-2m-continuation.md): 90% easy, 64% ±30°, **62% combined** (58–62%), **10% random**; visible-combat gate passes, 360° search regresses.
 - [Face-curriculum probe](docs/m3-face-curriculum-probe.md): 100k face-assisted training lifts `random_face` from 36% to 52%, but unassisted random stays at 10%; search must be handled explicitly.
 - [Scan-at-reset probe](docs/m3-scan-at-reset.md): a fixed 360° reset scan produced 0% wins and 54% timeouts; rejected. Search needs a cue/observation or an auto-face/split-gate decision.
+- [Search dataset v1](docs/m3-search-dataset-v1.md): 560 real RGB frames (255 face, 305 random), quality-checked and delivered to the shared directory for YOLO annotation.
 - [HH1/HH2 4090D validation](docs/hh1-4090d-validation.md): engineering chain validated on a 24 GB GPU; no behavioral-effectiveness claim.
 - [1M runbook](docs/1m-run.md) and [4090D handoff](docs/1m-4090d-handoff.md): exact commands and preflight for the next host.
 

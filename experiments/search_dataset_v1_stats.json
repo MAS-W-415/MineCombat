@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-16",
+  "branch": "feat/closed-loop-search",
+  "git_commit": "7b0edc238bdbc83cfdb3ef702cf80a3ce001b02a",
+  "checkpoint": "experiments/flat_1m_cont_mixed_angle30_4090d/checkpoints/2026-11-06_11-45-28/20/model.ckpt",
+  "checkpoint_sha256": "d961b9889f1a2424569bebcaa2633589e17aa6fc229c5e3b6283c0e2aa924f79",
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 4090 D",
+    "gpu_memory_mib": 24564
+  },
+  "software": {
+    "python": "3.10.22",
+    "torch": "2.5.1+cu124",
+    "minestudio": "1.1.6",
+    "java": "1.8.0_504"
+  },
+  "face": {
+    "config": "configs/env/zombie_stage1_random_face.yaml",
+    "episodes": 10,
+    "seeds": [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009],
+    "png": 255,
+    "videos": 10,
+    "wall_seconds": 260.81,
+    "outcomes": {
+      "success": 5,
+      "death": 2,
+      "ongoing": 3
+    },
+    "per_seed_png": {
+      "2000": 14,
+      "2001": 31,
+      "2002": 22,
+      "2003": 31,
+      "2004": 28,
+      "2005": 27,
+      "2006": 31,
+      "2007": 23,
+      "2008": 26,
+      "2009": 22
+    }
+  },
+  "random": {
+    "config": "configs/env/zombie_stage1.yaml",
+    "episodes": 10,
+    "seeds": [3000, 3001, 3002, 3003, 3004, 3005, 3006, 3007, 3008, 3009],
+    "png": 305,
+    "videos": 10,
+    "wall_seconds": 276.59,
+    "outcomes": {
+      "success": 0,
+      "death": 2,
+      "ongoing": 8
+    },
+    "per_seed_png": {
+      "3000": 29,
+      "3001": 28,
+      "3002": 31,
+      "3003": 31,
+      "3004": 31,
+      "3005": 31,
+      "3006": 31,
+      "3007": 31,
+      "3008": 31,
+      "3009": 31
+    }
+  },
+  "image": {
+    "resolution": [128, 128],
+    "missing": 0,
+    "duplicates": 0,
+    "black_frames": 0,
+    "manifest_aligned": true,
+    "total_png": 560
+  },
+  "video": {
+    "resolution": [640, 360],
+    "fps": 20,
+    "total_videos": 20,
+    "selected_videos": 10
+  },
+  "samples": {
+    "face": 20,
+    "random": 20,
+    "total": 40
+  },
+  "crashes": 0,
+  "total_wall_seconds": 537.40,
+  "share_root": "/eaas/default/groups/mine_/home/share/minecombat_results/search_dataset_v1",
+  "quality_notes": [
+    "All PNGs are 128x128 RGB and non-black.",
+    "No duplicate frames and no manifest mismatch.",
+    "Face group: early step-0 frames can be before the target is rendered; later frames contain visible targets.",
+    "Random group: mostly no-target/timeout frames, useful as negatives; a few close/visible frames."
+  ]
+}

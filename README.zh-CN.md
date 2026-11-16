@@ -36,6 +36,7 @@ HH1/HH2 已在 RTX 4090D 上完成工程验证；行为实验等团队确认拆�
 - [2M continuation](docs/m3-2m-continuation.md)：easy 90%、±30° 64%、组合 **62%**（58–62%）、random **10%**；可见战斗 gate 通过，360° 搜索退化。
 - [Face 课程探针](docs/m3-face-curriculum-probe.md)：100k face 辅助训练把 `random_face` 从 36% 提到 52%，但无 face 的 random 仍是 10%；搜索必须单独处理。
 - [Scan-at-reset 探针](docs/m3-scan-at-reset.md)：固定 360° 出生扫视只有 0% 胜率、54% 超时；已否决。搜索需要观测/线索，或接受 auto-face/拆分 gate。
+- [Search dataset v1](docs/m3-search-dataset-v1.md)：采集 560 张真实 RGB 帧（face 255、random 305），已完成质量检查并交付共享目录，下一步做 YOLO 标注。
 - [HH1/HH2 4090D 验证](docs/hh1-4090d-validation.md)：24 GB GPU 上完成工程链验证；不声称行为效果。
 - [1M 运行手册](docs/1m-run.md) 和 [4090D handoff](docs/1m-4090d-handoff.md)：下一台机器上的完整命令与前置检查。
 
