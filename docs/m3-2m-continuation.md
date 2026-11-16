@@ -66,7 +66,15 @@ while full 360° search remains the separate bottleneck.
 | random r3 | 0.14 | 0.54 | 15.08 | 270.0 |
 | **random mean** | **0.100** | **0.560** | **14.93** | **276.1** |
 
-Combined range: **0.58–0.62**. Random range: **0.06–0.14**.
+Combined range: **0.58–0.66**. Random range: **0.06–0.14**.
+
+The combined range comes from the three original 50-episode runs, with win
+rates of 0.58, 0.66, and 0.62. Their mean is 0.62. The source metrics for the
+corrected range are linked below.
+
+- [Combined r1 metrics](../experiments/eval_2m_4090d/20261106_135858_eval_vpt_ckpt/metrics.json)
+- [Combined r2 metrics](../experiments/eval_2m_4090d/20261106_143436_eval_vpt_ckpt/metrics.json)
+- [Combined r3 metrics](../experiments/eval_2m_4090d/20261106_150837_eval_vpt_ckpt/metrics.json)
 
 ### 1M → 2M comparison
 
@@ -81,7 +89,7 @@ Combined range: **0.58–0.62**. Random range: **0.06–0.14**.
 
 The result splits cleanly:
 
-- **Stage-1a — visible combat: passes.** Combined mean is 62% (range 58–62%),
+- **Stage-1a — visible combat: passes.** Combined mean is 62% (range 58–66%),
   easy is 90%, and ±30° is 64%. Video review shows real approach, aim, attack,
   and kill.
 - **Stage-1b — 360° search: fails.** Random mean is 10% (range 6–14%), down

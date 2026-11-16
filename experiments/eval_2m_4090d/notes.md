@@ -13,7 +13,12 @@ Seeds: 0–49, max 600 steps, deterministic
 | combined 3–7 + ±30° (3×50 mean) | **0.620** | 0.340 | 12.15 | 212.1 |
 | random 360° (3×50 mean) | **0.100** | 0.560 | 14.93 | 276.1 |
 
-Ranges: combined 0.58–0.62; random 0.06–0.14.
+Ranges: combined 0.58–0.66; random 0.06–0.14.
+
+The corrected combined range uses the original r1/r2/r3 win rates of
+0.58/0.66/0.62, giving a mean of 0.62. Sources are the `metrics.json` files in
+`20261106_135858_eval_vpt_ckpt/`, `20261106_143436_eval_vpt_ckpt/`, and
+`20261106_150837_eval_vpt_ckpt/`.
 
 ## Directories
 
