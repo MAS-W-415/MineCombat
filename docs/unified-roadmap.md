@@ -85,6 +85,7 @@ training.
 | M2 baselines | complete |
 | RQ1 flat PPO | in progress; 2M: 90% easy, 64% ±30°, 62% combined, 10% random |
 | Stage-1 gate | Stage-1a visible combat passed; Stage-1b 360° search open |
+| Closed-loop search engineering | camera calibration and 9-step VisualSearchPolicy integration accepted; 560-frame search dataset delivered; detector training pending |
 | HH1 conditioned VPT | 10k engineering validation; tactics weak, 0% win |
 | HH2 high-level PPO | L1 and targeted L2 data flow validated; multi-update stability and L3 pending |
 | RQ2/RQ3 | not started |
@@ -96,7 +97,9 @@ training.
 2. For **Stage-1b search**, scan-at-reset was tested and rejected (0% win,
    54% timeouts). Choose between an explicit auto-face/split-gate definition
    and a relative-direction observation for HH. Do not run more random PPO
-   without one of these.
+   without one of these. The closed-loop engineering chain is now accepted and
+   the 560-frame search dataset is delivered; annotate the first batch and train
+   the Zombie detector before the 360° performance evaluation.
 3. Ask the team to accept the Stage-1a/1b split. If accepted, initialize HH1
    from the 2M visible-combat checkpoint and keep HH2 behavioral work gated on
    Stage-1b.
