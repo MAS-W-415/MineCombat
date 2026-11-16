@@ -1,0 +1,20 @@
+[
+  {
+    "direction": "positive",
+    "requested_yaw": 8.0,
+    "steps": 3,
+    "buttons_id": 1,
+    "camera_id": 65,
+    "decoded_pitch": 0.0,
+    "decoded_yaw": 10.0
+  },
+  {
+    "direction": "negative",
+    "requested_yaw": -8.0,
+    "steps": 3,
+    "buttons_id": 1,
+    "camera_id": 55,
+    "decoded_pitch": 0.0,
+    "decoded_yaw": -10.0
+  }
+]

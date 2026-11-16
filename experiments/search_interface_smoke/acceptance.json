@@ -1,0 +1,117 @@
+{
+  "date_utc": "2026-11-16",
+  "branch": "feat/closed-loop-search",
+  "git_commit": "0539f3e64e21f44048ee7cde4f586520be89ab7c",
+  "single_environment": true,
+  "ray_started": false,
+  "training_started": false,
+  "yolo_best_pt_used": false,
+  "checkpoint": {
+    "path": "experiments/flat_1m_cont_mixed_angle30_4090d/checkpoints/2026-11-06_11-45-28/20/model.ckpt",
+    "sha256": "d961b9889f1a2424569bebcaa2633589e17aa6fc229c5e3b6283c0e2aa924f79",
+    "device": "cuda"
+  },
+  "camera_calibration": {
+    "status": "PASS",
+    "command": "python scripts/calibrate_search_camera.py --config configs/env/zombie_stage1_random_face.yaml --degrees 8 --steps 3 --output-dir experiments/search_camera_calibration_v1",
+    "discrete_actions": [
+      {
+        "direction": "positive",
+        "requested_yaw_deg": 8.0,
+        "buttons_id": 1,
+        "camera_id": 65,
+        "decoded_pitch_deg": 0.0,
+        "decoded_yaw_deg": 10.0,
+        "extra_non_camera_buttons": false
+      },
+      {
+        "direction": "negative",
+        "requested_yaw_deg": -8.0,
+        "buttons_id": 1,
+        "camera_id": 55,
+        "decoded_pitch_deg": 0.0,
+        "decoded_yaw_deg": -10.0,
+        "extra_non_camera_buttons": false
+      }
+    ],
+    "quantization_note": "8 degrees is quantized by the environment camera bins to 10 degrees; both directions remain valid and ordered.",
+    "direction_evidence": {
+      "frame_width_px": 128,
+      "positive_target_center_x_px": [64.5, 55.5, 45.5, 35.0],
+      "positive_motion": "left",
+      "negative_target_center_x_px": [62.5, 71.5, 81.5, 92.5],
+      "negative_motion": "right",
+      "yaw_sign": 1,
+      "note": "The required before frames were captured before the asynchronously spawned zombie rendered. A supplementary settled-target trajectory (12 noop settle steps, 3 camera steps) was used to measure motion; official calibration output was left unchanged."
+    },
+    "artifacts": {
+      "json": "experiments/search_camera_calibration_v1/calibration.json",
+      "log": "experiments/search_camera_calibration_v1.log",
+      "shared_calibration_dir": "/eaas/default/groups/mine_/home/share/minecombat_results/search_acceptance_v1/calibration",
+      "images": [
+        "before_positive.png",
+        "after_positive.png",
+        "before_negative.png",
+        "after_negative.png"
+      ],
+      "supplementary_evidence": "/eaas/default/groups/mine_/home/share/minecombat_results/search_acceptance_v1/direction/direction_evidence.png",
+      "note": "PNG artifacts are kept in the shared delivery; the repository's experiments/**/*.png ignore rule is not overridden."
+    }
+  },
+  "visual_search_integration": {
+    "status": "PASS",
+    "steps": 9,
+    "expected_modes": [
+      "search",
+      "align",
+      "combat",
+      "combat",
+      "combat",
+      "search",
+      "align",
+      "combat",
+      "combat"
+    ],
+    "observed_modes": [
+      "search",
+      "align",
+      "combat",
+      "combat",
+      "combat",
+      "search",
+      "align",
+      "combat",
+      "combat"
+    ],
+    "modes_match": true,
+    "combat_vpt_calls": 5,
+    "combat_memory_is_none": [true, false, false, true, false],
+    "memory_reset_matches_expected": true,
+    "search_trace": {
+      "steps": 9,
+      "search_steps": 2,
+      "align_steps": 2,
+      "combat_steps": 5,
+      "detected_steps": 5,
+      "first_detection_step": 2,
+      "first_combat_step": 3,
+      "reacquisitions": 1
+    },
+    "environment_checks": {
+      "oom": false,
+      "traceback": false,
+      "minecraft_crash": false,
+      "leftover_engine_process": false,
+      "nonfatal_warnings": [
+        "Narrator fliteWrapper unavailable",
+        "OpenAL device unavailable; sound disabled",
+        "OptiFine missing CTM texture"
+      ]
+    },
+    "artifacts": {
+      "run_log": "experiments/search_interface_smoke/run.log",
+      "environment": "experiments/search_interface_smoke/environment.txt"
+    }
+  },
+  "overall_status": "PASS"
+}

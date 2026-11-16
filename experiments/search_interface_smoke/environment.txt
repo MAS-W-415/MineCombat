@@ -1,0 +1,21 @@
+date_utc: 2026-11-16
+host: n1
+branch: feat/closed-loop-search
+git_commit: 0539f3e64e21f44048ee7cde4f586520be89ab7c
+gpu: NVIDIA GeForce RTX 4090 D
+gpu_memory_mib: 24564
+gpu_driver: 595.84
+python: 3.10.22
+pytorch: 2.5.1+cu124
+pytorch_cuda_available: true
+minestudio: 1.1.6
+numpy: 1.26.4
+java: OpenJDK 1.8.0_504
+display: Xvfb :99
+ray_started: false
+training_started: false
+vpt_checkpoint: experiments/flat_1m_cont_mixed_angle30_4090d/checkpoints/2026-11-06_11-45-28/20/model.ckpt
+vpt_checkpoint_sha256: d961b9889f1a2424569bebcaa2633589e17aa6fc229c5e3b6283c0e2aa924f79
+yaw_sign: 1
+camera_calibration: PASS
+visual_search_policy_integration: PASS
