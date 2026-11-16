@@ -1,0 +1,72 @@
+[
+  {
+    "seed": 3000,
+    "steps": 285,
+    "reward": -1.895,
+    "outcome": "death",
+    "video": "experiments/search_dataset_random_v1/episode_3000.mp4"
+  },
+  {
+    "seed": 3001,
+    "steps": 277,
+    "reward": -3.877,
+    "outcome": "death",
+    "video": "experiments/search_dataset_random_v1/episode_3001.mp4"
+  },
+  {
+    "seed": 3002,
+    "steps": 300,
+    "reward": -3.3,
+    "outcome": "ongoing",
+    "video": "experiments/search_dataset_random_v1/episode_3002.mp4"
+  },
+  {
+    "seed": 3003,
+    "steps": 300,
+    "reward": -2.7,
+    "outcome": "ongoing",
+    "video": "experiments/search_dataset_random_v1/episode_3003.mp4"
+  },
+  {
+    "seed": 3004,
+    "steps": 300,
+    "reward": -2.1,
+    "outcome": "ongoing",
+    "video": "experiments/search_dataset_random_v1/episode_3004.mp4"
+  },
+  {
+    "seed": 3005,
+    "steps": 300,
+    "reward": -2.7,
+    "outcome": "ongoing",
+    "video": "experiments/search_dataset_random_v1/episode_3005.mp4"
+  },
+  {
+    "seed": 3006,
+    "steps": 300,
+    "reward": -1.5,
+    "outcome": "ongoing",
+    "video": "experiments/search_dataset_random_v1/episode_3006.mp4"
+  },
+  {
+    "seed": 3007,
+    "steps": 300,
+    "reward": -2.1,
+    "outcome": "ongoing",
+    "video": "experiments/search_dataset_random_v1/episode_3007.mp4"
+  },
+  {
+    "seed": 3008,
+    "steps": 300,
+    "reward": -2.7,
+    "outcome": "ongoing",
+    "video": "experiments/search_dataset_random_v1/episode_3008.mp4"
+  },
+  {
+    "seed": 3009,
+    "steps": 300,
+    "reward": -2.7,
+    "outcome": "ongoing",
+    "video": "experiments/search_dataset_random_v1/episode_3009.mp4"
+  }
+]
