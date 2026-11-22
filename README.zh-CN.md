@@ -39,6 +39,7 @@ HH1/HH2 已在 RTX 4090D 上完成工程验证；行为实验等团队确认拆�
 - [Search dataset v1](docs/m3-search-dataset-v1.md)：采集 560 张真实 RGB 帧（face 255、random 305），已完成质量检查并交付共享目录，下一步做 YOLO 标注。
 - [Closed-loop Search 验收](docs/m3-closed-loop-search-acceptance.md)：真实相机标定（`yaw_sign=1`）与 9 步 VisualSearchPolicy 集成均通过，使用 2M checkpoint。
 - [Mob Radar 零微调检测器](docs/m3-mob-radar-zeroshot.md)：第三方 YOLO26 Nano 可加载并接入，但 `imgsz=320` 图像级召回只有 56.4%（误报 0%）；属于情况 B，需要少量微调。
+- [Zombie 检测标注状态](docs/annotation-status.md)：第一批 Train/Val 已完成——40 张图、27 个正样本框、13 个负样本；按 Episode 划分为 32 训练 / 8 验证；独立测试集和微调待做。
 - [HH1/HH2 4090D 验证](docs/hh1-4090d-validation.md)：24 GB GPU 上完成工程链验证；不声称行为效果。
 - [1M 运行手册](docs/1m-run.md) 和 [4090D handoff](docs/1m-4090d-handoff.md)：下一台机器上的完整命令与前置检查。
 

@@ -1,0 +1,24 @@
+{
+  "total_images": 40,
+  "train_images": 32,
+  "val_images": 8,
+  "train_positive": 23,
+  "val_positive": 4,
+  "train_negative": 9,
+  "val_negative": 4,
+  "train_episodes": [
+    2000,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    3000,
+    3002
+  ],
+  "val_episodes": [
+    2001,
+    3001
+  ],
+  "total_boxes": 27
+}
