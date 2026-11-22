@@ -1,0 +1,322 @@
+[
+  {
+    "image": "images/train/seed_2000_step_00020.png",
+    "label": "labels/train/seed_2000_step_00020.txt",
+    "split": "train",
+    "seed": 2000,
+    "step": 20,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2000_step_00050.png",
+    "label": "labels/train/seed_2000_step_00050.txt",
+    "split": "train",
+    "seed": 2000,
+    "step": 50,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2000_step_00080.png",
+    "label": "labels/train/seed_2000_step_00080.txt",
+    "split": "train",
+    "seed": 2000,
+    "step": 80,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2000_step_00110.png",
+    "label": "labels/train/seed_2000_step_00110.txt",
+    "split": "train",
+    "seed": 2000,
+    "step": 110,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/val/seed_2001_step_00030.png",
+    "label": "labels/val/seed_2001_step_00030.txt",
+    "split": "val",
+    "seed": 2001,
+    "step": 30,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/val/seed_2001_step_00090.png",
+    "label": "labels/val/seed_2001_step_00090.txt",
+    "split": "val",
+    "seed": 2001,
+    "step": 90,
+    "num_boxes": 0
+  },
+  {
+    "image": "images/val/seed_2001_step_00210.png",
+    "label": "labels/val/seed_2001_step_00210.txt",
+    "split": "val",
+    "seed": 2001,
+    "step": 210,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/val/seed_2001_step_00240.png",
+    "label": "labels/val/seed_2001_step_00240.txt",
+    "split": "val",
+    "seed": 2001,
+    "step": 240,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2002_step_00030.png",
+    "label": "labels/train/seed_2002_step_00030.txt",
+    "split": "train",
+    "seed": 2002,
+    "step": 30,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2002_step_00090.png",
+    "label": "labels/train/seed_2002_step_00090.txt",
+    "split": "train",
+    "seed": 2002,
+    "step": 90,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2002_step_00140.png",
+    "label": "labels/train/seed_2002_step_00140.txt",
+    "split": "train",
+    "seed": 2002,
+    "step": 140,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2002_step_00200.png",
+    "label": "labels/train/seed_2002_step_00200.txt",
+    "split": "train",
+    "seed": 2002,
+    "step": 200,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2003_step_00030.png",
+    "label": "labels/train/seed_2003_step_00030.txt",
+    "split": "train",
+    "seed": 2003,
+    "step": 30,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2003_step_00090.png",
+    "label": "labels/train/seed_2003_step_00090.txt",
+    "split": "train",
+    "seed": 2003,
+    "step": 90,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2003_step_00210.png",
+    "label": "labels/train/seed_2003_step_00210.txt",
+    "split": "train",
+    "seed": 2003,
+    "step": 210,
+    "num_boxes": 0
+  },
+  {
+    "image": "images/train/seed_2003_step_00240.png",
+    "label": "labels/train/seed_2003_step_00240.txt",
+    "split": "train",
+    "seed": 2003,
+    "step": 240,
+    "num_boxes": 0
+  },
+  {
+    "image": "images/train/seed_2004_step_00030.png",
+    "label": "labels/train/seed_2004_step_00030.txt",
+    "split": "train",
+    "seed": 2004,
+    "step": 30,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2004_step_00090.png",
+    "label": "labels/train/seed_2004_step_00090.txt",
+    "split": "train",
+    "seed": 2004,
+    "step": 90,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2004_step_00210.png",
+    "label": "labels/train/seed_2004_step_00210.txt",
+    "split": "train",
+    "seed": 2004,
+    "step": 210,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2004_step_00240.png",
+    "label": "labels/train/seed_2004_step_00240.txt",
+    "split": "train",
+    "seed": 2004,
+    "step": 240,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2005_step_00030.png",
+    "label": "labels/train/seed_2005_step_00030.txt",
+    "split": "train",
+    "seed": 2005,
+    "step": 30,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2005_step_00090.png",
+    "label": "labels/train/seed_2005_step_00090.txt",
+    "split": "train",
+    "seed": 2005,
+    "step": 90,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2005_step_00150.png",
+    "label": "labels/train/seed_2005_step_00150.txt",
+    "split": "train",
+    "seed": 2005,
+    "step": 150,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2005_step_00210.png",
+    "label": "labels/train/seed_2005_step_00210.txt",
+    "split": "train",
+    "seed": 2005,
+    "step": 210,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2006_step_00030.png",
+    "label": "labels/train/seed_2006_step_00030.txt",
+    "split": "train",
+    "seed": 2006,
+    "step": 30,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_2006_step_00090.png",
+    "label": "labels/train/seed_2006_step_00090.txt",
+    "split": "train",
+    "seed": 2006,
+    "step": 90,
+    "num_boxes": 0
+  },
+  {
+    "image": "images/train/seed_2006_step_00210.png",
+    "label": "labels/train/seed_2006_step_00210.txt",
+    "split": "train",
+    "seed": 2006,
+    "step": 210,
+    "num_boxes": 0
+  },
+  {
+    "image": "images/train/seed_2006_step_00240.png",
+    "label": "labels/train/seed_2006_step_00240.txt",
+    "split": "train",
+    "seed": 2006,
+    "step": 240,
+    "num_boxes": 0
+  },
+  {
+    "image": "images/train/seed_3000_step_00060.png",
+    "label": "labels/train/seed_3000_step_00060.txt",
+    "split": "train",
+    "seed": 3000,
+    "step": 60,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_3000_step_00100.png",
+    "label": "labels/train/seed_3000_step_00100.txt",
+    "split": "train",
+    "seed": 3000,
+    "step": 100,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_3000_step_00200.png",
+    "label": "labels/train/seed_3000_step_00200.txt",
+    "split": "train",
+    "seed": 3000,
+    "step": 200,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_3000_step_00250.png",
+    "label": "labels/train/seed_3000_step_00250.txt",
+    "split": "train",
+    "seed": 3000,
+    "step": 250,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/val/seed_3001_step_00060.png",
+    "label": "labels/val/seed_3001_step_00060.txt",
+    "split": "val",
+    "seed": 3001,
+    "step": 60,
+    "num_boxes": 0
+  },
+  {
+    "image": "images/val/seed_3001_step_00100.png",
+    "label": "labels/val/seed_3001_step_00100.txt",
+    "split": "val",
+    "seed": 3001,
+    "step": 100,
+    "num_boxes": 0
+  },
+  {
+    "image": "images/val/seed_3001_step_00200.png",
+    "label": "labels/val/seed_3001_step_00200.txt",
+    "split": "val",
+    "seed": 3001,
+    "step": 200,
+    "num_boxes": 0
+  },
+  {
+    "image": "images/val/seed_3001_step_00230.png",
+    "label": "labels/val/seed_3001_step_00230.txt",
+    "split": "val",
+    "seed": 3001,
+    "step": 230,
+    "num_boxes": 1
+  },
+  {
+    "image": "images/train/seed_3002_step_00060.png",
+    "label": "labels/train/seed_3002_step_00060.txt",
+    "split": "train",
+    "seed": 3002,
+    "step": 60,
+    "num_boxes": 0
+  },
+  {
+    "image": "images/train/seed_3002_step_00100.png",
+    "label": "labels/train/seed_3002_step_00100.txt",
+    "split": "train",
+    "seed": 3002,
+    "step": 100,
+    "num_boxes": 0
+  },
+  {
+    "image": "images/train/seed_3002_step_00200.png",
+    "label": "labels/train/seed_3002_step_00200.txt",
+    "split": "train",
+    "seed": 3002,
+    "step": 200,
+    "num_boxes": 0
+  },
+  {
+    "image": "images/train/seed_3002_step_00250.png",
+    "label": "labels/train/seed_3002_step_00250.txt",
+    "split": "train",
+    "seed": 3002,
+    "step": 250,
+    "num_boxes": 0
+  }
+]
