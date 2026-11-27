@@ -25,8 +25,22 @@ on `seed_2005_step_00090` was removed; no tracks remain. All negative frames
 were reviewed as true background frames.
 
 YOLO label files are committed under `labels/train/` and `labels/val/`.
-Images are staged in a local archive and will be copied to the GPU host or
-shared storage before training. The independent Test set and the actual
-fine-tune are not part of this record yet.
+Images were copied to the GPU host for training.
 
-See `docs/annotation-status.md` for the full acceptance record.
+## Fine-tune v1
+
+A 20-epoch single-class fine-tune from `mob_radar_best.pt` completed. The
+5-class Zombie head was remapped to the 1-class head (708/708 items
+transferred). Fine-tuned `best.pt` SHA256:
+
+```text
+23cdd80a89e7a4d33e217dea315833212af1dbb80c66d294f50449b13eb82b37
+```
+
+Pilot audit (80 images, not an independent test): recall improved from 56.4%
+to 82.1%, FPR remained 0%.
+
+An independent CVAT task `test_40` (40 new images, two jobs, 7 prelabels) was
+created and is awaiting annotation.
+
+See `docs/mob-radar-finetune-v1.md` and `docs/annotation-status.md`.

@@ -85,9 +85,11 @@ training.
 | M2 baselines | complete |
 | RQ1 flat PPO | in progress; 2M: 90% easy, 64% ±30°, 62% combined, 10% random |
 | Stage-1 gate | Stage-1a visible combat passed; Stage-1b 360° search open |
-| Closed-loop search engineering | camera calibration and 9-step VisualSearchPolicy integration accepted; 560-frame search dataset delivered; detector training pending |
+| Closed-loop search engineering | camera calibration and 9-step VisualSearchPolicy integration accepted; 560-frame search dataset delivered; detector fine-tune v1 complete |
 | Mob Radar zero-shot detector | YOLO26 Nano loads and integrates; 56.4% frame recall, 0% false positives on 80-image audit; case B, fine-tune needed |
-| Zombie detector annotation | first Train/Val batch complete: 40 images, 27 positives, 13 negatives; Train 32 / Val 8 by episode; Test pending |
+| Zombie detector annotation | first Train/Val batch complete: 40 images, 27 positives, 13 negatives; Train 32 / Val 8 by episode; Test task created |
+| Mob Radar fine-tune v1 | 20 epochs from Mob Radar; pilot audit recall 56.4% -> 82.1%, FPR 0%; independent test pending |
+| Independent detector test | `test_40` created: 20 Face + 20 Random images, two jobs, 7 prelabels; waiting for annotation |
 | HH1 conditioned VPT | 10k engineering validation; tactics weak, 0% win |
 | HH2 high-level PPO | L1 and targeted L2 data flow validated; multi-update stability and L3 pending |
 | RQ2/RQ3 | not started |
@@ -104,8 +106,10 @@ training.
    detector was tested (56.4% frame recall at 320, 0% false positives); it is
    usable only as a fine-tuning initialization. The first Train/Val annotation
    batch is complete (40 images: 27 positive, 13 negative; 32 train / 8 val by
-   episode). Fine-tune the Zombie detector next, then collect and annotate the
-   independent Test set before the 360° performance evaluation.
+   episode). Fine-tune v1 is complete; on the pilot audit set recall improved
+   from 56.4% to 82.1% with 0% false positives, but this audit is not an
+   independent test. Annotate and freeze the `test_40` task, then report the
+   old-vs-fine-tuned Precision/mAP comparison before the 360° evaluation.
 3. Ask the team to accept the Stage-1a/1b split. If accepted, initialize HH1
    from the 2M visible-combat checkpoint and keep HH2 behavioral work gated on
    Stage-1b.

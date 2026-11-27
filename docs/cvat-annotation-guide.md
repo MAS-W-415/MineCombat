@@ -272,10 +272,15 @@ Project:      MineCombat Zombie Detection
   Task: trainval_remaining_30
     Job A: frame 0–14  （15 张）
     Job B: frame 15–29 （15 张）
+
+独立测试标注（待完成）:
+  Task: test_40
+    Job C: frame 0–19  （20 张）
+    Job D: frame 20–39 （20 张）
 ```
 
-**Job A 和 Job B 不要同时打开或混标。**  
-每个标注人员只处理分配给自己的 Job。
+**Train/Val 与 Test 不能混在同一个 Job。**
+每个标注人员只处理分配给自己的 Job；Test 标注完成并冻结后，不再修改。
 
 标注完成状态：
 
@@ -287,10 +292,12 @@ Bounding Box:   27
 
 Train: 32 张（23 正 / 9 负）
 Val:    8 张（4 正 / 4 负）
+
+Test:  40 张，尚未标注
 ```
 
 Train/Val 已按 Episode 划分并完成 QA。  
-最终 Test Task 尚未创建；Test 标注完成并冻结后，不再接受修改。
+Test Task 已创建，但还没分配/完成；Test 标签冻结后才能做最终 mAP 对比。
 
 ---
 
