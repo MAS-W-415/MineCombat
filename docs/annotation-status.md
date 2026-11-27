@@ -99,19 +99,50 @@ The YOLO label text files are committed under
 The images and labels still need to be copied to the GPU host or shared storage
 before training.
 
+## Fine-tune v1
+
+The staged dataset was copied to the GPU host and used for a 20-epoch
+single-class fine-tune from `mob_radar_best.pt`.
+
+```text
+fine-tuned checkpoint SHA256:
+23cdd80a89e7a4d33e217dea315833212af1dbb80c66d294f50449b13eb82b37
+
+validation (8 images, 4 boxes):
+precision 0.972, recall 0.500, mAP50 0.495, mAP50-95 0.371
+
+pilot audit (80 images):
+original recall 56.4% -> fine-tuned 82.1%, FPR 0%
+```
+
+The 80-image audit is **not** the independent Test set. Details:
+`docs/mob-radar-finetune-v1.md`.
+
+## Independent Test task
+
+A separate CVAT task was created for 40 new images from unseen episodes:
+
+```text
+Task: test_40
+Task ID: 2796389
+Jobs: 4772812 (frame 0–19), 4772813 (frame 20–39)
+Images: 20 Face positives + 20 Random negatives
+Prelabels: 7
+Status: awaiting annotation
+```
+
 ## Not done yet
 
-- The independent Test set has not been collected or annotated.
-- The fine-tuned YOLO model has not been trained.
+- The independent Test task is not annotated or frozen.
+- Final old-vs-fine-tuned Precision/mAP comparison is not available.
 - No 360° search performance evaluation has been run.
 
 ## Next
 
-1. Copy the staged dataset to the GPU host.
-2. Run a 1-epoch transfer smoke test from `mob_radar_best.pt`.
-3. Run the planned 20-epoch, single-class fine-tune.
-4. Collect and annotate a separate 40-image Test set.
-5. Evaluate old vs fine-tuned weights on the same independent Test set.
+1. Assign and annotate the two `test_40` jobs.
+2. Freeze the Test labels.
+3. Evaluate original vs fine-tuned weights on the same Test set.
+4. If the test result is acceptable, run a small closed-loop search smoke.
 
 See `docs/cvat-annotation-guide.md` for the annotation procedure and
 `docs/m3-mob-radar-zeroshot.md` for the zero-shot baseline.

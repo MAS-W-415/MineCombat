@@ -1,0 +1,16 @@
+{
+  "weights": "/eaas/default/groups/mine_/home/share/minecombat_results/mob_radar_zeroshot_v1/models/mob_radar_best.pt",
+  "data": "/eaas/default/groups/mine_/home/share/minecombat_results/zombie_finetune_v1/dataset/data.yaml",
+  "epochs": 20,
+  "imgsz": 320,
+  "batch": 8,
+  "device": "0",
+  "workers": 2,
+  "seed": 42,
+  "project": "/eaas/default/groups/mine_/home/share/minecombat_results/zombie_finetune_v1/training",
+  "name": "finetune_20ep",
+  "exist_ok": false,
+  "plots": true,
+  "save": true,
+  "best_checkpoint": "/eaas/default/groups/mine_/home/share/minecombat_results/zombie_finetune_v1/training/finetune_20ep/weights/best.pt"
+}

@@ -1,0 +1,1024 @@
+{
+  "original": {
+    "tag": "original",
+    "positive": 39,
+    "negative": 41,
+    "tp": 22,
+    "fp": 0,
+    "fn": 17,
+    "tn": 41,
+    "frame_recall": 0.5641025641025641,
+    "false_positive_rate": 0.0,
+    "per_group": {
+      "face": {
+        "tp": 20,
+        "fn": 12,
+        "fp": 0,
+        "tn": 8,
+        "recall": 0.625,
+        "fpr": 0.0
+      },
+      "random": {
+        "tp": 2,
+        "fn": 5,
+        "fp": 0,
+        "tn": 33,
+        "recall": 0.2857142857142857,
+        "fpr": 0.0
+      }
+    },
+    "records": [
+      {
+        "image": "extra_seed_2000_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2000_step_00120.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2001_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_2001_step_00180.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_2002_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2002_step_00180.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2003_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_2003_step_00180.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_2004_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2004_step_00180.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2005_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_2005_step_00180.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2006_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2006_step_00180.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_2007_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2007_step_00180.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_2008_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2008_step_00180.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_2009_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2009_step_00180.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2000_step_00000.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_2000_step_00130.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "seed_2001_step_00150.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_2001_step_00300.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2002_step_00110.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "seed_2002_step_00210.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2003_step_00000.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_2003_step_00150.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_2004_step_00140.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2004_step_00270.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2005_step_00130.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2005_step_00260.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2006_step_00150.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_2006_step_00300.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "seed_2007_step_00110.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "seed_2007_step_00220.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2008_step_00130.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2008_step_00250.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "seed_2009_step_00110.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "seed_2009_step_00210.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3000_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3000_step_00170.png",
+        "group": "random",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3001_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3001_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3002_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3002_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3003_step_00030.png",
+        "group": "random",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3003_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3004_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3004_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3005_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3005_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3006_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3006_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3007_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3007_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3008_step_00030.png",
+        "group": "random",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3008_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3009_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3009_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3000_step_00140.png",
+        "group": "random",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_3000_step_00280.png",
+        "group": "random",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_3001_step_00140.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3001_step_00270.png",
+        "group": "random",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "seed_3002_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3002_step_00300.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3003_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3003_step_00150.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3004_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3004_step_00150.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3005_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3005_step_00150.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3006_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3006_step_00300.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3007_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3007_step_00150.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3008_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3008_step_00300.png",
+        "group": "random",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "seed_3009_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3009_step_00150.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      }
+    ]
+  },
+  "finetuned": {
+    "tag": "finetuned",
+    "positive": 39,
+    "negative": 41,
+    "tp": 32,
+    "fp": 0,
+    "fn": 7,
+    "tn": 41,
+    "frame_recall": 0.8205128205128205,
+    "false_positive_rate": 0.0,
+    "per_group": {
+      "face": {
+        "tp": 27,
+        "fn": 5,
+        "fp": 0,
+        "tn": 8,
+        "recall": 0.84375,
+        "fpr": 0.0
+      },
+      "random": {
+        "tp": 5,
+        "fn": 2,
+        "fp": 0,
+        "tn": 33,
+        "recall": 0.7142857142857143,
+        "fpr": 0.0
+      }
+    },
+    "records": [
+      {
+        "image": "extra_seed_2000_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2000_step_00120.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2001_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2001_step_00180.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_2002_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2002_step_00180.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2003_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2003_step_00180.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_2004_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2004_step_00180.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2005_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2005_step_00180.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2006_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2006_step_00180.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_2007_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2007_step_00180.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_2008_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2008_step_00180.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2009_step_00060.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_2009_step_00180.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2000_step_00000.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_2000_step_00130.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2001_step_00150.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_2001_step_00300.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2002_step_00110.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "seed_2002_step_00210.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2003_step_00000.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_2003_step_00150.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_2004_step_00140.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2004_step_00270.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2005_step_00130.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2005_step_00260.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2006_step_00150.png",
+        "group": "face",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_2006_step_00300.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "seed_2007_step_00110.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2007_step_00220.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "seed_2008_step_00130.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2008_step_00250.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_2009_step_00110.png",
+        "group": "face",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "seed_2009_step_00210.png",
+        "group": "face",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_3000_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3000_step_00170.png",
+        "group": "random",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3001_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3001_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3002_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3002_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3003_step_00030.png",
+        "group": "random",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "extra_seed_3003_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3004_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3004_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3005_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3005_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3006_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3006_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3007_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3007_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3008_step_00030.png",
+        "group": "random",
+        "human": 1,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3008_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3009_step_00030.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "extra_seed_3009_step_00170.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3000_step_00140.png",
+        "group": "random",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_3000_step_00280.png",
+        "group": "random",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_3001_step_00140.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3001_step_00270.png",
+        "group": "random",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_3002_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3002_step_00300.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3003_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3003_step_00150.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3004_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3004_step_00150.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3005_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3005_step_00150.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3006_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3006_step_00300.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3007_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3007_step_00150.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3008_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3008_step_00300.png",
+        "group": "random",
+        "human": 1,
+        "pred": 1
+      },
+      {
+        "image": "seed_3009_step_00000.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      },
+      {
+        "image": "seed_3009_step_00150.png",
+        "group": "random",
+        "human": 0,
+        "pred": 0
+      }
+    ]
+  }
+}

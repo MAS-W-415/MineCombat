@@ -41,7 +41,8 @@ Key results:
 - [Search dataset v1](docs/m3-search-dataset-v1.md): 560 real RGB frames (255 face, 305 random), quality-checked and delivered to the shared directory for YOLO annotation.
 - [Closed-loop search acceptance](docs/m3-closed-loop-search-acceptance.md): real camera calibration (`yaw_sign=1`) and 9-step VisualSearchPolicy integration both passed on the 2M checkpoint.
 - [Mob Radar zero-shot detector](docs/m3-mob-radar-zeroshot.md): third-party YOLO26 Nano loads and integrates, but only 56.4% frame recall at `imgsz=320` (0% false positives); case B, fine-tuning needed.
-- [Zombie detector annotation status](docs/annotation-status.md): first Train/Val batch complete — 40 images, 27 positive boxes, 13 negatives, split by episode into 32 train / 8 val; independent Test set and fine-tune pending.
+- [Zombie detector annotation status](docs/annotation-status.md): first Train/Val batch complete — 40 images, 27 positive boxes, 13 negatives, split by episode into 32 train / 8 val; independent Test task created.
+- [Mob Radar fine-tune v1](docs/mob-radar-finetune-v1.md): 20-epoch single-class fine-tune; pilot audit recall 56.4% → 82.1%, FPR 0%; independent `test_40` waiting for annotation.
 - [HH1/HH2 4090D validation](docs/hh1-4090d-validation.md): engineering chain validated on a 24 GB GPU; no behavioral-effectiveness claim.
 - [1M runbook](docs/1m-run.md) and [4090D handoff](docs/1m-4090d-handoff.md): exact commands and preflight for the next host.
 

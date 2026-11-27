@@ -1,0 +1,19 @@
+{
+  "task_id": 2796389,
+  "task_name": "test_40",
+  "task_url": "https://app.cvat.ai/tasks/2796389",
+  "jobs": [
+    [
+      4772813,
+      20,
+      39
+    ],
+    [
+      4772812,
+      0,
+      19
+    ]
+  ],
+  "images": 40,
+  "prelabels": 7
+}
